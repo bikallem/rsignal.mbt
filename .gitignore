@@ -31,3 +31,4 @@ dist
 *.njsproj
 *.sln
 *.sw?
+target/
