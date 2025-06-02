@@ -4,5 +4,6 @@
   "deps": {},
   "readme": "README.md",
   "description": "A reactive programming library for Moonbit",
-  "repository": "https://github.com/bikallem/reactive"
+  "repository": "https://github.com/bikallem/reactive",
+  "license": "MPL-2.0"
 }
