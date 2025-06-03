@@ -25,7 +25,7 @@ For web apps, `reactive` offers a fine-grained selection mechanisms to update UI
 ensures that only dom node that needs updating are accessed and updated. 
 
 ## How to use
-``` moon add bikallem/reactive/core```
+``` moon add bikallem/reactive```
 
 ## API Documentation
 https://mooncakes.io/docs/bikallem/reactive
