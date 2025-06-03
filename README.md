@@ -29,3 +29,6 @@ ensures that only dom node that needs updating are accessed and updated.
 
 ## API Documentation
 https://mooncakes.io/docs/bikallem/reactive
+
+## Status
+Early and experimental. API may be changed/removed without deprecation/warning.
