@@ -255,7 +255,7 @@ pub fn[T : Eq, U : Eq] Signal::map(self : Signal[T], f : (T) -> U) -> Signal[U] 
 ///   let values = []
 ///   let s1 = new(1)
 ///   let s2 = new(2)
-///   let s3 = @reactive.map2(s1, s2, fn(a, b) { a + b })
+///   let s3 = map2(s1, s2, fn(a, b) { a + b })
 ///   s3.subscribe_permanent(fn(v) { values.push(v) })
 ///   s1.update(3) // This will trigger the subscriber with value 5.
 ///   s2.update(4) // This will trigger the subscriber with value 7.
@@ -374,7 +374,7 @@ pub fn[T, U : Eq] Signal::filter_map(
 ///   let s1 = new(1)
 ///   let s2 = new(2)
 ///   let s3 = new(3)
-///   let combined_signal = @reactive.select_one([s1, s2, s3])
+///   let combined_signal = select_one([s1, s2, s3])
 ///   combined_signal.subscribe_permanent_only(fn(v) { values.push(v) })
 ///   s1.update(4) // This will trigger the subscriber with value 4.
 ///   s2.update(5) // This will trigger the subscriber with value 5.
@@ -405,7 +405,7 @@ pub fn[T : Default + Eq] select_one(signals : Array[Signal[T]]) -> Signal[T] {
 ///   let values = []
 ///   let s1 = new(1)
 ///   let s2 = new(2)
-///   let s3 = @reactive.combine_pair(s1, s2)
+///   let s3 = combine_pair(s1, s2)
 ///   s3.subscribe_permanent(fn(v) { values.push(v) })
 ///   s1.update(3) // This will trigger the subscriber with value (3, 2).
 ///   s2.update(4) // This will trigger the subscriber with value (3, 4).
@@ -440,7 +440,7 @@ pub fn[T : Eq, U : Eq] combine_pair(
 ///   let s1 = new(1)
 ///   let s2 = new(2)
 ///   let s3 = new(3)
-///   let s4 = @reactive.combine_triple(s1, s2, s3)
+///   let s4 = combine_triple(s1, s2, s3)
 ///   s4.subscribe_permanent(fn(v) { values.push(v) })
 ///   s1.update(4) // This will trigger the subscriber with value (4, 2, 3).
 ///   s2.update(5) // This will trigger the subscriber with value (4, 5, 3).
@@ -478,7 +478,7 @@ pub fn[T : Eq, U : Eq, V : Eq] combine_triple(
 ///   let s2 = new(2)
 ///   let s3 = new(3)
 ///   let s4 = new(4)
-///   let combined_signal = @reactive.combine_all([s1, s2, s3, s4])
+///   let combined_signal = combine_all([s1, s2, s3, s4])
 ///   combined_signal.subscribe_permanent(fn(v) { values.push(v) })
 ///   s1.update(5) // This will trigger the subscriber with value [5, 2, 3, 4].
 ///   s2.update(6) // This will trigger the subscriber with value [5, 6, 3, 4].
