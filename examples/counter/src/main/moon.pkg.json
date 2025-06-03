@@ -1,0 +1,7 @@
+{
+  "is-main": true,
+  "import": [
+    "bikallem/reactive/core",
+    "bikallem/reactive/web"
+  ]
+}
