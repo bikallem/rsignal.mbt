@@ -19,16 +19,6 @@ pub impl TEventTarget for Text with nop(_ : Text) -> Unit {
 }
 
 ///|
-pub impl Show for Text with to_string(self : Text) -> String {
-  JsValue::to_jv(self).to_string()
-}
-
-///|
-pub impl Show for Text with output(self : Text, logger : &Logger) -> Unit {
-  logger.write_string(self.to_string())
-}
-
-///|
 pub impl TNode for String with nop(_) -> Unit {
 
 }

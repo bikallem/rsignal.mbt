@@ -125,7 +125,6 @@ impl TElement for Element
 impl TEventTarget for Element
 impl TJsValue for Element
 impl TNode for Element
-impl Show for Element
 
 type Event
 fn[T : TEvent] Event::into(Self) -> T
@@ -242,7 +241,6 @@ fn[T] JsValue::of_jv(Self) -> T
 fn[T] JsValue::to_jv(T) -> Self
 fn[T] JsValue::to_option(Self) -> T?
 fn[T] JsValue::unwrap(Self) -> T
-impl Show for JsValue
 
 type KeyboardEvent
 fn KeyboardEvent::alt_key(Self) -> Bool
@@ -309,7 +307,6 @@ fn Text::whole_text(Self) -> String
 impl TEventTarget for Text
 impl TJsValue for Text
 impl TNode for Text
-impl Show for Text
 
 pub extern type Uint8Array
 fn Uint8Array::byte_length(Self) -> Int

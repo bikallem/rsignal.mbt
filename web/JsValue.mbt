@@ -6,16 +6,6 @@ extern "js" fn JsValue::to_string_ffi(self : JsValue) -> String =
   #| (self) => self.toString()
 
 ///|
-pub impl Show for JsValue with to_string(self : JsValue) -> String {
-  self.to_string_ffi()
-}
-
-///|
-pub impl Show for JsValue with output(self : JsValue, logger : &Logger) -> Unit {
-  logger.write_string(self.to_string())
-}
-
-///|
 pub fn[T] JsValue::to_jv(value : T) -> JsValue = "%identity"
 
 ///|

@@ -25,16 +25,6 @@ pub impl TEventTarget for Element with nop(_) -> Unit {
 }
 
 ///|
-pub impl Show for Element with to_string(self) -> String {
-  self.to_jv().to_string()
-}
-
-///|
-pub impl Show for Element with output(self, logger : &Logger) -> Unit {
-  logger.write_string(self.to_string())
-}
-
-///|
 pub fn[T : TElement] Element::into(self : Element) -> T = "%identity"
 
 ///| Create a new HTML element representing the given tag name
