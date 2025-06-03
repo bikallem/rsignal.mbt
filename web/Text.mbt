@@ -1,0 +1,54 @@
+///| Javascript DOM Text Node - https://developer.mozilla.org/en-US/docs/Web/API/Text
+extern type Text
+
+///|
+pub extern "js" fn whole_text(self : Text) -> String =
+  #| (self) => self.wholeText
+
+///|
+pub impl TNode for Text with nop(_ : Text) -> Unit {
+
+}
+
+///|
+pub impl TJsValue for Text with to_jv(self : Text) -> JsValue = "%identity"
+
+///|
+pub impl TEventTarget for Text with nop(_ : Text) -> Unit {
+
+}
+
+///|
+pub impl Show for Text with to_string(self : Text) -> String {
+  JsValue::to_jv(self).to_string()
+}
+
+///|
+pub impl Show for Text with output(self : Text, logger : &Logger) -> Unit {
+  logger.write_string(self.to_string())
+}
+
+///|
+pub impl TNode for String with nop(_) -> Unit {
+
+}
+
+///|
+pub impl TEventTarget for String with nop(_) -> Unit {
+
+}
+
+///|
+pub impl TAttachableNode for String with nop(_) -> Unit {
+
+}
+
+///|
+pub impl TJsValue for String with to_jv(self : String) -> JsValue {
+  JsValue::to_jv(document.create_text_node(self))
+}
+
+///| Create a new text node with the given content
+pub fn text(content : String) -> Text {
+  document.create_text_node(content)
+}

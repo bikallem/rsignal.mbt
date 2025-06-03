@@ -1,0 +1,411 @@
+package "bikallem/reactive/web"
+
+import(
+  "bikallem/reactive/core"
+)
+
+// Values
+const ATTRIBUTE_NODE : Int = 2
+
+const DOCUMENT_NODE : Int = 9
+
+const ELEMENT_NODE : Int = 1
+
+const TEXT_NODE : Int = 3
+
+fn[T : Show] a(String, T) -> Attr
+
+fn async_run(() -> Unit) -> Unit
+
+fn[T : Show] attr(String, T) -> Attr
+
+fn button(String, Array[&TAttachableNode]) -> HTMLButtonElement
+
+fn canvas(Array[&TAttachableNode]) -> HTMLCanvasElement
+
+fn class(String) -> Attr
+
+fn div(Array[&TAttachableNode]) -> HTMLDivElement
+
+let document : Document
+
+fn dynamic_import(String) -> Promise[JsValue]
+
+fn fetch(String) -> Promise[Response]
+
+let globalThis : JsValue
+
+fn h(String, Array[&TAttachableNode]) -> Element
+
+fn id(String) -> Attr
+
+fn input(String, Array[&TAttachableNode]) -> HTMLInputElement
+
+fn log(&TJsValue) -> Unit
+
+fn onchange((Event) -> Unit) -> EventHandlerAttr[Event]
+
+fn onclick((PointerEvent) -> Unit) -> EventHandlerAttr[PointerEvent]
+
+fn read_as_array_buffer_ffi(FileReader, JsValue) -> Unit
+
+fn span(Array[&TAttachableNode]) -> Element
+
+fn style(String) -> Attr
+
+fn text(String) -> Text
+
+fn[T] to_jv(T) -> JsValue
+
+fn whole_text(Text) -> String
+
+let window : Window
+
+// Types and methods
+type ArrayBuffer
+fn ArrayBuffer::to_jv(Self) -> JsValue
+
+type Attr
+fn Attr::name(Self) -> String
+fn Attr::owner_element(Self) -> Element?
+fn Attr::set_value(Self, &Show) -> Unit
+fn Attr::value(Self) -> String
+impl TAttachableNode for Attr
+impl TEventTarget for Attr
+impl TJsValue for Attr
+impl TNode for Attr
+
+type BeforeUnloadEvent
+impl TEvent for BeforeUnloadEvent
+impl TJsValue for BeforeUnloadEvent
+
+type Blob
+fn Blob::new(Array[JsValue], JsObject) -> Self
+impl TBlob for Blob
+impl TJsValue for Blob
+
+type CSSStyleDeclaration
+fn CSSStyleDeclaration::set_property(Self, String, String, priority~ : String = ..) -> Unit
+
+type CanvasRenderingContext2D
+fn CanvasRenderingContext2D::clear_rect(Self, Int, Int, Int, Int) -> Unit
+fn CanvasRenderingContext2D::fill_rect(Self, Int, Int, Int, Int) -> Unit
+fn CanvasRenderingContext2D::put_image_data(Self, ImageData, Int, Int) -> Unit
+fn CanvasRenderingContext2D::restore(Self) -> Unit
+fn CanvasRenderingContext2D::save(Self) -> Unit
+fn CanvasRenderingContext2D::set_fill_style(Self, String) -> Unit
+fn CanvasRenderingContext2D::set_line_width(Self, Int) -> Unit
+fn CanvasRenderingContext2D::set_stroke_style(Self, String) -> Unit
+fn CanvasRenderingContext2D::stroke_rect(Self, Int, Int, Int, Int) -> Unit
+
+type DOMRect
+fn DOMRect::bottom(Self) -> Double
+fn DOMRect::height(Self) -> Double
+fn DOMRect::left(Self) -> Double
+fn DOMRect::right(Self) -> Double
+fn DOMRect::top(Self) -> Double
+fn DOMRect::width(Self) -> Double
+
+type Document
+fn Document::body(Self) -> Element
+fn Document::create_attribute(Self, String) -> Attr
+fn Document::create_element(Self, String) -> Element
+fn Document::create_text_node(Self, String) -> Text
+fn Document::get_element_by_id(Self, String) -> Element?
+impl TEventTarget for Document
+impl TJsValue for Document
+impl TNode for Document
+
+type Element
+fn[T : TElement] Element::into(Self) -> T
+impl TAttachableNode for Element
+impl TElement for Element
+impl TEventTarget for Element
+impl TJsValue for Element
+impl TNode for Element
+impl Show for Element
+
+type Event
+fn[T : TEvent] Event::into(Self) -> T
+impl TEvent for Event
+impl TJsValue for Event
+
+type EventHandlerAttr[E]
+fn[E : TEvent] EventHandlerAttr::event_name(Self[E]) -> String
+fn[E : TEvent] EventHandlerAttr::handler(Self[E]) -> (E) -> Unit
+fn[E : TEvent] EventHandlerAttr::new(String, (E) -> Unit) -> Self[E]
+impl[T : TEvent] TAttachableNode for EventHandlerAttr[T]
+impl[T] TEventTarget for EventHandlerAttr[T]
+impl[T] TJsValue for EventHandlerAttr[T]
+impl[T : TEvent] TNode for EventHandlerAttr[T]
+
+type EventTarget
+fn[T : TEventTarget] EventTarget::into(Self) -> T
+impl TEventTarget for EventTarget
+impl TJsValue for EventTarget
+
+type File
+fn File::last_modified(Self) -> Int
+fn File::name(Self) -> String
+fn File::size(Self) -> Int
+fn File::type_(Self) -> String
+fn File::webkit_relative_path(Self) -> String
+impl TBlob for File
+impl TJsValue for File
+
+type FileList
+fn FileList::item(Self, Int) -> File?
+fn FileList::length(Self) -> Int
+
+type FileReader
+fn FileReader::new() -> Self
+fn FileReader::onerror(Self, (ProgressEvent) -> Unit) -> Unit
+fn FileReader::onload(Self, (ProgressEvent) -> Unit) -> Unit
+fn FileReader::read_as_array_buffer(Self, &TBlob) -> Unit
+fn FileReader::read_as_data_url(Self, &TBlob) -> Unit
+fn FileReader::read_as_text(Self, &TBlob, encoding~ : String = ..) -> Unit
+fn FileReader::result(Self) -> FileReaderResult
+impl TEventTarget for FileReader
+impl TJsValue for FileReader
+
+type FileReaderResult
+fn FileReaderResult::to_array_buffer(Self) -> ArrayBuffer
+
+pub extern type Float64Array
+fn Float64Array::new(ArrayBuffer, Int, Int) -> Self
+fn Float64Array::op_get(Self, Int) -> Double
+fn Float64Array::to_jv(Self) -> JsValue
+impl TTypedArray for Float64Array
+
+type HTMLButtonElement
+fn HTMLButtonElement::disabled(Self) -> Bool
+fn HTMLButtonElement::name(Self) -> String
+fn HTMLButtonElement::set_disabled(Self, Bool) -> Unit
+fn HTMLButtonElement::set_name(Self, String) -> Unit
+fn HTMLButtonElement::set_value(Self, String) -> Unit
+fn HTMLButtonElement::value(Self) -> String
+impl TAttachableNode for HTMLButtonElement
+impl TElement for HTMLButtonElement
+impl TEventTarget for HTMLButtonElement
+impl TJsValue for HTMLButtonElement
+impl TNode for HTMLButtonElement
+
+type HTMLCanvasElement
+fn HTMLCanvasElement::get_2d_context(Self) -> CanvasRenderingContext2D
+fn HTMLCanvasElement::height(Self) -> Int
+fn HTMLCanvasElement::set_height(Self, Int) -> Unit
+fn HTMLCanvasElement::set_width(Self, Int) -> Unit
+fn HTMLCanvasElement::width(Self) -> Int
+impl TAttachableNode for HTMLCanvasElement
+impl TElement for HTMLCanvasElement
+impl TEventTarget for HTMLCanvasElement
+impl TJsValue for HTMLCanvasElement
+impl TNode for HTMLCanvasElement
+
+type HTMLDivElement
+impl TAttachableNode for HTMLDivElement
+impl TElement for HTMLDivElement
+impl TEventTarget for HTMLDivElement
+impl THTMLelement for HTMLDivElement
+impl TJsValue for HTMLDivElement
+impl TNode for HTMLDivElement
+
+type HTMLInputElement
+fn HTMLInputElement::files(Self) -> FileList
+impl TAttachableNode for HTMLInputElement
+impl TElement for HTMLInputElement
+impl TEventTarget for HTMLInputElement
+impl THTMLelement for HTMLInputElement
+impl TJsValue for HTMLInputElement
+impl TNode for HTMLInputElement
+
+type ImageData
+fn ImageData::data(Self) -> Uint8ClampedArray
+fn ImageData::height(Self) -> Int
+fn ImageData::new(Uint8ClampedArray, Int, Int) -> Self
+fn ImageData::width(Self) -> Int
+
+type JsObject
+fn[T] JsObject::get(Self, String) -> T
+fn JsObject::new() -> Self
+fn JsObject::set(Self, String, JsValue) -> Unit
+fn JsObject::to_jv(Self) -> JsValue
+
+type JsValue
+fn JsValue::define_property(Self, String, Self) -> Unit
+fn JsValue::is_none(Self) -> Bool
+fn JsValue::is_null(Self) -> Bool
+fn JsValue::is_undefined(Self) -> Bool
+fn[T] JsValue::of_jv(Self) -> T
+fn[T] JsValue::to_jv(T) -> Self
+fn[T] JsValue::to_option(Self) -> T?
+fn[T] JsValue::unwrap(Self) -> T
+impl Show for JsValue
+
+type KeyboardEvent
+fn KeyboardEvent::alt_key(Self) -> Bool
+fn KeyboardEvent::code(Self) -> String
+fn KeyboardEvent::ctrl_key(Self) -> Bool
+fn KeyboardEvent::key(Self) -> String
+fn KeyboardEvent::meta_key(Self) -> Bool
+fn KeyboardEvent::repeat(Self) -> Bool
+fn KeyboardEvent::shift_key(Self) -> Bool
+impl TEvent for KeyboardEvent
+impl TJsValue for KeyboardEvent
+
+type MouseEvent
+fn MouseEvent::from_event(&TEvent) -> Self
+impl TEvent for MouseEvent
+impl TJsValue for MouseEvent
+impl TMouseEvent for MouseEvent
+
+type PointerEvent
+fn PointerEvent::from_event(&TEvent) -> Self
+impl TEvent for PointerEvent
+impl TJsValue for PointerEvent
+impl TMouseEvent for PointerEvent
+
+type ProgressEvent
+impl TEvent for ProgressEvent
+impl TJsValue for ProgressEvent
+
+type Promise[T]
+fn[A, B] Promise::map(Self[A], (A) -> B) -> Self[B]
+fn[T] Promise::new(((T) -> Unit, (Error) -> Unit) -> Unit) -> Self[T]
+fn[A] Promise::resolve(A) -> Self[A]
+fn[A, B] Promise::then(Self[A], (A) -> Self[B]) -> Self[B]
+async fn[T] Promise::wait(Self[T]) -> T!
+
+type ReactiveAttr[T]
+fn ReactiveAttr::disabled(@core.Signal[Bool]) -> Self[Bool]
+fn[A : Eq] ReactiveAttr::new(String, @core.Signal[A], (Element, Attr, A) -> Unit) -> Self[A]
+fn ReactiveAttr::style(@core.Signal[String]) -> Self[String]
+impl[T : Eq] TAttachableNode for ReactiveAttr[T]
+impl[T : Eq] TEventTarget for ReactiveAttr[T]
+impl[T : Eq] TJsValue for ReactiveAttr[T]
+impl[T : Eq] TNode for ReactiveAttr[T]
+
+type ReactiveElement[T]
+fn[A : Eq] ReactiveElement::div(@core.Signal[A], (HTMLDivElement, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
+fn[A : Eq] ReactiveElement::h(String, @core.Signal[A], (Element, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
+fn ReactiveElement::text(@core.Signal[String], (Text, String) -> Unit) -> Self[Text]
+impl[A : TNode] TAttachableNode for ReactiveElement[A]
+impl[A : TNode] TElement for ReactiveElement[A]
+impl[A : TNode] TEventTarget for ReactiveElement[A]
+impl[A : TNode] TJsValue for ReactiveElement[A]
+impl[A : TNode] TNode for ReactiveElement[A]
+
+type Response
+fn Response::array_buffer(Self) -> Promise[ArrayBuffer]
+fn Response::ok(Self) -> Bool
+fn Response::status(Self) -> Int
+fn Response::status_text(Self) -> String
+fn Response::text(Self) -> Promise[String]
+
+type Text
+fn Text::whole_text(Self) -> String
+impl TEventTarget for Text
+impl TJsValue for Text
+impl TNode for Text
+impl Show for Text
+
+pub extern type Uint8Array
+fn Uint8Array::byte_length(Self) -> Int
+fn Uint8Array::new(ArrayBuffer) -> Self
+fn Uint8Array::op_get(Self, Int) -> Int
+fn Uint8Array::set(Self, Self, Int) -> Unit
+fn Uint8Array::subarray(Self, Int, Int) -> Self
+fn Uint8Array::to_jv(Self) -> JsValue
+impl TTypedArray for Uint8Array
+
+pub extern type Uint8ClampedArray
+fn Uint8ClampedArray::new(Uint8Array) -> Self
+fn Uint8ClampedArray::to_jv(Self) -> JsValue
+
+type Window
+fn Window::beforeunload(Self, (BeforeUnloadEvent) -> Unit) -> Unit
+fn Window::device_pixel_ratio(Self) -> Double
+impl TEventTarget for Window
+impl TJsValue for Window
+
+// Type aliases
+
+// Traits
+pub(open) trait TAttachableNode : TNode {
+  nop(Self) -> Unit
+  attach(Self, Element) -> Unit = _
+}
+impl TAttachableNode for String
+
+pub(open) trait TBlob : TJsValue {
+  nop(Self) -> Unit
+  type_(Self) -> String = _
+  size(Self) -> Int = _
+  slice(Self, Int, Int, String) -> Blob = _
+  array_buffer(Self) -> Promise[ArrayBuffer] = _
+  text(Self) -> Promise[String] = _
+}
+
+pub(open) trait TElement : TNode {
+  nop(Self) -> Unit
+  tag_name(Self) -> String = _
+  set_attribute(Self, String, String) -> Unit = _
+  set_attribute_node(Self, Attr) -> Unit = _
+  get_bounding_client_rect(Self) -> DOMRect = _
+  remove_attribute_node(Self, Attr) -> Unit = _
+  toggle_attribute(Self, String, Bool) -> Unit = _
+  onclick(Self, (PointerEvent) -> Unit) -> Unit = _
+  onmousedown(Self, (MouseEvent) -> Unit) -> Unit = _
+  onmousemove(Self, (MouseEvent) -> Unit) -> Unit = _
+  onmouseup(Self, (MouseEvent) -> Unit) -> Unit = _
+  onkeydown(Self, (KeyboardEvent) -> Unit) -> Unit = _
+  onkeyup(Self, (KeyboardEvent) -> Unit) -> Unit = _
+}
+
+pub(open) trait TEvent : TJsValue {
+  nop(Self) -> Unit
+  type_(Self) -> String = _
+  target(Self) -> EventTarget = _
+  current_target(Self) -> EventTarget = _
+  stop_propagation(Self) -> Unit = _
+  prevent_default(Self) -> Unit = _
+  stop_immediate_propagation(Self) -> Unit = _
+}
+
+pub(open) trait TEventTarget : TJsValue {
+  nop(Self) -> Unit
+  add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit = _
+}
+impl TEventTarget for String
+
+pub(open) trait THTMLelement : TElement {
+  nop(Self) -> Unit
+  onchange(Self, (Event) -> Unit) -> Unit = _
+  style(Self) -> CSSStyleDeclaration = _
+}
+
+pub(open) trait TJsValue {
+  to_jv(Self) -> JsValue
+}
+impl TJsValue for String
+
+pub(open) trait TMouseEvent : TEvent {
+  nop(Self) -> Unit
+  client_x(Self) -> Double = _
+  client_y(Self) -> Double = _
+}
+
+pub(open) trait TNode : TEventTarget {
+  nop(Self) -> Unit
+  node_name(Self) -> String = _
+  node_type(Self) -> Int = _
+  text_content(Self) -> String = _
+  set_text_content(Self, &Show) -> Unit = _
+  append_child(Self, &TNode) -> Unit = _
+}
+impl TNode for String
+
+pub(open) trait TTypedArray {
+  buffer(Self) -> ArrayBuffer
+}
+
