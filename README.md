@@ -4,19 +4,35 @@
 At the core of the library is a type called `Signal`. Any changes/updates to the `signal` can be observed by subscribers. Once subscribed, the observers are notified whenever a `signal` is updated or modified. Observers can then initiate changes based on 
 these signal updates. A signal can have many subscribers.
 
-Example:
+A simple **counter** app in `reactive`:
 ```moonbit
-test "signal_update" {
-  let values = []
-  let s = new(0)
-  s.subscribe_permanent(fn(v) { values.push(v) })
-  assert_eq!(s.val(), 0)
-  s.update(5) // This will notify subscribers with the new value.
-  assert_eq!(s.val(), 5)
-  assert_eq!(values, [0, 5])
-  s.update(10) // This will notify subscribers with the new value.
-  assert_eq!(s.val(), 10)
-  assert_eq!(values, [0, 5, 10])
+///|
+fnalias @web.(div, button, style, onclick)
+
+///|
+typealias @web.(HTMLDivElement, ReactiveElement as RE, ReactiveAttr as RA)
+
+///|
+fn counter(initial_count : Int) -> HTMLDivElement {
+  let state = @core.new(initial_count) // root signal
+  div([
+    style("display: flex; flex-direction: column; align-items: center;"),
+    div([
+      style("display: flex; flex-direction: row; column-gap: 1em;"),
+      button("Increment", [onclick(fn(_) { state.update(state.val() + 1) })]),
+      RE::text(state, fn(txt, cur_count) { txt.set_text_content(cur_count) }),
+      button("Decrement", [
+        onclick(fn(_) { state.update(state.val() - 1) }),
+        RA::disabled(state.map(fn(count) { count <= 0 })), // Disable button when count is 0
+      ]),
+    ]),
+  ])
+}
+
+///|
+fn main {
+  let el = counter(0)
+  @web.mount_to_body(el)
 }
 ```
 
