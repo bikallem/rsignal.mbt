@@ -43,6 +43,8 @@ fn input(String, Array[&TAttachableNode]) -> HTMLInputElement
 
 fn log(&TJsValue) -> Unit
 
+fn mount_to_body(&TAttachableNode) -> Unit
+
 fn onchange((Event) -> Unit) -> EventHandlerAttr[Event]
 
 fn onclick((PointerEvent) -> Unit) -> EventHandlerAttr[PointerEvent]
@@ -288,7 +290,7 @@ impl[T : Eq] TNode for ReactiveAttr[T]
 type ReactiveElement[T]
 fn[A : Eq] ReactiveElement::div(@core.Signal[A], (HTMLDivElement, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
 fn[A : Eq] ReactiveElement::h(String, @core.Signal[A], (Element, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
-fn ReactiveElement::text(@core.Signal[String], (Text, String) -> Unit) -> Self[Text]
+fn[T : Show] ReactiveElement::text(@core.Signal[T], (Text, T) -> Unit) -> Self[Text]
 impl[A : TNode] TAttachableNode for ReactiveElement[A]
 impl[A : TNode] TElement for ReactiveElement[A]
 impl[A : TNode] TEventTarget for ReactiveElement[A]

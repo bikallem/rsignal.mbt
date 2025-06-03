@@ -25,3 +25,8 @@ pub fn log(obj : &TJsValue) -> Unit {
   let js_obj = obj.to_jv()
   log_ffi(js_obj)
 }
+
+///|
+pub fn mount_to_body(element : &TAttachableNode) -> Unit {
+  document.body().append_child(element)
+}

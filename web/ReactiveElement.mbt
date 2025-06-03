@@ -29,9 +29,9 @@ pub impl[A : TNode] TEventTarget for ReactiveElement[A] with nop(_) -> Unit {
 }
 
 ///| Creates a new reactive DOM element that updates text content based on a signal.
-pub fn ReactiveElement::text(
-  signal : @core.Signal[String],
-  effect : (Text, String) -> Unit
+pub fn[T : Show] ReactiveElement::text(
+  signal : @core.Signal[T],
+  effect : (Text, T) -> Unit
 ) -> ReactiveElement[Text] {
   let txt = document.create_text_node("")
   signal.subscribe_permanent(fn(value) { effect(txt, value) })
