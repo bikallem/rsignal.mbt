@@ -254,7 +254,6 @@ impl TEvent for KeyboardEvent
 impl TJsValue for KeyboardEvent
 
 type MouseEvent
-fn MouseEvent::from_event(&TEvent) -> Self
 impl TEvent for MouseEvent
 impl TJsValue for MouseEvent
 impl TMouseEvent for MouseEvent
@@ -392,6 +391,10 @@ pub(open) trait TMouseEvent : TEvent {
   nop(Self) -> Unit
   client_x(Self) -> Double = _
   client_y(Self) -> Double = _
+  alt_key(Self) -> Bool = _
+  ctrl_key(Self) -> Bool = _
+  meta_key(Self) -> Bool = _
+  shift_key(Self) -> Bool = _
 }
 
 pub(open) trait TNode : TEventTarget {
