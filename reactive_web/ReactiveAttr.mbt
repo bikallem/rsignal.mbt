@@ -1,7 +1,7 @@
 ///|
 struct ReactiveAttr[T] {
   attr : Attr
-  signal : @core.Signal[T]
+  signal : @reactive_core.Signal[T]
   effect : (Element, Attr, T) -> Unit
 }
 
@@ -39,7 +39,7 @@ pub impl[T : Eq] TEventTarget for ReactiveAttr[T] with nop(_) -> Unit {
 ///|
 pub fn[A : Eq] ReactiveAttr::new(
   name : String,
-  signal : @core.Signal[A],
+  signal : @reactive_core.Signal[A],
   effect : (Element, Attr, A) -> Unit
 ) -> ReactiveAttr[A] {
   let attr = document.create_attribute(name)
@@ -48,7 +48,7 @@ pub fn[A : Eq] ReactiveAttr::new(
 
 ///|
 pub fn ReactiveAttr::disabled(
-  signal : @core.Signal[Bool]
+  signal : @reactive_core.Signal[Bool]
 ) -> ReactiveAttr[Bool] {
   ReactiveAttr::new("disabled", signal, fn(el, attr, disable) {
     if disable {
@@ -61,7 +61,7 @@ pub fn ReactiveAttr::disabled(
 
 ///|
 pub fn ReactiveAttr::style(
-  signal : @core.Signal[String]
+  signal : @reactive_core.Signal[String]
 ) -> ReactiveAttr[String] {
   ReactiveAttr::new("style", signal, fn(_, attr, style) {
     attr.set_value(style)

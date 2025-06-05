@@ -1,12 +1,16 @@
 ///|
-fnalias @web.(div, button, style, onclick, h)
+fnalias @reactive_web.(div, button, style, onclick, h)
 
 ///|
-typealias @web.(HTMLDivElement, ReactiveElement as RE, ReactiveAttr as RA)
+typealias @reactive_web.(
+  HTMLDivElement,
+  ReactiveElement as RE,
+  ReactiveAttr as RA
+)
 
 ///|
 fn counter(initial_count : Int) -> HTMLDivElement {
-  let state = @core.new(initial_count) // root signal
+  let state = @reactive_core.new(initial_count) // root signal
   div([
     style("display: flex; flex-direction: column; align-items: center;"),
     h("h2", ["The Greatest Counter Ever!"]),
@@ -25,5 +29,5 @@ fn counter(initial_count : Int) -> HTMLDivElement {
 ///|
 fn main {
   let el = counter(0)
-  @web.mount_to_body(el)
+  @reactive_web.mount_to_body(el)
 }

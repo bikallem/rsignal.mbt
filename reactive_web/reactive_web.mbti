@@ -1,7 +1,7 @@
-package "bikallem/reactive/web"
+package "bikallem/reactive/reactive_web"
 
 import(
-  "bikallem/reactive/core"
+  "bikallem/reactive/reactive_core"
 )
 
 // Values
@@ -90,14 +90,18 @@ type CSSStyleDeclaration
 fn CSSStyleDeclaration::set_property(Self, String, String, priority~ : String = ..) -> Unit
 
 type CanvasRenderingContext2D
+fn CanvasRenderingContext2D::begin_path(Self) -> Unit
 fn CanvasRenderingContext2D::clear_rect(Self, Int, Int, Int, Int) -> Unit
 fn CanvasRenderingContext2D::fill_rect(Self, Int, Int, Int, Int) -> Unit
+fn CanvasRenderingContext2D::line_to(Self, Int, Int) -> Unit
+fn CanvasRenderingContext2D::move_to(Self, Int, Int) -> Unit
 fn CanvasRenderingContext2D::put_image_data(Self, ImageData, Int, Int) -> Unit
 fn CanvasRenderingContext2D::restore(Self) -> Unit
 fn CanvasRenderingContext2D::save(Self) -> Unit
 fn CanvasRenderingContext2D::set_fill_style(Self, String) -> Unit
 fn CanvasRenderingContext2D::set_line_width(Self, Int) -> Unit
 fn CanvasRenderingContext2D::set_stroke_style(Self, String) -> Unit
+fn CanvasRenderingContext2D::stroke(Self) -> Unit
 fn CanvasRenderingContext2D::stroke_rect(Self, Int, Int, Int, Int) -> Unit
 
 type DOMRect
@@ -276,18 +280,18 @@ fn[A, B] Promise::then(Self[A], (A) -> Self[B]) -> Self[B]
 async fn[T] Promise::wait(Self[T]) -> T!
 
 type ReactiveAttr[T]
-fn ReactiveAttr::disabled(@core.Signal[Bool]) -> Self[Bool]
-fn[A : Eq] ReactiveAttr::new(String, @core.Signal[A], (Element, Attr, A) -> Unit) -> Self[A]
-fn ReactiveAttr::style(@core.Signal[String]) -> Self[String]
+fn ReactiveAttr::disabled(@reactive_core.Signal[Bool]) -> Self[Bool]
+fn[A : Eq] ReactiveAttr::new(String, @reactive_core.Signal[A], (Element, Attr, A) -> Unit) -> Self[A]
+fn ReactiveAttr::style(@reactive_core.Signal[String]) -> Self[String]
 impl[T : Eq] TAttachableNode for ReactiveAttr[T]
 impl[T : Eq] TEventTarget for ReactiveAttr[T]
 impl[T : Eq] TJsValue for ReactiveAttr[T]
 impl[T : Eq] TNode for ReactiveAttr[T]
 
 type ReactiveElement[T]
-fn[A : Eq] ReactiveElement::div(@core.Signal[A], (HTMLDivElement, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
-fn[A : Eq] ReactiveElement::h(String, @core.Signal[A], (Element, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
-fn[T : Show] ReactiveElement::text(@core.Signal[T], (Text, T) -> Unit) -> Self[Text]
+fn[A : Eq] ReactiveElement::div(@reactive_core.Signal[A], (HTMLDivElement, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
+fn[A : Eq] ReactiveElement::h(String, @reactive_core.Signal[A], (Element, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
+fn[T : Show] ReactiveElement::text(@reactive_core.Signal[T], (Text, T) -> Unit) -> Self[Text]
 impl[A : TNode] TAttachableNode for ReactiveElement[A]
 impl[A : TNode] TElement for ReactiveElement[A]
 impl[A : TNode] TEventTarget for ReactiveElement[A]

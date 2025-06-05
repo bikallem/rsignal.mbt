@@ -3,6 +3,6 @@
     "js"
   ],
   "import": [
-    "bikallem/reactive/core"
+    "bikallem/reactive/reactive_core"
   ]
 }

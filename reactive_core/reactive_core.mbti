@@ -1,4 +1,4 @@
-package "bikallem/reactive"
+package "bikallem/reactive/reactive_core"
 
 // Values
 fn[T : Eq] combine_all(Array[Signal[T]]) -> Signal[Array[T]]

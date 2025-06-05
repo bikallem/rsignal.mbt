@@ -30,7 +30,7 @@ pub impl[A : TNode] TEventTarget for ReactiveElement[A] with nop(_) -> Unit {
 
 ///| Creates a new reactive DOM element that updates text content based on a signal.
 pub fn[T : Show] ReactiveElement::text(
-  signal : @core.Signal[T],
+  signal : @reactive_core.Signal[T],
   effect : (Text, T) -> Unit
 ) -> ReactiveElement[Text] {
   let txt = document.create_text_node("")
@@ -41,7 +41,7 @@ pub fn[T : Show] ReactiveElement::text(
 ///| Creates a new reactive HTML element with the given tag name.
 pub fn[A : Eq] ReactiveElement::h(
   tag : String,
-  signal : @core.Signal[A],
+  signal : @reactive_core.Signal[A],
   effect : (Element, A) -> Unit,
   nodes : Array[&TAttachableNode]
 ) -> ReactiveElement[Element] {
@@ -53,7 +53,7 @@ pub fn[A : Eq] ReactiveElement::h(
 
 ///| Creates a new reactive HTML div element.
 pub fn[A : Eq] ReactiveElement::div(
-  signal : @core.Signal[A],
+  signal : @reactive_core.Signal[A],
   effect : (HTMLDivElement, A) -> Unit,
   nodes : Array[&TAttachableNode]
 ) -> ReactiveElement[Element] {
