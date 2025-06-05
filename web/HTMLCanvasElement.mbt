@@ -117,3 +117,27 @@ pub extern "js" fn CanvasRenderingContext2D::clear_rect(
   width : Int,
   height : Int
 ) -> Unit = "(self, x, y, width, height) => self.clearRect(x, y, width, height)"
+
+///|
+pub extern "js" fn CanvasRenderingContext2D::begin_path(
+  self : CanvasRenderingContext2D
+) -> Unit = "(self) => self.beginPath()"
+
+///|
+pub extern "js" fn CanvasRenderingContext2D::move_to(
+  self : CanvasRenderingContext2D,
+  x : Int,
+  y : Int
+) -> Unit = "(self, x, y) => self.moveTo(x, y)"
+
+///|
+pub extern "js" fn CanvasRenderingContext2D::line_to(
+  self : CanvasRenderingContext2D,
+  x : Int,
+  y : Int
+) -> Unit = "(self, x, y) => self.lineTo(x, y)"
+
+///|
+pub extern "js" fn CanvasRenderingContext2D::stroke(
+  self : CanvasRenderingContext2D
+) -> Unit = "(self) => self.stroke()"
