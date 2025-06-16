@@ -1,6 +1,5 @@
 ///|
 pub(open) trait TEvent: TJsValue {
-  nop(Self) -> Unit
   type_(Self) -> String = _
   target(Self) -> EventTarget = _
   current_target(Self) -> EventTarget = _

@@ -1,5 +1,6 @@
 ///|
-extern type CanvasRenderingContext2D
+#external
+type CanvasRenderingContext2D
 
 ///|
 pub extern "js" fn HTMLCanvasElement::get_2d_context(

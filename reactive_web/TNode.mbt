@@ -12,7 +12,6 @@ pub const DOCUMENT_NODE = 9
 
 ///|
 pub(open) trait TNode: TEventTarget {
-  nop(self : Self) -> Unit
   node_name(self : Self) -> String = _
   node_type(self : Self) -> Int = _
   text_content(self : Self) -> String = _

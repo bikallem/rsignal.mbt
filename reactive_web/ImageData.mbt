@@ -1,5 +1,6 @@
 ///|
-extern type ImageData
+#external
+type ImageData
 
 ///|
 pub extern "js" fn ImageData::new(

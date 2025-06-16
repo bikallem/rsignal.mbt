@@ -11,14 +11,10 @@ pub impl[T : Eq] TJsValue for ReactiveAttr[T] with to_jv(_) -> JsValue {
 }
 
 ///|
-pub impl[T : Eq] TNode for ReactiveAttr[T] with nop(_) -> Unit {
-
-}
+pub impl[T : Eq] TNode for ReactiveAttr[T]
 
 ///|
-pub impl[T : Eq] TAttachableNode for ReactiveAttr[T] with nop(_) -> Unit {
-
-}
+pub impl[T : Eq] TAttachableNode for ReactiveAttr[T]
 
 ///|
 pub impl[T : Eq] TAttachableNode for ReactiveAttr[T] with attach(
@@ -32,9 +28,7 @@ pub impl[T : Eq] TAttachableNode for ReactiveAttr[T] with attach(
 }
 
 ///|
-pub impl[T : Eq] TEventTarget for ReactiveAttr[T] with nop(_) -> Unit {
-
-}
+pub impl[T : Eq] TEventTarget for ReactiveAttr[T]
 
 ///|
 pub fn[A : Eq] ReactiveAttr::new(

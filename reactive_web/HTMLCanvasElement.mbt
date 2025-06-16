@@ -1,33 +1,24 @@
 ///|
-extern type HTMLCanvasElement
+#external
+type HTMLCanvasElement
 
 ///|
 pub impl TJsValue for HTMLCanvasElement with to_jv(self : HTMLCanvasElement) -> JsValue = "%identity"
 
 ///|
-pub impl TNode for HTMLCanvasElement with nop(_) -> Unit {
-
-}
+pub impl TNode for HTMLCanvasElement
 
 ///|
-pub impl TElement for HTMLCanvasElement with nop(_) -> Unit {
-
-}
+pub impl TElement for HTMLCanvasElement
 
 ///|
-pub impl TEventTarget for HTMLCanvasElement with nop(_) -> Unit {
-
-}
+pub impl TEventTarget for HTMLCanvasElement
 
 ///|
-pub impl TAttachableNode for HTMLCanvasElement with nop(_) -> Unit {
-
-}
+pub impl TAttachableNode for HTMLCanvasElement
 
 ///|
-pub impl THTMLelement for HTMLCanvasElement with nop(_) -> Unit {
-
-}
+pub impl THTMLelement for HTMLCanvasElement
 
 ///|
 pub extern "js" fn HTMLCanvasElement::width(self : HTMLCanvasElement) -> Int = "(self) => self.width"

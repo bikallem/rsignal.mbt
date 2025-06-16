@@ -33,9 +33,7 @@ pub impl[T] TJsValue for EventHandlerAttr[T] with to_jv(_) -> JsValue {
 }
 
 ///|
-pub impl[T : TEvent] TNode for EventHandlerAttr[T] with nop(_) -> Unit {
-
-}
+pub impl[T : TEvent] TNode for EventHandlerAttr[T]
 
 ///|
 pub impl[T : TEvent] TNode for EventHandlerAttr[T] with node_type(_) -> Int {
@@ -43,9 +41,7 @@ pub impl[T : TEvent] TNode for EventHandlerAttr[T] with node_type(_) -> Int {
 }
 
 ///|
-pub impl[T : TEvent] TAttachableNode for EventHandlerAttr[T] with nop(_) -> Unit {
-
-}
+pub impl[T : TEvent] TAttachableNode for EventHandlerAttr[T]
 
 ///|
 pub impl[T : TEvent] TAttachableNode for EventHandlerAttr[T] with attach(
@@ -56,9 +52,7 @@ pub impl[T : TEvent] TAttachableNode for EventHandlerAttr[T] with attach(
 }
 
 ///|
-pub impl[T] TEventTarget for EventHandlerAttr[T] with nop(_) -> Unit {
-
-}
+pub impl[T] TEventTarget for EventHandlerAttr[T]
 
 ///| onclick attribute
 pub fn onclick(

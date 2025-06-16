@@ -58,7 +58,8 @@ impl TMouseEvent with shift_key(self : Self) -> Bool {
 }
 
 ///| MouseEvent - https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
-extern type MouseEvent
+#external
+type MouseEvent
 
 ///|
 pub impl TJsValue for MouseEvent with to_jv(self : MouseEvent) -> JsValue = "%identity"
@@ -69,6 +70,4 @@ pub impl TMouseEvent for MouseEvent with nop(_ : MouseEvent) -> Unit {
 }
 
 ///|
-pub impl TEvent for MouseEvent with nop(_ : MouseEvent) -> Unit {
-
-}
+pub impl TEvent for MouseEvent

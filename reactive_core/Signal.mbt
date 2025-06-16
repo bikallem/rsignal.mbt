@@ -512,13 +512,13 @@ pub fn[T : Eq] combine_all(signals : Array[Signal[T]]) -> Signal[Array[T]] {
 ///|
 test "create_signal: get and set basic" {
   let s = new(0)
-  assert_eq!(Signal::val(s), 0)
+  assert_eq(Signal::val(s), 0)
   Signal::update(s, 5)
-  assert_eq!(Signal::val(s), 5)
+  assert_eq(Signal::val(s), 5)
   let s = new("hello")
-  assert_eq!(Signal::val(s), "hello")
+  assert_eq(Signal::val(s), "hello")
   Signal::update(s, "world")
-  assert_eq!(Signal::val(s), "world")
+  assert_eq(Signal::val(s), "world")
 }
 
 ///|
@@ -531,7 +531,7 @@ test "subscribe: basic" (t : @test.T) {
   t.writeln("\nUnsubscribed sub1.\nSignal update to 10.\n")
   Signal::update(s, 10)
   Signal::update(s, 10)
-  t.snapshot!(filename="subscribe_basic")
+  t.snapshot(filename="subscribe_basic")
 }
 
 ///|
@@ -543,5 +543,5 @@ test "map: basic" (t : @test.T) {
   s.update(10)
   s2.unsubscribe(sub)
   s.update(20)
-  t.snapshot!(filename="map_basic")
+  t.snapshot(filename="map_basic")
 }

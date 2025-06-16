@@ -1,5 +1,6 @@
 ///|
-extern type CSSStyleDeclaration
+#external
+type CSSStyleDeclaration
 
 ///|
 pub extern "js" fn CSSStyleDeclaration::set_property(

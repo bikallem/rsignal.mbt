@@ -1,6 +1,5 @@
 ///|
 pub(open) trait TElement: TNode {
-  nop(self : Self) -> Unit
   tag_name(self : Self) -> String = _
   set_attribute(self : Self, name : String, value : String) -> Unit = _
   set_attribute_node(self : Self, attr : Attr) -> Unit = _

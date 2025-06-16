@@ -1,5 +1,6 @@
 ///| JavaScript Attr Object - https://developer.mozilla.org/en-US/docs/Web/API/Attr
-extern type Attr
+#external
+type Attr
 
 ///|
 pub extern "js" fn Attr::name(self : Attr) -> String = "(self) => self.name"
@@ -28,14 +29,10 @@ pub fn Attr::owner_element(self : Attr) -> Element? {
 pub impl TJsValue for Attr with to_jv(self : Attr) -> JsValue = "%identity"
 
 ///|
-pub impl TNode for Attr with nop(_) -> Unit {
-
-}
+pub impl TNode for Attr
 
 ///|
-pub impl TAttachableNode for Attr with nop(_) -> Unit {
-
-}
+pub impl TAttachableNode for Attr
 
 ///|
 pub impl TAttachableNode for Attr with attach(self : Attr, parent : Element) -> Unit {
@@ -43,9 +40,7 @@ pub impl TAttachableNode for Attr with attach(self : Attr, parent : Element) -> 
 }
 
 ///|
-pub impl TEventTarget for Attr with nop(_) -> Unit {
-
-}
+pub impl TEventTarget for Attr
 
 ///|
 pub fn[T : Show] attr(name : String, value : T) -> Attr {
@@ -60,8 +55,8 @@ pub fn id(id : String) -> Attr {
 }
 
 ///| class attribute
-pub fn class(class : String) -> Attr {
-  attr("class", class)
+pub fn clasz(clasz : String) -> Attr {
+  attr("class", clasz)
 }
 
 ///| style attribute

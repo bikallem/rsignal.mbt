@@ -1,5 +1,6 @@
 ///| JavaScript value
-extern type JsValue
+#external
+type JsValue
 
 ///|
 extern "js" fn JsValue::to_string_ffi(self : JsValue) -> String =

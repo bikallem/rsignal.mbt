@@ -5,7 +5,6 @@
 /// be attached to another node. A text node can only be attached to an
 /// element node, and an attribute can only be attached to an element node.
 pub(open) trait TAttachableNode: TNode {
-  nop(self : Self) -> Unit
   attach(self : Self, parent : Element) -> Unit = _
 }
 

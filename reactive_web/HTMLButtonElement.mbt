@@ -1,28 +1,21 @@
 ///|
-extern type HTMLButtonElement
+#external
+type HTMLButtonElement
 
 ///|
 pub impl TJsValue for HTMLButtonElement with to_jv(_) -> JsValue = "%identity"
 
 ///|
-pub impl TNode for HTMLButtonElement with nop(_) -> Unit {
-
-}
+pub impl TNode for HTMLButtonElement
 
 ///|
-pub impl TElement for HTMLButtonElement with nop(_) -> Unit {
-
-}
+pub impl TElement for HTMLButtonElement
 
 ///|
-pub impl TEventTarget for HTMLButtonElement with nop(_) -> Unit {
-
-}
+pub impl TEventTarget for HTMLButtonElement
 
 ///|
-pub impl TAttachableNode for HTMLButtonElement with nop(_) -> Unit {
-
-}
+pub impl TAttachableNode for HTMLButtonElement
 
 ///|
 pub extern "js" fn HTMLButtonElement::disabled(

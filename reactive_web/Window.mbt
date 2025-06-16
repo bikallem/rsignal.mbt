@@ -1,5 +1,6 @@
 ///|
-extern type Window
+#external
+type Window
 
 ///|
 extern "js" fn window_ffi() -> Window = "() => window"
@@ -11,9 +12,7 @@ pub let window : Window = window_ffi()
 pub impl TJsValue for Window with to_jv(self : Window) -> JsValue = "%identity"
 
 ///|
-pub impl TEventTarget for Window with nop(_ : Window) -> Unit {
-
-}
+pub impl TEventTarget for Window
 
 ///|
 pub extern "js" fn Window::device_pixel_ratio(self : Window) -> Double = "(self) => self.devicePixelRatio"
@@ -31,7 +30,8 @@ pub fn Window::beforeunload(
 }
 
 ///|
-extern type ImageBitmap
+#external
+type ImageBitmap
 
 ///|
 pub extern "js" fn Window::create_image_bitmap(

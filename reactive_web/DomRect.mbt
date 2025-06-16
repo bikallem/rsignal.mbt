@@ -1,5 +1,6 @@
 ///|
-extern type DOMRect
+#external
+type DOMRect
 
 ///|
 pub extern "js" fn DOMRect::left(self : DOMRect) -> Double = "(self) => self.left"

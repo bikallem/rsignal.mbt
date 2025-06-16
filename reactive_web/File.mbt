@@ -1,5 +1,6 @@
 ///|
-extern type FileList
+#external
+type FileList
 
 ///|
 extern "js" fn file_list_item_ffi(file_list : FileList, index : Int) -> JsValue = "(self, index) => self.item(index)"
@@ -13,7 +14,8 @@ pub fn FileList::item(self : FileList, index : Int) -> File? {
 pub extern "js" fn FileList::length(self : FileList) -> Int = "(self) => self.length"
 
 ///|
-extern type File
+#external
+type File
 
 ///|
 pub impl TJsValue for File with to_jv(self : File) -> JsValue = "%identity"

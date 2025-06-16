@@ -1,13 +1,12 @@
 ///| FileReader - https://developer.mozilla.org/en-US/docs/Web/API/FileReader
-extern type FileReader
+#external
+type FileReader
 
 ///|
 pub impl TJsValue for FileReader with to_jv(self : FileReader) -> JsValue = "%identity"
 
 ///|
-pub impl TEventTarget for FileReader with nop(_ : FileReader) -> Unit {
-
-}
+pub impl TEventTarget for FileReader
 
 ///|
 pub extern "js" fn FileReader::new() -> FileReader = "() => new FileReader()"
@@ -70,7 +69,8 @@ pub fn FileReader::onerror(
 }
 
 ///|
-extern type FileReaderResult
+#external
+type FileReaderResult
 
 ///|
 pub fn FileReaderResult::to_array_buffer(

@@ -1,5 +1,6 @@
 ///| JavaScript ArrayBuffer
-extern type ArrayBuffer
+#external
+type ArrayBuffer
 
 ///|
 pub(open) trait TTypedArray {
@@ -10,7 +11,8 @@ pub(open) trait TTypedArray {
 pub fn ArrayBuffer::to_jv(self : ArrayBuffer) -> JsValue = "%identity"
 
 ///| https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set
-pub extern type Uint8Array
+#external
+pub type Uint8Array
 
 ///|
 extern "js" fn buffer_ffi(jv : JsValue) -> ArrayBuffer = "(self) => self.buffer"
@@ -24,7 +26,8 @@ pub impl TTypedArray for Uint8Array with buffer(self : Uint8Array) -> ArrayBuffe
 pub extern "js" fn Uint8Array::op_get(self : Uint8Array, index : Int) -> Int = "(self, index) => self[index]"
 
 ///|
-pub extern type Float64Array
+#external
+pub type Float64Array
 
 ///|
 pub impl TTypedArray for Float64Array with buffer(self : Float64Array) -> ArrayBuffer {
@@ -71,7 +74,8 @@ pub extern "js" fn Uint8Array::subarray(
 pub fn Uint8Array::to_jv(self : Uint8Array) -> JsValue = "%identity"
 
 ///|
-pub extern type Uint8ClampedArray
+#external
+pub type Uint8ClampedArray
 
 ///|
 pub extern "js" fn Uint8ClampedArray::new(

@@ -1,33 +1,24 @@
 ///|
-extern type HTMLDivElement
+#external
+type HTMLDivElement
 
 ///|
 pub impl TJsValue for HTMLDivElement with to_jv(self : HTMLDivElement) -> JsValue = "%identity"
 
 ///|
-pub impl TElement for HTMLDivElement with nop(_) -> Unit {
-
-}
+pub impl TElement for HTMLDivElement
 
 ///|
-pub impl TNode for HTMLDivElement with nop(_) -> Unit {
-
-}
+pub impl TNode for HTMLDivElement
 
 ///|
-pub impl TEventTarget for HTMLDivElement with nop(_) -> Unit {
-
-}
+pub impl TEventTarget for HTMLDivElement
 
 ///|
-pub impl THTMLelement for HTMLDivElement with nop(_) -> Unit {
-
-}
+pub impl THTMLelement for HTMLDivElement
 
 ///|
-pub impl TAttachableNode for HTMLDivElement with nop(_) -> Unit {
-
-}
+pub impl TAttachableNode for HTMLDivElement
 
 ///|
 pub fn div(nodes : Array[&TAttachableNode]) -> HTMLDivElement {

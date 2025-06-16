@@ -1,6 +1,5 @@
 ///| EventTarget - https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 pub(open) trait TEventTarget: TJsValue {
-  nop(self : Self) -> Unit
   add_event_listener(
     self : Self,
     event : String,

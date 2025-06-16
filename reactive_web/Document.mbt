@@ -1,18 +1,15 @@
 ///| Javascript DOM Document
-extern type Document
+#external
+type Document
 
 ///|
-pub impl TNode for Document with nop(_) -> Unit {
-
-}
+pub impl TNode for Document
 
 ///|
 pub impl TJsValue for Document with to_jv(self : Document) -> JsValue = "%identity"
 
 ///|
-pub impl TEventTarget for Document with nop(_) -> Unit {
-
-}
+pub impl TEventTarget for Document
 
 ///|
 extern "js" fn document_ffi() -> Document = "() => document"

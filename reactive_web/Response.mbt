@@ -1,5 +1,6 @@
 ///| JavaScript Response
-extern type Response
+#external
+type Response
 
 ///|
 pub extern "js" fn Response::array_buffer(

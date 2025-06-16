@@ -59,7 +59,8 @@ impl TBlob with text(self : Self) -> Promise[String] {
 }
 
 ///| https://developer.mozilla.org/en-US/docs/Web/API/Blob
-extern type Blob
+#external
+type Blob
 
 ///|
 pub extern "js" fn Blob::new(

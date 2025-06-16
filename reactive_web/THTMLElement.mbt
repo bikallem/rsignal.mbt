@@ -1,6 +1,5 @@
 ///|
 pub(open) trait THTMLelement: TElement {
-  nop(self : Self) -> Unit
   onchange(self : Self, listener : (Event) -> Unit) -> Unit = _
   style(self : Self) -> CSSStyleDeclaration = _
 }

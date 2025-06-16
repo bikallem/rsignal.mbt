@@ -1,5 +1,6 @@
 ///| JavaScript Object
-extern type JsObject
+#external
+type JsObject
 
 ///|
 pub extern "js" fn JsObject::new() -> JsObject = "() => {}"
