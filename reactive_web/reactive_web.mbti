@@ -23,7 +23,7 @@ fn button(String, Array[&TAttachableNode]) -> HTMLButtonElement
 
 fn canvas(Array[&TAttachableNode]) -> HTMLCanvasElement
 
-fn class(String) -> Attr
+fn clasz(String) -> Attr
 
 fn div(Array[&TAttachableNode]) -> HTMLDivElement
 
@@ -92,13 +92,18 @@ fn CSSStyleDeclaration::set_property(Self, String, String, priority~ : String = 
 type CanvasRenderingContext2D
 fn CanvasRenderingContext2D::begin_path(Self) -> Unit
 fn CanvasRenderingContext2D::clear_rect(Self, Int, Int, Int, Int) -> Unit
+fn CanvasRenderingContext2D::draw_image(Self, JsValue, Int, Int, Int, Int, Int, Int, Int, Int) -> Unit
 fn CanvasRenderingContext2D::fill_rect(Self, Int, Int, Int, Int) -> Unit
+fn CanvasRenderingContext2D::image_smoothing_enabled(Self) -> Bool
+fn CanvasRenderingContext2D::image_smoothing_quality(Self) -> String
 fn CanvasRenderingContext2D::line_to(Self, Int, Int) -> Unit
 fn CanvasRenderingContext2D::move_to(Self, Int, Int) -> Unit
 fn CanvasRenderingContext2D::put_image_data(Self, ImageData, Int, Int) -> Unit
 fn CanvasRenderingContext2D::restore(Self) -> Unit
 fn CanvasRenderingContext2D::save(Self) -> Unit
 fn CanvasRenderingContext2D::set_fill_style(Self, String) -> Unit
+fn CanvasRenderingContext2D::set_image_smoothing_enabled(Self, Bool) -> Unit
+fn CanvasRenderingContext2D::set_image_smoothing_quality(Self, String) -> Unit
 fn CanvasRenderingContext2D::set_line_width(Self, Int) -> Unit
 fn CanvasRenderingContext2D::set_stroke_style(Self, String) -> Unit
 fn CanvasRenderingContext2D::stroke(Self) -> Unit
@@ -176,7 +181,8 @@ impl TJsValue for FileReader
 type FileReaderResult
 fn FileReaderResult::to_array_buffer(Self) -> ArrayBuffer
 
-pub extern type Float64Array
+#external
+pub type Float64Array
 fn Float64Array::new(ArrayBuffer, Int, Int) -> Self
 fn Float64Array::op_get(Self, Int) -> Double
 fn Float64Array::to_jv(Self) -> JsValue
@@ -204,6 +210,7 @@ fn HTMLCanvasElement::width(Self) -> Int
 impl TAttachableNode for HTMLCanvasElement
 impl TElement for HTMLCanvasElement
 impl TEventTarget for HTMLCanvasElement
+impl THTMLelement for HTMLCanvasElement
 impl TJsValue for HTMLCanvasElement
 impl TNode for HTMLCanvasElement
 
@@ -223,6 +230,8 @@ impl TEventTarget for HTMLInputElement
 impl THTMLelement for HTMLInputElement
 impl TJsValue for HTMLInputElement
 impl TNode for HTMLInputElement
+
+type ImageBitmap
 
 type ImageData
 fn ImageData::data(Self) -> Uint8ClampedArray
@@ -277,7 +286,7 @@ fn[A, B] Promise::map(Self[A], (A) -> B) -> Self[B]
 fn[T] Promise::new(((T) -> Unit, (Error) -> Unit) -> Unit) -> Self[T]
 fn[A] Promise::resolve(A) -> Self[A]
 fn[A, B] Promise::then(Self[A], (A) -> Self[B]) -> Self[B]
-async fn[T] Promise::wait(Self[T]) -> T!
+async fn[T] Promise::wait(Self[T]) -> T raise
 
 type ReactiveAttr[T]
 fn ReactiveAttr::disabled(@reactive_core.Signal[Bool]) -> Self[Bool]
@@ -311,7 +320,8 @@ impl TEventTarget for Text
 impl TJsValue for Text
 impl TNode for Text
 
-pub extern type Uint8Array
+#external
+pub type Uint8Array
 fn Uint8Array::byte_length(Self) -> Int
 fn Uint8Array::new(ArrayBuffer) -> Self
 fn Uint8Array::op_get(Self, Int) -> Int
@@ -320,12 +330,14 @@ fn Uint8Array::subarray(Self, Int, Int) -> Self
 fn Uint8Array::to_jv(Self) -> JsValue
 impl TTypedArray for Uint8Array
 
-pub extern type Uint8ClampedArray
+#external
+pub type Uint8ClampedArray
 fn Uint8ClampedArray::new(Uint8Array) -> Self
 fn Uint8ClampedArray::to_jv(Self) -> JsValue
 
 type Window
 fn Window::beforeunload(Self, (BeforeUnloadEvent) -> Unit) -> Unit
+fn Window::create_image_bitmap(Self, ImageData) -> Promise[ImageBitmap]
 fn Window::device_pixel_ratio(Self) -> Double
 impl TEventTarget for Window
 impl TJsValue for Window
@@ -334,7 +346,6 @@ impl TJsValue for Window
 
 // Traits
 pub(open) trait TAttachableNode : TNode {
-  nop(Self) -> Unit
   attach(Self, Element) -> Unit = _
 }
 impl TAttachableNode for String
@@ -349,7 +360,6 @@ pub(open) trait TBlob : TJsValue {
 }
 
 pub(open) trait TElement : TNode {
-  nop(Self) -> Unit
   tag_name(Self) -> String = _
   set_attribute(Self, String, String) -> Unit = _
   set_attribute_node(Self, Attr) -> Unit = _
@@ -365,7 +375,6 @@ pub(open) trait TElement : TNode {
 }
 
 pub(open) trait TEvent : TJsValue {
-  nop(Self) -> Unit
   type_(Self) -> String = _
   target(Self) -> EventTarget = _
   current_target(Self) -> EventTarget = _
@@ -375,13 +384,11 @@ pub(open) trait TEvent : TJsValue {
 }
 
 pub(open) trait TEventTarget : TJsValue {
-  nop(Self) -> Unit
   add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit = _
 }
 impl TEventTarget for String
 
 pub(open) trait THTMLelement : TElement {
-  nop(Self) -> Unit
   onchange(Self, (Event) -> Unit) -> Unit = _
   style(Self) -> CSSStyleDeclaration = _
 }
@@ -392,7 +399,6 @@ pub(open) trait TJsValue {
 impl TJsValue for String
 
 pub(open) trait TMouseEvent : TEvent {
-  nop(Self) -> Unit
   client_x(Self) -> Double = _
   client_y(Self) -> Double = _
   alt_key(Self) -> Bool = _
@@ -402,7 +408,6 @@ pub(open) trait TMouseEvent : TEvent {
 }
 
 pub(open) trait TNode : TEventTarget {
-  nop(Self) -> Unit
   node_name(Self) -> String = _
   node_type(Self) -> Int = _
   text_content(Self) -> String = _

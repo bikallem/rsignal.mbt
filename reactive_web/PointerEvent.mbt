@@ -3,9 +3,7 @@
 type PointerEvent
 
 ///|
-pub impl TMouseEvent for PointerEvent with nop(_ : PointerEvent) -> Unit {
-
-}
+pub impl TMouseEvent for PointerEvent
 
 ///|
 pub impl TJsValue for PointerEvent with to_jv(self : PointerEvent) -> JsValue = "%identity"
