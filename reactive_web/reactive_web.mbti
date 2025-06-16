@@ -351,7 +351,6 @@ pub(open) trait TAttachableNode : TNode {
 impl TAttachableNode for String
 
 pub(open) trait TBlob : TJsValue {
-  nop(Self) -> Unit
   type_(Self) -> String = _
   size(Self) -> Int = _
   slice(Self, Int, Int, String) -> Blob = _

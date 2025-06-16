@@ -21,9 +21,7 @@ type File
 pub impl TJsValue for File with to_jv(self : File) -> JsValue = "%identity"
 
 ///|
-pub impl TBlob for File with nop(_ : File) -> Unit {
-
-}
+pub impl TBlob for File
 
 ///|
 pub extern "js" fn File::name(self : File) -> String = "(self) => self.name"
