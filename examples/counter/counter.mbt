@@ -17,11 +17,11 @@ fn counter(initial_count : Int) -> HTMLDivElement {
     div([
       style("display: flex; flex-direction: row; column-gap: 1em;"),
       button("Decrement", [
-        onclick(fn(_) { state.update(state.val() - 1) }),
-        RA::disabled(state.map(fn(count) { count <= 0 })), // Disable button when count is 0
+        onclick(_ => state.update(state.val() - 1)),
+        RA::disabled(state.map(count => count <= 0)), // Disable button when count is 0
       ]),
-      RE::text(state, fn(txt, cur_count) { txt.set_text_content(cur_count) }),
-      button("Increment", [onclick(fn(_) { state.update(state.val() + 1) })]),
+      RE::text(state, (txt, cur_count) => txt.set_text_content(cur_count)),
+      button("Increment", [onclick(_ => state.update(state.val() + 1))]),
     ]),
   ])
 }

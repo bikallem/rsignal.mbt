@@ -18,8 +18,7 @@ extern "js" fn document_ffi() -> Document = "() => document"
 pub let document : Document = document_ffi()
 
 ///|
-extern "js" fn get_element_by_id_ffi(doc : Document, id : String) -> JsValue =
-  #| (doc, id) => doc.getElementById(id)
+extern "js" fn get_element_by_id_ffi(doc : Document, id : String) -> JsValue = "(doc, id) => doc.getElementById(id)"
 
 ///|
 pub fn Document::get_element_by_id(self : Document, id : String) -> Element? {
@@ -30,19 +29,16 @@ pub fn Document::get_element_by_id(self : Document, id : String) -> Element? {
 pub extern "js" fn Document::create_attribute(
   self : Document,
   name : String
-) -> Attr =
-  #| (document, name) => document.createAttribute(name)
+) -> Attr = "(document, name) => document.createAttribute(name)"
 
 ///| Create a new element with the given tag name
 pub extern "js" fn Document::create_element(
   self : Document,
   tag_name : String
-) -> Element =
-  #| (document, tag_name) => document.createElement(tag_name);
+) -> Element = "(document, tag_name) => document.createElement(tag_name)"
 
 ///|
-extern "js" fn body_ffi() -> Element =
-  #| () => document.body
+extern "js" fn body_ffi() -> Element = "(document) => document.body"
 
 ///|
 pub fn Document::body(_ : Document) -> Element {
@@ -53,5 +49,4 @@ pub fn Document::body(_ : Document) -> Element {
 pub extern "js" fn Document::create_text_node(
   self : Document,
   content : String
-) -> Text =
-  #| (document, content) => document.createTextNode(content);
+) -> Text = "(document, content) => document.createTextNode(content)"

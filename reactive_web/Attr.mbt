@@ -9,8 +9,7 @@ pub extern "js" fn Attr::name(self : Attr) -> String = "(self) => self.name"
 pub extern "js" fn Attr::value(self : Attr) -> String = "(self) => self.value"
 
 ///|
-extern "js" fn Attr::set_value_ffi(self : Attr, value : String) -> Unit =
-  #| (self, value) => self.value = value
+extern "js" fn Attr::set_value_ffi(self : Attr, value : String) -> Unit = "(self, value) => self.value = value"
 
 ///| Set the value of an attribute
 pub fn Attr::set_value(self : Attr, value : &Show) -> Unit {

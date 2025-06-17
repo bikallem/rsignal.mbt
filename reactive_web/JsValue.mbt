@@ -13,16 +13,13 @@ pub extern "js" fn JsValue::define_property(
   self : JsValue,
   key : String,
   value : JsValue
-) -> Unit =
-  #| (self, key, value) => self[key] = value
+) -> Unit = "(self, key, value) => self[key] = value"
 
 ///|
-pub extern "js" fn JsValue::is_null(self : JsValue) -> Bool =
-  #| (self) => Object.is(self, null)
+pub extern "js" fn JsValue::is_null(self : JsValue) -> Bool = "(self) => Object.is(self, null)"
 
 ///|
-pub extern "js" fn JsValue::is_undefined(self : JsValue) -> Bool =
-  #| (self) => Object.is(self, undefined)
+pub extern "js" fn JsValue::is_undefined(self : JsValue) -> Bool = "(self) => Object.is(self, undefined)"
 
 ///| Returns true if the value is `null` or `undefined`
 pub fn JsValue::is_none(self : JsValue) -> Bool {

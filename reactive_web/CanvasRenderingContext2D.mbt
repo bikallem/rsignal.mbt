@@ -27,8 +27,7 @@ pub extern "js" fn CanvasRenderingContext2D::draw_image(
   dy : Int,
   dwidth : Int,
   dheight : Int
-) -> Unit =
-  #| (self, image, sx, sy, swidth, sheight, dx, dy, dwidth, dheight) => self.drawImage(image, sx, sy, swidth, sheight, dx, dy, dwidth, dheight)
+) -> Unit = "(self, image, sx, sy, swidth, sheight, dx, dy, dwidth, dheight) => self.drawImage(image, sx, sy, swidth, sheight, dx, dy, dwidth, dheight)"
 
 ///|
 pub extern "js" fn CanvasRenderingContext2D::save(

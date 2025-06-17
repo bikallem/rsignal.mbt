@@ -30,8 +30,7 @@ extern "js" fn set_attribute_ffi(
   element : JsValue,
   name : String,
   value : String
-) -> Unit =
-  #| (self, name, v) => self.setAttribute(name, v)
+) -> Unit = "(self, name, v) => self.setAttribute(name, v)"
 
 ///|
 impl TElement with set_attribute(self : Self, name : String, value : String) -> Unit {
@@ -42,8 +41,7 @@ impl TElement with set_attribute(self : Self, name : String, value : String) -> 
 extern "js" fn set_attribute_node_ffi(
   element : JsValue,
   attr : JsValue
-) -> Unit =
-  #| (self, attr) => self.setAttributeNode(attr)
+) -> Unit = "(self, attr) => self.setAttributeNode(attr)"
 
 ///|
 impl TElement with set_attribute_node(self : Self, attr : Attr) -> Unit {
@@ -51,8 +49,7 @@ impl TElement with set_attribute_node(self : Self, attr : Attr) -> Unit {
 }
 
 ///|
-extern "js" fn get_bounding_client_rect_ffi(element : JsValue) -> DOMRect =
-  #| (self) => self.getBoundingClientRect()
+extern "js" fn get_bounding_client_rect_ffi(element : JsValue) -> DOMRect = "(self) => self.getBoundingClientRect()"
 
 ///|
 impl TElement with get_bounding_client_rect(self : Self) -> DOMRect {
@@ -63,8 +60,7 @@ impl TElement with get_bounding_client_rect(self : Self) -> DOMRect {
 extern "js" fn remove_attribute_node_ffi(
   element : JsValue,
   attr : Attr
-) -> Unit =
-  #| (self, attr) => self.removeAttributeNode(attr)
+) -> Unit = "(self, attr) => self.removeAttributeNode(attr)"
 
 ///|
 impl TElement with remove_attribute_node(self : Self, attr : Attr) -> Unit {
@@ -76,8 +72,7 @@ extern "js" fn toggle_attribute_ffi(
   element : JsValue,
   name : String,
   force : Bool
-) -> Unit =
-  #| (self, name, force) => self.toggleAttribute(name, force)
+) -> Unit = "(self, name, force) => self.toggleAttribute(name, force)"
 
 ///|
 impl TElement with toggle_attribute(self : Self, name : String, force : Bool) -> Unit {
