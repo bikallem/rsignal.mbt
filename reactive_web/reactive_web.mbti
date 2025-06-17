@@ -59,8 +59,6 @@ fn text(String) -> Text
 
 fn[T] to_jv(T) -> JsValue
 
-fn whole_text(Text) -> String
-
 let window : Window
 
 // Types and methods

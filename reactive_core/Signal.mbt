@@ -49,12 +49,10 @@ pub fn[T : Eq] new(value : T, label~ : String = "signal") -> Signal[T] {
 ///
 /// Example:
 /// ```moonbit
-/// test "signal_id" {
-///   let s = new(0)
-///   assert_eq!(s.id(), "signal#0")  
-///   let s2 = new(1, label="my_signal")
-///   assert_eq!(s2.id(), "my_signal#1")
-/// }
+/// let s = new(0)
+/// assert_eq(s.id(), "signal#0")  
+/// let s2 = new(1, label="my_signal")
+/// assert_eq(s2.id(), "my_signal#1")
 /// ```
 pub fn[T] Signal::id(self : Signal[T]) -> String {
   self.id
@@ -70,12 +68,10 @@ pub fn[T] Signal::id(self : Signal[T]) -> String {
 /// 
 /// Example:
 /// ```moonbit
-/// test "signal_val" {
-///   let s = new(0)
-///   assert_eq!(s.val(), 0)
-///   s.update(5)
-///   assert_eq!(s.val(), 5)
-/// }
+/// let s = new(0)
+/// assert_eq(s.val(), 0)
+/// s.update(5)
+/// assert_eq(s.val(), 5)
 /// ```
 pub fn[T] Signal::val(s : Signal[T]) -> T {
   s.value
@@ -90,17 +86,15 @@ pub fn[T] Signal::val(s : Signal[T]) -> T {
 ///
 /// Example:
 /// ```moonbit
-/// test "signal_set" {
-///   let values = []
-///   let s = new(0)
-///   s.subscribe_permanent(fn(v) { values.push(v) })
-///   assert_eq!(s.val(), 0)
-///   s.set(5) // This will set the signal to 5 without notifying subscribers.
-///   assert_eq!(s.val(), 5)
-///   s.update(10) // This will notify subscribers with the new value.
-///   assert_eq!(s.val(), 10)
-///   assert_eq!(values, [0, 10])
-/// }
+/// let values = []
+/// let s = new(0)
+/// s.subscribe_permanent(fn(v) { values.push(v) })
+/// assert_eq(s.val(), 0)
+/// s.set(5) // This will set the signal to 5 without notifying subscribers.
+/// assert_eq(s.val(), 5)
+/// s.update(10) // This will notify subscribers with the new value.
+/// assert_eq(s.val(), 10)
+/// assert_eq(values, [0, 10])
 /// ```
 pub fn[T] Signal::set(s : Signal[T], value : T) -> Unit {
   s.value = value
@@ -159,18 +153,16 @@ pub fn[T] Signal::subscribe_permanent_only(
 ///
 /// Example:
 /// ```moonbit
-/// test "signal_update" {
-///   let values = []
-///   let s = new(0)
-///   s.subscribe_permanent(fn(v) { values.push(v) })
-///   assert_eq!(s.val(), 0)
-///   s.update(5) // This will notify subscribers with the new value.
-///   assert_eq!(s.val(), 5)
-///   assert_eq!(values, [0, 5])
-///   s.update(10) // This will notify subscribers with the new value.
-///   assert_eq!(s.val(), 10)
-///   assert_eq!(values, [0, 5, 10])
-/// }
+/// let values = []
+/// let s = new(0)
+/// s.subscribe_permanent(fn(v) { values.push(v) })
+/// assert_eq(s.val(), 0)
+/// s.update(5) // This will notify subscribers with the new value.
+/// assert_eq(s.val(), 5)
+/// assert_eq(values, [0, 5])
+/// s.update(10) // This will notify subscribers with the new value.
+/// assert_eq(s.val(), 10)
+/// assert_eq(values, [0, 5, 10])
 /// ```
 pub fn[T : Eq] Signal::update(self : Signal[T], new_value : T) -> Unit {
   if self.value != new_value {
@@ -189,20 +181,18 @@ pub fn[T : Eq] Signal::update(self : Signal[T], new_value : T) -> Unit {
 ///
 /// Example:
 /// ```moonbit
-/// test "signal_unsubscribe" {
-///   let values = []
-///   let s = new(0)
-///   let sub = s.subscribe(fn(v) { values.push(v) })
-///   assert_eq!(s.val(), 0)
-///   s.update(5) // This will notify subscribers with the new value.
-///   assert_eq!(s.val(), 5)
-///   assert_eq!(values, [0, 5])
-///   s.unsubscribe(sub) // This will unsubscribe the subscriber.
-///   assert_eq!(s.val(), 5)
-///   s.update(10) // This will not notify the unsubscribed subscriber.
-///   assert_eq!(s.val(), 10)
-///   assert_eq!(values, [0, 5])
-/// }
+/// let values = []
+/// let s = new(0)
+/// let sub = s.subscribe(fn(v) { values.push(v) })
+/// assert_eq(s.val(), 0)
+/// s.update(5) // This will notify subscribers with the new value.
+/// assert_eq(s.val(), 5)
+/// assert_eq(values, [0, 5])
+/// s.unsubscribe(sub) // This will unsubscribe the subscriber.
+/// assert_eq(s.val(), 5)
+/// s.update(10) // This will not notify the unsubscribed subscriber.
+/// assert_eq(s.val(), 10)
+/// assert_eq(values, [0, 5])
 /// ```
 pub fn[T] Signal::unsubscribe(
   self : Signal[T],
@@ -222,16 +212,14 @@ pub fn[T] Signal::unsubscribe(
 ///
 /// Example:
 /// ```moonbit
-/// test "signal_map" {
-///   let values = []
-///   let s = new(0)
-///   let s2 = s.map(fn(v) { v + 1 })
-///   s2.subscribe_permanent(fn(v) { values.push(v) })
-///   s.update(5) // This will trigger the subscriber with value 6.
-///   s.update(10) // This will trigger the subscriber with value 11.
-///   s.update(20) // This will trigger the subscriber with value 21.
-///   inspect!(values, content="[1, 6, 11, 21]")
-/// }
+/// let values = []
+/// let s = new(0)
+/// let s2 = s.map(fn(v) { v + 1 })
+/// s2.subscribe_permanent(fn(v) { values.push(v) })
+/// s.update(5) // This will trigger the subscriber with value 6.
+/// s.update(10) // This will trigger the subscriber with value 11.
+/// s.update(20) // This will trigger the subscriber with value 21.
+/// inspect(values, content="[1, 6, 11, 21]")
 /// ```
 pub fn[T : Eq, U : Eq] Signal::map(self : Signal[T], f : (T) -> U) -> Signal[U] {
   let s = new(f(self.value))
@@ -251,17 +239,15 @@ pub fn[T : Eq, U : Eq] Signal::map(self : Signal[T], f : (T) -> U) -> Signal[U] 
 /// 
 /// Example:
 /// ```moonbit
-/// test "signal_map2" {
-///   let values = []
-///   let s1 = new(1)
-///   let s2 = new(2)
-///   let s3 = map2(s1, s2, fn(a, b) { a + b })
-///   s3.subscribe_permanent(fn(v) { values.push(v) })
-///   s1.update(3) // This will trigger the subscriber with value 5.
-///   s2.update(4) // This will trigger the subscriber with value 7.
-///   s1.update(5) // This will trigger the subscriber with value 9.
-///   inspect!(values, content="[3, 5, 7, 9]")
-/// }
+/// let values = []
+/// let s1 = new(1)
+/// let s2 = new(2)
+/// let s3 = map2(s1, s2, fn(a, b) { a + b })
+/// s3.subscribe_permanent(fn(v) { values.push(v) })
+/// s1.update(3) // This will trigger the subscriber with value 5.
+/// s2.update(4) // This will trigger the subscriber with value 7.
+/// s1.update(5) // This will trigger the subscriber with value 9.
+/// inspect(values, content="[3, 5, 7, 9]")
 /// ```
 pub fn[T : Eq, U : Eq, V : Eq] map2(
   s1 : Signal[T],
@@ -288,16 +274,14 @@ pub fn[T : Eq, U : Eq, V : Eq] map2(
 /// 
 /// Example:
 /// ```moonbit
-/// test "signal_filter" {
-///   let filtered_values = []
-///   let s = new(1)
-///   let s2 = s.filter(fn(v) { v > 5 }, 0)
-///   s2.subscribe_permanent_only(fn(v) { filtered_values.push(v) })
-///   s.update(10) // This will trigger the subscriber with value 10.
-///   s.update(7) // This will trigger the subscriber with value 7.
-///   s.update(3) // This will not trigger the subscriber.
-///   inspect!(filtered_values, content="[10, 7]")
-/// }
+/// let filtered_values = []
+/// let s = new(1)
+/// let s2 = s.filter(fn(v) { v > 5 }, 0)
+/// s2.subscribe_permanent_only(fn(v) { filtered_values.push(v) })
+/// s.update(10) // This will trigger the subscriber with value 10.
+/// s.update(7) // This will trigger the subscriber with value 7.
+/// s.update(3) // This will not trigger the subscriber.
+/// inspect(filtered_values, content="[10, 7]")
 /// ```
 pub fn[T : Eq] Signal::filter(
   self : Signal[T],
@@ -325,16 +309,14 @@ pub fn[T : Eq] Signal::filter(
 /// 
 /// Example:
 /// ```moonbit
-/// test "signal_filter_map" {
-///   let mapped_values = []
-///   let s = new(1)
-///   let s2 = s.filter_map(fn(v) { if v > 5 { Some(v+2) } else { None } }, 0)
-///   s2.subscribe_permanent_only(fn(v) { mapped_values.push(v) })
-///   s.update(10) // This will trigger the subscriber with value 12.
-///   s.update(7) // This will trigger the subscriber with value 9.
-///   s.update(3) // This will not trigger the subscriber.
-///   inspect!(mapped_values, content="[12, 9]")
-/// }
+/// let mapped_values = []
+/// let s = new(1)
+/// let s2 = s.filter_map(fn(v) { if v > 5 { Some(v+2) } else { None } }, 0)
+/// s2.subscribe_permanent_only(fn(v) { mapped_values.push(v) })
+/// s.update(10) // This will trigger the subscriber with value 12.
+/// s.update(7) // This will trigger the subscriber with value 9.
+/// s.update(3) // This will not trigger the subscriber.
+/// inspect(mapped_values, content="[12, 9]")
 /// ```
 pub fn[T, U : Eq] Signal::filter_map(
   self : Signal[T],
@@ -369,18 +351,16 @@ pub fn[T, U : Eq] Signal::filter_map(
 ///
 /// Example:
 /// ```moonbit
-/// test "select_one" {
-///   let values = []
-///   let s1 = new(1)
-///   let s2 = new(2)
-///   let s3 = new(3)
-///   let combined_signal = select_one([s1, s2, s3])
-///   combined_signal.subscribe_permanent_only(fn(v) { values.push(v) })
-///   s1.update(4) // This will trigger the subscriber with value 4.
-///   s2.update(5) // This will trigger the subscriber with value 5.
-///   s3.update(6) // This will trigger the subscriber with value 6.
-///   inspect!(values, content="[4, 5, 6]")
-/// }
+/// let values = []
+/// let s1 = new(1)
+/// let s2 = new(2)
+/// let s3 = new(3)
+/// let combined_signal = select_one([s1, s2, s3])
+/// combined_signal.subscribe_permanent_only(fn(v) { values.push(v) })
+/// s1.update(4) // This will trigger the subscriber with value 4.
+/// s2.update(5) // This will trigger the subscriber with value 5.
+/// s3.update(6) // This will trigger the subscriber with value 6.
+/// inspect(values, content="[4, 5, 6]")
 /// ```
 pub fn[T : Default + Eq] select_one(signals : Array[Signal[T]]) -> Signal[T] {
   let s = new(T::default())
@@ -401,17 +381,15 @@ pub fn[T : Default + Eq] select_one(signals : Array[Signal[T]]) -> Signal[T] {
 ///
 /// Example:
 /// ```moonbit
-/// test "combine_pair" {
-///   let values = []
-///   let s1 = new(1)
-///   let s2 = new(2)
-///   let s3 = combine_pair(s1, s2)
-///   s3.subscribe_permanent(fn(v) { values.push(v) })
-///   s1.update(3) // This will trigger the subscriber with value (3, 2).
-///   s2.update(4) // This will trigger the subscriber with value (3, 4).
-///   s1.update(5) // This will trigger the subscriber with value (5, 4).
-///   inspect!(values, content="[(1, 2), (3, 2), (3, 4), (5, 4)]")
-/// }
+/// let values = []
+/// let s1 = new(1)
+/// let s2 = new(2)
+/// let s3 = combine_pair(s1, s2)
+/// s3.subscribe_permanent(fn(v) { values.push(v) })
+/// s1.update(3) // This will trigger the subscriber with value (3, 2).
+/// s2.update(4) // This will trigger the subscriber with value (3, 4).
+/// s1.update(5) // This will trigger the subscriber with value (5, 4).
+/// inspect(values, content="[(1, 2), (3, 2), (3, 4), (5, 4)]")
 /// ```
 pub fn[T : Eq, U : Eq] combine_pair(
   s1 : Signal[T],
@@ -435,19 +413,17 @@ pub fn[T : Eq, U : Eq] combine_pair(
 ///
 /// Example:
 /// ```moonbit
-/// test "combine_triple" {
-///   let values = []
-///   let s1 = new(1)
-///   let s2 = new(2)
-///   let s3 = new(3)
-///   let s4 = combine_triple(s1, s2, s3)
-///   s4.subscribe_permanent(fn(v) { values.push(v) })
-///   s1.update(4) // This will trigger the subscriber with value (4, 2, 3).
-///   s2.update(5) // This will trigger the subscriber with value (4, 5, 3).
-///   s3.update(6) // This will trigger the subscriber with value (4, 5, 6).
-///   s1.update(7) // This will trigger the subscriber with value (7, 5, 6).
-///   inspect!(values, content="[(1, 2, 3), (4, 2, 3), (4, 5, 3), (4, 5, 6), (7, 5, 6)]")
-/// }
+/// let values = []
+/// let s1 = new(1)
+/// let s2 = new(2)
+/// let s3 = new(3)
+/// let s4 = combine_triple(s1, s2, s3)
+/// s4.subscribe_permanent(fn(v) { values.push(v) })
+/// s1.update(4) // This will trigger the subscriber with value (4, 2, 3).
+/// s2.update(5) // This will trigger the subscriber with value (4, 5, 3).
+/// s3.update(6) // This will trigger the subscriber with value (4, 5, 6).
+/// s1.update(7) // This will trigger the subscriber with value (7, 5, 6).
+/// inspect(values, content="[(1, 2, 3), (4, 2, 3), (4, 5, 3), (4, 5, 6), (7, 5, 6)]")
 /// ```
 pub fn[T : Eq, U : Eq, V : Eq] combine_triple(
   s1 : Signal[T],
@@ -472,20 +448,18 @@ pub fn[T : Eq, U : Eq, V : Eq] combine_triple(
 /// 
 /// Example:
 /// ```moonbit
-/// test "combine_all" {
-///   let values = []
-///   let s1 = new(1)
-///   let s2 = new(2)
-///   let s3 = new(3)
-///   let s4 = new(4)
-///   let combined_signal = combine_all([s1, s2, s3, s4])
-///   combined_signal.subscribe_permanent(fn(v) { values.push(v) })
-///   s1.update(5) // This will trigger the subscriber with value [5, 2, 3, 4].
-///   s2.update(6) // This will trigger the subscriber with value [5, 6, 3, 4].
-///   s3.update(7) // This will trigger the subscriber with value [5, 6, 7, 4].
-///   s4.update(8) // This will trigger the subscriber with value [5, 6, 7, 8].
-///   inspect!(values, content="[[1, 2, 3, 4], [5, 2, 3, 4], [5, 6, 3, 4], [5, 6, 7, 4], [5, 6, 7, 8]]")
-/// }
+/// let values = []
+/// let s1 = new(1)
+/// let s2 = new(2)
+/// let s3 = new(3)
+/// let s4 = new(4)
+/// let combined_signal = combine_all([s1, s2, s3, s4])
+/// combined_signal.subscribe_permanent(fn(v) { values.push(v) })
+/// s1.update(5) // This will trigger the subscriber with value [5, 2, 3, 4].
+/// s2.update(6) // This will trigger the subscriber with value [5, 6, 3, 4].
+/// s3.update(7) // This will trigger the subscriber with value [5, 6, 7, 4].
+/// s4.update(8) // This will trigger the subscriber with value [5, 6, 7, 8].
+/// inspect(values, content="[[1, 2, 3, 4], [5, 2, 3, 4], [5, 6, 3, 4], [5, 6, 7, 4], [5, 6, 7, 8]]")
 /// ```
 pub fn[T : Eq] combine_all(signals : Array[Signal[T]]) -> Signal[Array[T]] {
   let latest_values = []

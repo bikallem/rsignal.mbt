@@ -3,10 +3,6 @@
 type JsValue
 
 ///|
-extern "js" fn JsValue::to_string_ffi(self : JsValue) -> String =
-  #| (self) => self.toString()
-
-///|
 pub fn[T] JsValue::to_jv(value : T) -> JsValue = "%identity"
 
 ///|
