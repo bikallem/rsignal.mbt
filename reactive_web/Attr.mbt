@@ -55,8 +55,8 @@ pub fn id(id : String) -> Attr {
 }
 
 ///| class attribute
-pub fn clasz(clasz : String) -> Attr {
-  attr("class", clasz)
+pub fn class(class : String) -> Attr {
+  attr("class", class)
 }
 
 ///| style attribute

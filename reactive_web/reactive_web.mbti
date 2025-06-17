@@ -23,7 +23,7 @@ fn button(String, Array[&TAttachableNode]) -> HTMLButtonElement
 
 fn canvas(Array[&TAttachableNode]) -> HTMLCanvasElement
 
-fn clasz(String) -> Attr
+fn class(String) -> Attr
 
 fn div(Array[&TAttachableNode]) -> HTMLDivElement
 
