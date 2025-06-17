@@ -8,17 +8,16 @@ pub(open) trait TElement: TNode {
   toggle_attribute(self : Self, name : String, force : Bool) -> Unit = _
 
   // Events
-  onclick(self : Self, f : (PointerEvent) -> Unit) -> Unit = _
-  onmousedown(self : Self, f : (MouseEvent) -> Unit) -> Unit = _
-  onmousemove(self : Self, f : (MouseEvent) -> Unit) -> Unit = _
-  onmouseup(self : Self, f : (MouseEvent) -> Unit) -> Unit = _
-  onkeydown(self : Self, f : (KeyboardEvent) -> Unit) -> Unit = _
-  onkeyup(self : Self, f : (KeyboardEvent) -> Unit) -> Unit = _
+  onclick(self : Self, handler : (PointerEvent) -> Unit) -> Unit = _
+  onmousedown(self : Self, handler : (MouseEvent) -> Unit) -> Unit = _
+  onmousemove(self : Self, handler : (MouseEvent) -> Unit) -> Unit = _
+  onmouseup(self : Self, handler : (MouseEvent) -> Unit) -> Unit = _
+  onkeydown(self : Self, handler : (KeyboardEvent) -> Unit) -> Unit = _
+  onkeyup(self : Self, handler : (KeyboardEvent) -> Unit) -> Unit = _
 }
 
 ///|
-extern "js" fn tag_name_ffi(element : JsValue) -> String =
-  #| (self) => self.tagName
+extern "js" fn tag_name_ffi(element : JsValue) -> String = "(self) => self.tagName"
 
 ///|
 impl TElement with tag_name(self : Self) -> String {
@@ -80,31 +79,31 @@ impl TElement with toggle_attribute(self : Self, name : String, force : Bool) ->
 }
 
 ///|
-impl TElement with onclick(self : Self, f : (PointerEvent) -> Unit) -> Unit {
-  add_event_listener(self, "click", f)
+impl TElement with onclick(self : Self, handler : (PointerEvent) -> Unit) -> Unit {
+  add_event_listener(self, "click", handler)
 }
 
 ///|
-impl TElement with onmousedown(self : Self, f : (MouseEvent) -> Unit) -> Unit {
-  add_event_listener(self, "mousedown", f)
+impl TElement with onmousedown(self : Self, handler : (MouseEvent) -> Unit) -> Unit {
+  add_event_listener(self, "mousedown", handler)
 }
 
 ///|
-impl TElement with onmousemove(self : Self, f : (MouseEvent) -> Unit) -> Unit {
-  add_event_listener(self, "mousemove", f)
+impl TElement with onmousemove(self : Self, handler : (MouseEvent) -> Unit) -> Unit {
+  add_event_listener(self, "mousemove", handler)
 }
 
 ///|
-impl TElement with onmouseup(self : Self, f : (MouseEvent) -> Unit) -> Unit {
-  add_event_listener(self, "mouseup", f)
+impl TElement with onmouseup(self : Self, handler : (MouseEvent) -> Unit) -> Unit {
+  add_event_listener(self, "mouseup", handler)
 }
 
 ///|
-impl TElement with onkeydown(self : Self, f : (KeyboardEvent) -> Unit) -> Unit {
-  add_event_listener(self, "keydown", f)
+impl TElement with onkeydown(self : Self, handler : (KeyboardEvent) -> Unit) -> Unit {
+  add_event_listener(self, "keydown", handler)
 }
 
 ///|
-impl TElement with onkeyup(self : Self, f : (KeyboardEvent) -> Unit) -> Unit {
-  add_event_listener(self, "keyup", f)
+impl TElement with onkeyup(self : Self, handler : (KeyboardEvent) -> Unit) -> Unit {
+  add_event_listener(self, "keyup", handler)
 }

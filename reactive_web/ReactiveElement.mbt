@@ -26,7 +26,7 @@ pub fn[T : Show] ReactiveElement::text(
   effect : (Text, T) -> Unit
 ) -> ReactiveElement[Text] {
   let txt = document.create_text_node("")
-  signal.subscribe_permanent(fn(value) { effect(txt, value) })
+  signal.subscribe_permanent(value => effect(txt, value))
   ReactiveElement::{ node: txt }
 }
 
@@ -38,8 +38,8 @@ pub fn[A : Eq] ReactiveElement::h(
   nodes : Array[&TAttachableNode]
 ) -> ReactiveElement[Element] {
   let el = document.create_element(tag)
-  nodes.each(fn(node) { node.attach(el) })
-  signal.subscribe_permanent(fn(value) { effect(el, value) })
+  nodes.each(node => node.attach(el))
+  signal.subscribe_permanent(value => effect(el, value))
   ReactiveElement::{ node: el }
 }
 
@@ -52,7 +52,7 @@ pub fn[A : Eq] ReactiveElement::div(
   ReactiveElement::h(
     "div",
     signal,
-    fn(el, value) {
+    (el, value) => {
       let div = el.into()
       effect(div, value)
     },

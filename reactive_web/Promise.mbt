@@ -3,8 +3,7 @@
 type Promise[T]
 
 ///|
-extern "js" fn then_ffi(p : JsValue, f : JsValue) -> JsValue =
-  #| (p, f) => p.then(f)
+extern "js" fn then_ffi(p : JsValue, f : JsValue) -> JsValue = "(p, f) => p.then(f)"
 
 ///| 
 async fn[T, E : Error] suspend(
@@ -24,9 +23,9 @@ extern "js" fn promise_then_ffi(
 ///|
 pub async fn[T] Promise::wait(self : Promise[T]) -> T raise {
   let promise : JsValue = JsValue::to_jv(self)
-  let v = suspend(fn(resolve, reject) {
-    promise_then_ffi(promise, resolve, fn(e) { reject(e) })
-  })
+  let v = suspend((resolve, reject) => promise_then_ffi(promise, resolve, e => reject(
+    e,
+  )))
   JsValue::of_jv(v)
 }
 

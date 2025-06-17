@@ -3,8 +3,7 @@
 type Text
 
 ///|
-pub extern "js" fn whole_text(self : Text) -> String =
-  #| (self) => self.wholeText
+pub extern "js" fn whole_text(self : Text) -> String = "(self) => self.wholeText"
 
 ///|
 pub impl TNode for Text

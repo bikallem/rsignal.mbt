@@ -22,9 +22,11 @@ pub impl[T : Eq] TAttachableNode for ReactiveAttr[T] with attach(
   parent : Element
 ) -> Unit {
   set_attribute_node_ffi(parent.to_jv(), self.attr.to_jv())
-  self.signal.subscribe_permanent(fn(value) {
-    (self.effect)(parent, self.attr, value)
-  })
+  self.signal.subscribe_permanent(value => (self.effect)(
+    parent,
+    self.attr,
+    value,
+  ))
 }
 
 ///|
@@ -44,12 +46,10 @@ pub fn[A : Eq] ReactiveAttr::new(
 pub fn ReactiveAttr::disabled(
   signal : @reactive_core.Signal[Bool]
 ) -> ReactiveAttr[Bool] {
-  ReactiveAttr::new("disabled", signal, fn(el, attr, disable) {
-    if disable {
-      el.set_attribute_node(attr)
-    } else {
-      el.remove_attribute_node(attr)
-    }
+  ReactiveAttr::new("disabled", signal, (el, attr, disable) => if disable {
+    el.set_attribute_node(attr)
+  } else {
+    el.remove_attribute_node(attr)
   })
 }
 
@@ -57,7 +57,5 @@ pub fn ReactiveAttr::disabled(
 pub fn ReactiveAttr::style(
   signal : @reactive_core.Signal[String]
 ) -> ReactiveAttr[String] {
-  ReactiveAttr::new("style", signal, fn(_, attr, style) {
-    attr.set_value(style)
-  })
+  ReactiveAttr::new("style", signal, (_el, attr, style) => attr.set_value(style))
 }
