@@ -38,7 +38,7 @@ pub extern "js" fn Document::create_element(
 ) -> Element = "(document, tag_name) => document.createElement(tag_name)"
 
 ///|
-extern "js" fn body_ffi() -> Element = "(document) => document.body"
+extern "js" fn body_ffi() -> Element = "() => document.body"
 
 ///|
 pub fn Document::body(_ : Document) -> Element {
