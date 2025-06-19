@@ -33,15 +33,9 @@ pub impl[T] TJsValue for EventHandlerAttr[T] with to_jv(_) -> JsValue {
 }
 
 ///|
-pub impl[T : TEvent] TNode for EventHandlerAttr[T]
-
-///|
 pub impl[T : TEvent] TNode for EventHandlerAttr[T] with node_type(_) -> Int {
   abort("EventHandlerAttr does not have a node type")
 }
-
-///|
-pub impl[T : TEvent] TAttachableNode for EventHandlerAttr[T]
 
 ///|
 pub impl[T : TEvent] TAttachableNode for EventHandlerAttr[T] with attach(

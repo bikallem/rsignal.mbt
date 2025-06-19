@@ -31,9 +31,6 @@ pub impl TJsValue for Attr with to_jv(self : Attr) -> JsValue = "%identity"
 pub impl TNode for Attr
 
 ///|
-pub impl TAttachableNode for Attr
-
-///|
 pub impl TAttachableNode for Attr with attach(self : Attr, parent : Element) -> Unit {
   set_attribute_node_ffi(parent.to_jv(), self.to_jv())
 }
