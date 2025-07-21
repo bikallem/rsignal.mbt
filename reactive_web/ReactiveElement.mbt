@@ -21,9 +21,9 @@ pub impl[A : TNode] TAttachableNode for ReactiveElement[A]
 pub impl[A : TNode] TEventTarget for ReactiveElement[A]
 
 ///| Creates a new reactive DOM element that updates text content based on a signal.
-pub fn[T : Show] ReactiveElement::text(
+pub fn[T] ReactiveElement::text(
   signal : @reactive_core.Signal[T],
-  effect : (Text, T) -> Unit
+  effect : (Text, T) -> Unit,
 ) -> ReactiveElement[Text] {
   let txt = document.create_text_node("")
   signal.subscribe_permanent(value => effect(txt, value))
@@ -31,11 +31,11 @@ pub fn[T : Show] ReactiveElement::text(
 }
 
 ///| Creates a new reactive HTML element with the given tag name.
-pub fn[A : Eq] ReactiveElement::h(
+pub fn[A] ReactiveElement::h(
   tag : String,
   signal : @reactive_core.Signal[A],
   effect : (Element, A) -> Unit,
-  nodes : Array[&TAttachableNode]
+  nodes : Array[&TAttachableNode],
 ) -> ReactiveElement[Element] {
   let el = document.create_element(tag)
   nodes.each(node => node.attach(el))
@@ -44,10 +44,10 @@ pub fn[A : Eq] ReactiveElement::h(
 }
 
 ///| Creates a new reactive HTML div element.
-pub fn[A : Eq] ReactiveElement::div(
+pub fn[A] ReactiveElement::div(
   signal : @reactive_core.Signal[A],
   effect : (HTMLDivElement, A) -> Unit,
-  nodes : Array[&TAttachableNode]
+  nodes : Array[&TAttachableNode],
 ) -> ReactiveElement[Element] {
   ReactiveElement::h(
     "div",

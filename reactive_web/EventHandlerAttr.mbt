@@ -6,24 +6,20 @@ struct EventHandlerAttr[E] {
 }
 
 ///|
-pub fn[E : TEvent] EventHandlerAttr::new(
+pub fn[E] EventHandlerAttr::new(
   event : String,
-  handler : (E) -> Unit
+  handler : (E) -> Unit,
 ) -> EventHandlerAttr[E] {
   EventHandlerAttr::{ event_name: event, handler }
 }
 
 ///|
-pub fn[E : TEvent] EventHandlerAttr::event_name(
-  self : EventHandlerAttr[E]
-) -> String {
+pub fn[E] EventHandlerAttr::event_name(self : EventHandlerAttr[E]) -> String {
   self.event_name
 }
 
 ///|
-pub fn[E : TEvent] EventHandlerAttr::handler(
-  self : EventHandlerAttr[E]
-) -> (E) -> Unit {
+pub fn[E] EventHandlerAttr::handler(self : EventHandlerAttr[E]) -> (E) -> Unit {
   self.handler
 }
 
@@ -33,14 +29,14 @@ pub impl[T] TJsValue for EventHandlerAttr[T] with to_jv(_) -> JsValue {
 }
 
 ///|
-pub impl[T : TEvent] TNode for EventHandlerAttr[T] with node_type(_) -> Int {
+pub impl[T] TNode for EventHandlerAttr[T] with node_type(_) -> Int {
   abort("EventHandlerAttr does not have a node type")
 }
 
 ///|
-pub impl[T : TEvent] TAttachableNode for EventHandlerAttr[T] with attach(
+pub impl[T] TAttachableNode for EventHandlerAttr[T] with attach(
   self : EventHandlerAttr[T],
-  parent : Element
+  parent : Element,
 ) -> Unit {
   add_event_listener(parent, self.event_name, self.handler)
 }
@@ -50,7 +46,7 @@ pub impl[T] TEventTarget for EventHandlerAttr[T]
 
 ///| onclick attribute
 pub fn onclick(
-  handler : (PointerEvent) -> Unit
+  handler : (PointerEvent) -> Unit,
 ) -> EventHandlerAttr[PointerEvent] {
   EventHandlerAttr::new("click", handler)
 }

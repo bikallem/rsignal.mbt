@@ -12,7 +12,7 @@ pub fn[T] JsValue::of_jv(value : JsValue) -> T = "%identity"
 pub extern "js" fn JsValue::define_property(
   self : JsValue,
   key : String,
-  value : JsValue
+  value : JsValue,
 ) -> Unit = "(self, key, value) => self[key] = value"
 
 ///|

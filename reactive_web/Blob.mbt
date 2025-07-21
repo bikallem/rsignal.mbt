@@ -5,7 +5,7 @@ type Blob
 ///|
 pub extern "js" fn Blob::new(
   parts : Array[JsValue],
-  options : JsObject
+  options : JsObject,
 ) -> Blob = "(parts, options) => new Blob(parts, options)"
 
 ///|

@@ -28,7 +28,7 @@ extern "js" fn blob_slice_ffi(
   blob : JsValue,
   start : Int,
   end : Int,
-  content_type : String
+  content_type : String,
 ) -> Blob = "(blob, start, end, contentType) => blob.slice(start, end, contentType)"
 
 ///|
@@ -36,7 +36,7 @@ impl TBlob with slice(
   self : Self,
   start : Int,
   end : Int,
-  content_type : String
+  content_type : String,
 ) -> Blob {
   blob_slice_ffi(self.to_jv(), start, end, content_type)
 }

@@ -1,3 +1,4 @@
+// Generated using `moon info`, DON'T EDIT IT
 package "bikallem/reactive/reactive_web"
 
 import(
@@ -15,7 +16,7 @@ const TEXT_NODE : Int = 3
 
 fn[T : Show] a(String, T) -> Attr
 
-fn async_run(() -> Unit) -> Unit
+fn async_run(async () -> Unit) -> Unit
 
 fn[T : Show] attr(String, T) -> Attr
 
@@ -56,8 +57,6 @@ fn span(Array[&TAttachableNode]) -> Element
 fn style(String) -> Attr
 
 fn text(String) -> Text
-
-fn[T] to_jv(T) -> JsValue
 
 let window : Window
 
@@ -139,13 +138,13 @@ impl TEvent for Event
 impl TJsValue for Event
 
 type EventHandlerAttr[E]
-fn[E : TEvent] EventHandlerAttr::event_name(Self[E]) -> String
-fn[E : TEvent] EventHandlerAttr::handler(Self[E]) -> (E) -> Unit
-fn[E : TEvent] EventHandlerAttr::new(String, (E) -> Unit) -> Self[E]
-impl[T : TEvent] TAttachableNode for EventHandlerAttr[T]
+fn[E] EventHandlerAttr::event_name(Self[E]) -> String
+fn[E] EventHandlerAttr::handler(Self[E]) -> (E) -> Unit
+fn[E] EventHandlerAttr::new(String, (E) -> Unit) -> Self[E]
+impl[T] TAttachableNode for EventHandlerAttr[T]
 impl[T] TEventTarget for EventHandlerAttr[T]
 impl[T] TJsValue for EventHandlerAttr[T]
-impl[T : TEvent] TNode for EventHandlerAttr[T]
+impl[T] TNode for EventHandlerAttr[T]
 
 type EventTarget
 fn[T : TEventTarget] EventTarget::into(Self) -> T
@@ -250,6 +249,7 @@ fn JsValue::is_null(Self) -> Bool
 fn JsValue::is_undefined(Self) -> Bool
 fn[T] JsValue::of_jv(Self) -> T
 fn[T] JsValue::to_jv(T) -> Self
+fnalias JsValue::to_jv
 fn[T] JsValue::to_option(Self) -> T?
 fn[T] JsValue::unwrap(Self) -> T
 
@@ -288,17 +288,17 @@ async fn[T] Promise::wait(Self[T]) -> T raise
 
 type ReactiveAttr[T]
 fn ReactiveAttr::disabled(@reactive_core.Signal[Bool]) -> Self[Bool]
-fn[A : Eq] ReactiveAttr::new(String, @reactive_core.Signal[A], (Element, Attr, A) -> Unit) -> Self[A]
+fn[A] ReactiveAttr::new(String, @reactive_core.Signal[A], (Element, Attr, A) -> Unit) -> Self[A]
 fn ReactiveAttr::style(@reactive_core.Signal[String]) -> Self[String]
 impl[T : Eq] TAttachableNode for ReactiveAttr[T]
 impl[T : Eq] TEventTarget for ReactiveAttr[T]
-impl[T : Eq] TJsValue for ReactiveAttr[T]
+impl[T] TJsValue for ReactiveAttr[T]
 impl[T : Eq] TNode for ReactiveAttr[T]
 
 type ReactiveElement[T]
-fn[A : Eq] ReactiveElement::div(@reactive_core.Signal[A], (HTMLDivElement, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
-fn[A : Eq] ReactiveElement::h(String, @reactive_core.Signal[A], (Element, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
-fn[T : Show] ReactiveElement::text(@reactive_core.Signal[T], (Text, T) -> Unit) -> Self[Text]
+fn[A] ReactiveElement::div(@reactive_core.Signal[A], (HTMLDivElement, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
+fn[A] ReactiveElement::h(String, @reactive_core.Signal[A], (Element, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
+fn[T] ReactiveElement::text(@reactive_core.Signal[T], (Text, T) -> Unit) -> Self[Text]
 impl[A : TNode] TAttachableNode for ReactiveElement[A]
 impl[A : TNode] TElement for ReactiveElement[A]
 impl[A : TNode] TEventTarget for ReactiveElement[A]

@@ -19,13 +19,13 @@ pub impl TAttachableNode for HTMLButtonElement
 
 ///|
 pub extern "js" fn HTMLButtonElement::disabled(
-  self : HTMLButtonElement
+  self : HTMLButtonElement,
 ) -> Bool = "(self) => self.disabled"
 
 ///|
 pub extern "js" fn HTMLButtonElement::set_disabled(
   self : HTMLButtonElement,
-  disabled : Bool
+  disabled : Bool,
 ) -> Unit = "(self, disabled) => self.disabled = disabled"
 
 ///|
@@ -34,7 +34,7 @@ pub extern "js" fn HTMLButtonElement::name(self : HTMLButtonElement) -> String =
 ///|
 pub extern "js" fn HTMLButtonElement::set_name(
   self : HTMLButtonElement,
-  name : String
+  name : String,
 ) -> Unit = "(self, name) => self.name = name"
 
 ///|
@@ -43,13 +43,13 @@ pub extern "js" fn HTMLButtonElement::value(self : HTMLButtonElement) -> String 
 ///|
 pub extern "js" fn HTMLButtonElement::set_value(
   self : HTMLButtonElement,
-  value : String
+  value : String,
 ) -> Unit = "(self, value) => self.value = value"
 
 ///|
 pub fn button(
   label : String,
-  nodes : Array[&TAttachableNode]
+  nodes : Array[&TAttachableNode],
 ) -> HTMLButtonElement {
   h("button", [label] + nodes).into()
 }

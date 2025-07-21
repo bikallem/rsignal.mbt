@@ -7,17 +7,17 @@ extern "js" fn then_ffi(p : JsValue, f : JsValue) -> JsValue = "(p, f) => p.then
 
 ///| 
 async fn[T, E : Error] suspend(
-  f : ((T) -> Unit, (E) -> Unit) -> Unit
+  f : ((T) -> Unit, (E) -> Unit) -> Unit,
 ) -> T raise E = "%async.suspend"
 
 ///|
-pub fn async_run(f : async () -> Unit) -> Unit = "%async.run"
+pub fn async_run(f : async () -> Unit noraise) -> Unit = "%async.run"
 
 ///|
 extern "js" fn promise_then_ffi(
   promise : JsValue,
   on_ok : (JsValue) -> Unit,
-  on_err : (Error) -> Unit
+  on_err : (Error) -> Unit,
 ) -> Unit = "(self, on_ok, on_err) => self.then((t) => on_ok(t), (e) => on_err(e))"
 
 ///|
@@ -60,7 +60,7 @@ extern "js" fn new_promise_ffi(f : JsValue) -> JsValue = "(f) => new Promise(f)"
 
 ///|
 pub fn[T] Promise::new(
-  f : ((T) -> Unit, (Error) -> Unit) -> Unit
+  f : ((T) -> Unit, (Error) -> Unit) -> Unit,
 ) -> Promise[T] {
   let js_f = JsValue::to_jv(f)
   JsValue::of_jv(new_promise_ffi(js_f))

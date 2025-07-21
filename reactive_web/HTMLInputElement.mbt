@@ -26,7 +26,7 @@ pub extern "js" fn HTMLInputElement::files(self : HTMLInputElement) -> FileList 
 ///|
 pub fn input(
   type_ : String,
-  nodes : Array[&TAttachableNode]
+  nodes : Array[&TAttachableNode],
 ) -> HTMLInputElement {
   h("input", [a("type", type_)] + nodes).into()
 }

@@ -28,7 +28,7 @@ impl TElement with tag_name(self : Self) -> String {
 extern "js" fn set_attribute_ffi(
   element : JsValue,
   name : String,
-  value : String
+  value : String,
 ) -> Unit = "(self, name, v) => self.setAttribute(name, v)"
 
 ///|
@@ -39,7 +39,7 @@ impl TElement with set_attribute(self : Self, name : String, value : String) -> 
 ///|
 extern "js" fn set_attribute_node_ffi(
   element : JsValue,
-  attr : JsValue
+  attr : JsValue,
 ) -> Unit = "(self, attr) => self.setAttributeNode(attr)"
 
 ///|
@@ -58,7 +58,7 @@ impl TElement with get_bounding_client_rect(self : Self) -> DOMRect {
 ///|
 extern "js" fn remove_attribute_node_ffi(
   element : JsValue,
-  attr : Attr
+  attr : Attr,
 ) -> Unit = "(self, attr) => self.removeAttributeNode(attr)"
 
 ///|
@@ -70,7 +70,7 @@ impl TElement with remove_attribute_node(self : Self, attr : Attr) -> Unit {
 extern "js" fn toggle_attribute_ffi(
   element : JsValue,
   name : String,
-  force : Bool
+  force : Bool,
 ) -> Unit = "(self, name, force) => self.toggleAttribute(name, force)"
 
 ///|

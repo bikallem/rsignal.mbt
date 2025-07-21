@@ -29,13 +29,13 @@ pub extern "js" fn HTMLCanvasElement::height(self : HTMLCanvasElement) -> Int = 
 ///|
 pub extern "js" fn HTMLCanvasElement::set_width(
   self : HTMLCanvasElement,
-  width : Int
+  width : Int,
 ) -> Unit = "(self, width) => self.width = width"
 
 ///|
 pub extern "js" fn HTMLCanvasElement::set_height(
   self : HTMLCanvasElement,
-  height : Int
+  height : Int,
 ) -> Unit = "(self, height) => self.height = height"
 
 ///|

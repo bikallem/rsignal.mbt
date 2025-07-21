@@ -33,7 +33,7 @@ fn id_generator() -> () -> Int {
 let signal_id : () -> Int = id_generator()
 
 ///| Creates a new signal with the given initial value.
-pub fn[T : Eq] new(value : T, label~ : String = "signal") -> Signal[T] {
+pub fn[T] new(value : T, label~ : String = "signal") -> Signal[T] {
   let sub_id = id_generator()
   let id = "\{label}#\{signal_id()}"
   Signal::{ id, value, sub_id, subscribers: @hashmap.new() }
@@ -108,7 +108,7 @@ fn[T] Signal::sub_id(self : Signal[T]) -> SubId {
 ///| Subscribes to a signal and immediately calls the effect function with the current value
 pub fn[T] Signal::subscribe(
   self : Signal[T],
-  effect : (T) -> Unit
+  effect : (T) -> Unit,
 ) -> Subscriber[T] {
   let subscriber = Subscriber::{ id: self.sub_id(), effect }
   self.subscribers[subscriber.id] = subscriber
@@ -121,7 +121,7 @@ pub fn[T] Signal::subscribe(
 /// trigger the effect function until the signal changes.
 pub fn[T] Signal::subscribe_only(
   self : Signal[T],
-  effect : (T) -> Unit
+  effect : (T) -> Unit,
 ) -> Subscriber[T] {
   let subscriber = Subscriber::{ id: self.sub_id(), effect }
   self.subscribers[subscriber.id] = subscriber
@@ -132,7 +132,7 @@ pub fn[T] Signal::subscribe_only(
 /// This is useful for cases where you want to set up a subscription that will not be removed
 pub fn[T] Signal::subscribe_permanent(
   self : Signal[T],
-  effect : (T) -> Unit
+  effect : (T) -> Unit,
 ) -> Unit {
   self.subscribe(effect) |> ignore
 }
@@ -140,7 +140,7 @@ pub fn[T] Signal::subscribe_permanent(
 ///| Subscribes to a signal permanently without immediately calling the effect function.
 pub fn[T] Signal::subscribe_permanent_only(
   self : Signal[T],
-  effect : (T) -> Unit
+  effect : (T) -> Unit,
 ) -> Unit {
   self.subscribe_only(effect) |> ignore
 }
@@ -196,7 +196,7 @@ pub fn[T : Eq] Signal::update(self : Signal[T], new_value : T) -> Unit {
 /// ```
 pub fn[T] Signal::unsubscribe(
   self : Signal[T],
-  subscription : Subscriber[T]
+  subscription : Subscriber[T],
 ) -> Unit {
   self.subscribers.remove(subscription.id)
 }
@@ -221,9 +221,9 @@ pub fn[T] Signal::unsubscribe(
 /// s.update(20) // This will trigger the subscriber with value 21.
 /// inspect(values, content="[1, 6, 11, 21]")
 /// ```
-pub fn[T : Eq, U : Eq] Signal::map(self : Signal[T], f : (T) -> U) -> Signal[U] {
+pub fn[T, U : Eq] Signal::map(self : Signal[T], f : (T) -> U) -> Signal[U] {
   let s = new(f(self.value))
-  self.subscribe_permanent(fn(v) { s.update(f(v)) })
+  self.subscribe_permanent(v => s.update(f(v)))
   s
 }
 
@@ -249,14 +249,14 @@ pub fn[T : Eq, U : Eq] Signal::map(self : Signal[T], f : (T) -> U) -> Signal[U] 
 /// s1.update(5) // This will trigger the subscriber with value 9.
 /// inspect(values, content="[3, 5, 7, 9]")
 /// ```
-pub fn[T : Eq, U : Eq, V : Eq] map2(
+pub fn[T, U, V : Eq] map2(
   s1 : Signal[T],
   s2 : Signal[U],
-  f : (T, U) -> V
+  f : (T, U) -> V,
 ) -> Signal[V] {
   let s = new(f(s1.value, s2.value))
-  s1.subscribe_permanent(fn(v) { s.update(f(v, s2.value)) })
-  s2.subscribe_permanent(fn(v) { s.update(f(s1.value, v)) })
+  s1.subscribe_permanent(v => s.update(f(v, s2.value)))
+  s2.subscribe_permanent(v => s.update(f(s1.value, v)))
   s
 }
 
@@ -286,11 +286,11 @@ pub fn[T : Eq, U : Eq, V : Eq] map2(
 pub fn[T : Eq] Signal::filter(
   self : Signal[T],
   f : (T) -> Bool,
-  seed : T
+  seed : T,
 ) -> Signal[T] {
   let v = if f(self.value) { self.value } else { seed }
   let s = new(v)
-  self.subscribe_permanent(fn(v) { if f(v) { s.update(v) } })
+  self.subscribe_permanent(v => if f(v) { s.update(v) })
   s
 }
 
@@ -321,15 +321,13 @@ pub fn[T : Eq] Signal::filter(
 pub fn[T, U : Eq] Signal::filter_map(
   self : Signal[T],
   f : (T) -> U?,
-  seed : U
+  seed : U,
 ) -> Signal[U] {
-  let v = f(self.value).or_else(fn() { seed })
+  let v = f(self.value).unwrap_or_else(() => seed)
   let s = new(v)
-  self.subscribe_permanent(fn(v) {
-    match f(v) {
-      Some(v) => s.update(v)
-      None => ()
-    }
+  self.subscribe_permanent(v => match f(v) {
+    Some(v) => s.update(v)
+    None => ()
   })
   s
 }
@@ -365,7 +363,7 @@ pub fn[T, U : Eq] Signal::filter_map(
 pub fn[T : Default + Eq] select_one(signals : Array[Signal[T]]) -> Signal[T] {
   let s = new(T::default())
   for signal in signals {
-    signal.subscribe_permanent_only(fn(v) { s.update(v) })
+    signal.subscribe_permanent_only(v => s.update(v))
   }
   s
 }
@@ -393,11 +391,11 @@ pub fn[T : Default + Eq] select_one(signals : Array[Signal[T]]) -> Signal[T] {
 /// ```
 pub fn[T : Eq, U : Eq] combine_pair(
   s1 : Signal[T],
-  s2 : Signal[U]
+  s2 : Signal[U],
 ) -> Signal[(T, U)] {
   let s = new((s1.value, s2.value))
-  s1.subscribe_permanent_only(fn(v) { s.update((v, s2.value)) })
-  s2.subscribe_permanent_only(fn(v) { s.update((s1.value, v)) })
+  s1.subscribe_permanent_only(v => s.update((v, s2.value)))
+  s2.subscribe_permanent_only(v => s.update((s1.value, v)))
   s
 }
 
@@ -428,12 +426,12 @@ pub fn[T : Eq, U : Eq] combine_pair(
 pub fn[T : Eq, U : Eq, V : Eq] combine_triple(
   s1 : Signal[T],
   s2 : Signal[U],
-  s3 : Signal[V]
+  s3 : Signal[V],
 ) -> Signal[(T, U, V)] {
   let s = new((s1.value, s2.value, s3.value))
-  s1.subscribe_permanent_only(fn(v) { s.update((v, s2.value, s3.value)) })
-  s2.subscribe_permanent_only(fn(v) { s.update((s1.value, v, s3.value)) })
-  s3.subscribe_permanent_only(fn(v) { s.update((s1.value, s2.value, v)) })
+  s1.subscribe_permanent_only(v => s.update((v, s2.value, s3.value)))
+  s2.subscribe_permanent_only(v => s.update((s1.value, v, s3.value)))
+  s3.subscribe_permanent_only(v => s.update((s1.value, s2.value, v)))
   s
 }
 
@@ -468,7 +466,7 @@ pub fn[T : Eq] combine_all(signals : Array[Signal[T]]) -> Signal[Array[T]] {
   }
   let s = new(latest_values)
   for signal in signals {
-    signal.subscribe_permanent_only(fn(new_val) {
+    signal.subscribe_permanent_only(new_val => {
       let vals = []
       for s in signals {
         if s.id == signal.id {
@@ -499,8 +497,8 @@ test "create_signal: get and set basic" {
 test "subscribe: basic" (t : @test.T) {
   let s = new(0)
   Signal::update(s, 5)
-  let sub1 = Signal::subscribe(s, fn(v) { t.writeln("Sub1 updated to: \{v}") })
-  let _ = Signal::subscribe(s, fn(v) { t.writeln("Sub2 updated to: \{v}") })
+  let sub1 = Signal::subscribe(s, v => t.writeln("Sub1 updated to: \{v}"))
+  let _ = Signal::subscribe(s, v => t.writeln("Sub2 updated to: \{v}"))
   Signal::unsubscribe(s, sub1)
   t.writeln("\nUnsubscribed sub1.\nSignal update to 10.\n")
   Signal::update(s, 10)
@@ -511,8 +509,8 @@ test "subscribe: basic" (t : @test.T) {
 ///|
 test "map: basic" (t : @test.T) {
   let s = new(0)
-  let s2 = Signal::map(s, fn(v) { v + 1 })
-  let sub = Signal::subscribe(s2, fn(v) { t.writeln("Sub updated to: \{v}") })
+  let s2 = Signal::map(s, v => v + 1)
+  let sub = Signal::subscribe(s2, v => t.writeln("Sub updated to: \{v}"))
   s.update(5)
   s.update(10)
   s2.unsubscribe(sub)

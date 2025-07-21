@@ -14,13 +14,13 @@ pub extern "js" fn FileReader::new() -> FileReader = "() => new FileReader()"
 ///|
 pub extern "js" fn read_as_array_buffer_ffi(
   file_reader : FileReader,
-  blob : JsValue
+  blob : JsValue,
 ) -> Unit = "(fileReader, blob) => fileReader.readAsArrayBuffer(blob)"
 
 ///|
 pub fn FileReader::read_as_array_buffer(
   self : FileReader,
-  blob : &TBlob
+  blob : &TBlob,
 ) -> Unit {
   read_as_array_buffer_ffi(self, blob.to_jv())
 }
@@ -29,14 +29,14 @@ pub fn FileReader::read_as_array_buffer(
 extern "js" fn read_as_text_ffi(
   file_reader : FileReader,
   blob : JsValue,
-  encoding : String
+  encoding : String,
 ) -> Unit = "(fileReader, blob, encoding) => fileReader.readAsText(blob, encoding)"
 
 ///|
 pub fn FileReader::read_as_text(
   self : FileReader,
   blob : &TBlob,
-  encoding~ : String = "utf-8"
+  encoding~ : String = "utf-8",
 ) -> Unit {
   read_as_text_ffi(self, blob.to_jv(), encoding)
 }
@@ -44,7 +44,7 @@ pub fn FileReader::read_as_text(
 ///|
 extern "js" fn read_as_data_url_ffi(
   file_reader : FileReader,
-  blob : JsValue
+  blob : JsValue,
 ) -> Unit = "(fileReader, blob) => fileReader.readAsDataURL(blob)"
 
 ///|
@@ -55,7 +55,7 @@ pub fn FileReader::read_as_data_url(self : FileReader, blob : &TBlob) -> Unit {
 ///|
 pub fn FileReader::onload(
   self : FileReader,
-  handler : (ProgressEvent) -> Unit
+  handler : (ProgressEvent) -> Unit,
 ) -> Unit {
   add_event_listener(self, "load", handler)
 }
@@ -63,7 +63,7 @@ pub fn FileReader::onload(
 ///|
 pub fn FileReader::onerror(
   self : FileReader,
-  handler : (ProgressEvent) -> Unit
+  handler : (ProgressEvent) -> Unit,
 ) -> Unit {
   add_event_listener(self, "error", handler)
 }
@@ -74,7 +74,7 @@ type FileReaderResult
 
 ///|
 pub fn FileReaderResult::to_array_buffer(
-  self : FileReaderResult
+  self : FileReaderResult,
 ) -> ArrayBuffer = "%identity"
 
 ///|

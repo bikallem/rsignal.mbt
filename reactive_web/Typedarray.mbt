@@ -37,14 +37,14 @@ pub impl TTypedArray for Float64Array with buffer(self : Float64Array) -> ArrayB
 ///|
 pub extern "js" fn Float64Array::op_get(
   self : Float64Array,
-  index : Int
+  index : Int,
 ) -> Double = "(self, index) => self[index]"
 
 ///|
 pub extern "js" fn Float64Array::new(
   buffer : ArrayBuffer,
   byte_offset : Int,
-  length : Int
+  length : Int,
 ) -> Float64Array = "(buffer, byte_offset, length) => new Float64Array(buffer, byte_offset, length)"
 
 ///|
@@ -60,14 +60,14 @@ pub extern "js" fn Uint8Array::byte_length(self : Uint8Array) -> Int = "(self) =
 pub extern "js" fn Uint8Array::set(
   self : Uint8Array,
   buffer : Uint8Array,
-  offset : Int
+  offset : Int,
 ) -> Unit = "(self, buffer, offset) => self.set(buffer, offset)"
 
 ///|
 pub extern "js" fn Uint8Array::subarray(
   self : Uint8Array,
   start_offset : Int,
-  end_offset : Int
+  end_offset : Int,
 ) -> Uint8Array = "(self, start_offset, end_offset) => self.subarray(start_offset, end_offset)"
 
 ///|
@@ -79,7 +79,7 @@ pub type Uint8ClampedArray
 
 ///|
 pub extern "js" fn Uint8ClampedArray::new(
-  buffer : Uint8Array
+  buffer : Uint8Array,
 ) -> Uint8ClampedArray = "(buffer) => new Uint8ClampedArray(buffer)"
 
 ///|

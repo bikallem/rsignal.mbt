@@ -28,13 +28,13 @@ pub fn Document::get_element_by_id(self : Document, id : String) -> Element? {
 ///| Create a new attribute with the given name and value
 pub extern "js" fn Document::create_attribute(
   self : Document,
-  name : String
+  name : String,
 ) -> Attr = "(document, name) => document.createAttribute(name)"
 
 ///| Create a new element with the given tag name
 pub extern "js" fn Document::create_element(
   self : Document,
-  tag_name : String
+  tag_name : String,
 ) -> Element = "(document, tag_name) => document.createElement(tag_name)"
 
 ///|
@@ -48,5 +48,5 @@ pub fn Document::body(_ : Document) -> Element {
 ///| Create a new text node with the given content
 pub extern "js" fn Document::create_text_node(
   self : Document,
-  content : String
+  content : String,
 ) -> Text = "(document, content) => document.createTextNode(content)"

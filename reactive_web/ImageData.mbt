@@ -6,7 +6,7 @@ type ImageData
 pub extern "js" fn ImageData::new(
   data : Uint8ClampedArray,
   width : Int,
-  height : Int
+  height : Int,
 ) -> ImageData = "(data, width, height) => new ImageData(data, width, height)"
 
 ///|

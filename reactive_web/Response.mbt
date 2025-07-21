@@ -4,7 +4,7 @@ type Response
 
 ///|
 pub extern "js" fn Response::array_buffer(
-  self : Response
+  self : Response,
 ) -> Promise[ArrayBuffer] = "(self) => self.arrayBuffer()"
 
 ///|

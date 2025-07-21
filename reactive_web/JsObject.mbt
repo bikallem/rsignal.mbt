@@ -18,7 +18,7 @@ pub fn[T] JsObject::get(self : JsObject, key : String) -> T {
 pub extern "js" fn JsObject::set(
   self : JsObject,
   key : String,
-  value : JsValue
+  value : JsValue,
 ) -> Unit = "(self, key, value) => self[key] = value"
 
 ///|
