@@ -1,5 +1,5 @@
 ///| Subscriber ID
-priv type SubId Int derive(Eq, Hash)
+priv struct SubId(Int) derive(Eq, Hash)
 
 ///| A reactive signal that can be subscribed to and updated.
 struct Signal[T] {

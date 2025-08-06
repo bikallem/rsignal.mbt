@@ -22,6 +22,10 @@ fn counter(initial_count : Int) -> HTMLDivElement {
       ]),
       RE::text(state, (txt, cur_count) => txt.set_text_content(cur_count)),
       button("Increment", [onclick(_ => state.update(state.val() + 1))]),
+      button("Reset", [
+        onclick(_ => state.update(initial_count)),
+        RA::disabled(state.map(count => count == initial_count)), // Disable reset when at initial count        
+      ]),
     ]),
   ])
 }

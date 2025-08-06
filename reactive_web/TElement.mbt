@@ -84,6 +84,23 @@ impl TElement with onclick(self : Self, handler : (PointerEvent) -> Unit) -> Uni
 }
 
 ///|
+/// Registers a mouse down event handler on the element.
+///
+/// Parameters:
+///
+/// * `self` : The element to attach the event handler to.
+/// * `handler` : The callback function that will be invoked when a mouse down
+///   event occurs on the element.
+///
+/// Example:
+///
+/// ```moonbit
+/// let button = @bikallem/reactive/reactive_web.button("Click me", [])
+/// button.onmousedown(fn(event) {
+///   @bikallem/reactive/reactive_web.log("Mouse down at: \{event.client_x()}, \{event.client_y()}")
+/// })
+/// ```
+///
 impl TElement with onmousedown(self : Self, handler : (MouseEvent) -> Unit) -> Unit {
   add_event_listener(self, "mousedown", handler)
 }

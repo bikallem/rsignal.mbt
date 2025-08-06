@@ -60,6 +60,8 @@ fn text(String) -> Text
 
 let window : Window
 
+// Errors
+
 // Types and methods
 type ArrayBuffer
 fn ArrayBuffer::to_jv(Self) -> JsValue
@@ -84,7 +86,7 @@ impl TBlob for Blob
 impl TJsValue for Blob
 
 type CSSStyleDeclaration
-fn CSSStyleDeclaration::set_property(Self, String, String, priority~ : String = ..) -> Unit
+fn CSSStyleDeclaration::set_property(Self, String, String, priority? : String) -> Unit
 
 type CanvasRenderingContext2D
 fn CanvasRenderingContext2D::begin_path(Self) -> Unit
@@ -170,7 +172,7 @@ fn FileReader::onerror(Self, (ProgressEvent) -> Unit) -> Unit
 fn FileReader::onload(Self, (ProgressEvent) -> Unit) -> Unit
 fn FileReader::read_as_array_buffer(Self, &TBlob) -> Unit
 fn FileReader::read_as_data_url(Self, &TBlob) -> Unit
-fn FileReader::read_as_text(Self, &TBlob, encoding~ : String = ..) -> Unit
+fn FileReader::read_as_text(Self, &TBlob, encoding? : String) -> Unit
 fn FileReader::result(Self) -> FileReaderResult
 impl TEventTarget for FileReader
 impl TJsValue for FileReader
