@@ -2,13 +2,9 @@
 fnalias @reactive_web.(div, button, onclick, h, attr, bool_attr)
 
 ///|
-typealias @reactive_web.(
-  HTMLDivElement,
-  ReactiveElement as RE,
-  HTMLButtonElement
-)
+typealias @reactive_web.(HTMLDivElement, HTMLButtonElement)
 
-///|
+///| Create a button that can be disabled based on a signal value.
 fn disabled_button(
   label : String,
   state : @reactive_core.Signal[Bool],
@@ -26,19 +22,19 @@ fn disabled_button(
 
 ///|
 fn counter(initial_count : Int) -> HTMLDivElement {
-  let state = @reactive_core.new(initial_count) // root signal  
+  let count = @reactive_core.new(initial_count) // root signal  
   div([
     attr("style", "display: flex; flex-direction: column; align-items: center;"),
     h("h2", ["The Greatest Counter Ever!"]),
     div([
       attr("style", "display: flex; flex-direction: row; column-gap: 1em;"),
-      disabled_button("Decrement", state.map(count => count <= 0), [
-        onclick(_ => state.update(state.val() - 1)),
+      disabled_button("Decrement", count.map(count => count <= 0), [
+        onclick(_ => count.update(count.val() - 1)),
       ]),
-      RE::text(state, (txt, cur_count) => txt.set_text_content(cur_count)),
-      button("Increment", [onclick(_ => state.update(state.val() + 1))]),
-      disabled_button("Reset", state.map(count => count == initial_count), [
-        onclick(_ => state.update(initial_count)),
+      h("span", [attr("style", ""), count]),
+      button("Increment", [onclick(_ => count.update(count.val() + 1))]),
+      disabled_button("Reset", count.map(count => count == initial_count), [
+        onclick(_ => count.update(initial_count)),
       ]),
     ]),
   ])

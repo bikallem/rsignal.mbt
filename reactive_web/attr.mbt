@@ -39,37 +39,9 @@ pub impl TAttachableNode for Attr with attach(self : Attr, parent : Element) -> 
 pub impl TEventTarget for Attr
 
 ///|
-pub(open) trait TAttrValue {
-  init_value(self : Self, attr : Attr) -> Unit
-}
-
-///|
-pub impl TAttrValue for String with init_value(self : String, attr : Attr) -> Unit {
-  attr.set_value(self)
-}
-
-///|
-pub impl TAttrValue for Int with init_value(self : Int, attr : Attr) -> Unit {
-  attr.set_value(self.to_string())
-}
-
-///|
-pub impl TAttrValue for Bool with init_value(self : Bool, attr : Attr) -> Unit {
-  attr.set_value(self.to_string())
-}
-
-///|
-pub impl[T : Show] TAttrValue for @reactive_core.Signal[T] with init_value(
-  self : @reactive_core.Signal[T],
-  attr : Attr,
-) -> Unit {
-  self.subscribe_permanent(value => attr.set_value(value))
-}
-
-///|
 pub fn[T : TAttrValue] attr(name : String, v : T) -> Attr {
   let at = document.create_attribute(name)
-  v.init_value(at)
+  v.set_value(at)
   at
 }
 

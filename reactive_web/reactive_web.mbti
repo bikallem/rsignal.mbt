@@ -3,6 +3,7 @@ package "bikallem/reactive/reactive_web"
 
 import(
   "bikallem/reactive/reactive_core"
+  "moonbitlang/core/bigint"
 )
 
 // Values
@@ -58,7 +59,7 @@ fn span(Array[&TAttachableNode]) -> Element
 
 fn style(String) -> Attr
 
-fn text(String) -> Text
+fn[T : TTextValue] text(T) -> Text
 
 let window : Window
 
@@ -122,7 +123,7 @@ type Document
 fn Document::body(Self) -> Element
 fn Document::create_attribute(Self, String) -> Attr
 fn Document::create_element(Self, String) -> Element
-fn Document::create_text_node(Self, String) -> Text
+fn[T : Show] Document::create_text_node(Self, T) -> Text
 fn Document::get_element_by_id(Self, String) -> Element?
 impl TEventTarget for Document
 impl TJsValue for Document
@@ -341,15 +342,34 @@ impl TJsValue for Window
 pub(open) trait TAttachableNode : TNode {
   attach(Self, Element) -> Unit = _
 }
+impl TAttachableNode for Bool
+impl TAttachableNode for Int
+impl TAttachableNode for Int16
+impl TAttachableNode for Int64
+impl TAttachableNode for UInt
+impl TAttachableNode for UInt16
+impl TAttachableNode for UInt64
+impl TAttachableNode for Float
+impl TAttachableNode for Double
 impl TAttachableNode for String
+impl[T : Show] TAttachableNode for @reactive_core.Signal[T]
+impl TAttachableNode for @bigint.BigInt
 
 pub(open) trait TAttrValue {
-  init_value(Self, Attr) -> Unit
+  set_value(Self, Attr) -> Unit
 }
 impl TAttrValue for Bool
 impl TAttrValue for Int
+impl TAttrValue for Int16
+impl TAttrValue for Int64
+impl TAttrValue for UInt
+impl TAttrValue for UInt16
+impl TAttrValue for UInt64
+impl TAttrValue for Float
+impl TAttrValue for Double
 impl TAttrValue for String
 impl[T : Show] TAttrValue for @reactive_core.Signal[T]
+impl TAttrValue for @bigint.BigInt
 
 pub(open) trait TBlob : TJsValue {
   type_(Self) -> String = _
@@ -386,7 +406,18 @@ pub(open) trait TEvent : TJsValue {
 pub(open) trait TEventTarget : TJsValue {
   add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit = _
 }
+impl TEventTarget for Bool
+impl TEventTarget for Int
+impl TEventTarget for Int16
+impl TEventTarget for Int64
+impl TEventTarget for UInt
+impl TEventTarget for UInt16
+impl TEventTarget for UInt64
+impl TEventTarget for Float
+impl TEventTarget for Double
 impl TEventTarget for String
+impl[T : Show] TEventTarget for @reactive_core.Signal[T]
+impl TEventTarget for @bigint.BigInt
 
 pub(open) trait THTMLelement : TElement {
   onchange(Self, (Event) -> Unit) -> Unit = _
@@ -396,7 +427,18 @@ pub(open) trait THTMLelement : TElement {
 pub(open) trait TJsValue {
   to_jv(Self) -> JsValue
 }
+impl TJsValue for Bool
+impl TJsValue for Int
+impl TJsValue for Int16
+impl TJsValue for Int64
+impl TJsValue for UInt
+impl TJsValue for UInt16
+impl TJsValue for UInt64
+impl TJsValue for Float
+impl TJsValue for Double
 impl TJsValue for String
+impl[T : Show] TJsValue for @reactive_core.Signal[T]
+impl TJsValue for @bigint.BigInt
 
 pub(open) trait TMouseEvent : TEvent {
   client_x(Self) -> Double = _
@@ -414,7 +456,34 @@ pub(open) trait TNode : TEventTarget {
   set_text_content(Self, &Show) -> Unit = _
   append_child(Self, &TNode) -> Unit = _
 }
+impl TNode for Bool
+impl TNode for Int
+impl TNode for Int16
+impl TNode for Int64
+impl TNode for UInt
+impl TNode for UInt16
+impl TNode for UInt64
+impl TNode for Float
+impl TNode for Double
 impl TNode for String
+impl[T : Show] TNode for @reactive_core.Signal[T]
+impl TNode for @bigint.BigInt
+
+pub(open) trait TTextValue {
+  set_value(Self, Text) -> Unit
+}
+impl TTextValue for Bool
+impl TTextValue for Int
+impl TTextValue for Int16
+impl TTextValue for Int64
+impl TTextValue for UInt
+impl TTextValue for UInt16
+impl TTextValue for UInt64
+impl TTextValue for Float
+impl TTextValue for Double
+impl TTextValue for String
+impl[T : Show] TTextValue for @reactive_core.Signal[T]
+impl TTextValue for @bigint.BigInt
 
 pub(open) trait TTypedArray {
   buffer(Self) -> ArrayBuffer

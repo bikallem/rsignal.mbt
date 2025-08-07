@@ -46,7 +46,15 @@ pub fn Document::body(_ : Document) -> Element {
 }
 
 ///| Create a new text node with the given content
-pub extern "js" fn Document::create_text_node(
-  self : Document,
+extern "js" fn create_text_node_ffi(
+  document : Document,
   content : String,
 ) -> Text = "(document, content) => document.createTextNode(content)"
+
+///|
+pub fn[T : Show] Document::create_text_node(
+  self : Document,
+  content : T,
+) -> Text {
+  create_text_node_ffi(self, content.to_string())
+}
