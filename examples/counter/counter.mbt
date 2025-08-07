@@ -22,7 +22,15 @@ fn disabled_button(
 
 ///|
 fn counter(initial_count : Int) -> HTMLDivElement {
-  let count = @reactive_core.new(initial_count) // root signal  
+  let count = @reactive_core.new(initial_count) // signal to keep track of the count
+  // Update color based on the count value
+  let color_signal = count.map(count => if count >= 5 {
+    "green"
+  } else if count == 0 {
+    "red"
+  } else {
+    ""
+  })
   div([
     attr("style", "display: flex; flex-direction: column; align-items: center;"),
     h("h2", ["The Greatest Counter Ever!"]),
@@ -31,19 +39,7 @@ fn counter(initial_count : Int) -> HTMLDivElement {
       disabled_button("Decrement", count.map(count => count <= 0), [
         onclick(_ => count.update(count.val() - 1)),
       ]),
-      h("span", [
-        attr(
-          "style",
-          count.map(count => if count >= 5 {
-            "color: green"
-          } else if count == 0 {
-            "color: red"
-          } else {
-            ""
-          }),
-        ),
-        count,
-      ]),
+      h("span", [attr("style", color_signal), count]), // Display the current count with dynamic color
       button("Increment", [onclick(_ => count.update(count.val() + 1))]),
       disabled_button("Reset", count.map(count => count == initial_count), [
         onclick(_ => count.update(initial_count)),
