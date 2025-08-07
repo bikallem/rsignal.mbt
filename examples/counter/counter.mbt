@@ -1,30 +1,44 @@
 ///|
-fnalias @reactive_web.(div, button, style, onclick, h)
+fnalias @reactive_web.(div, button, onclick, h, attr, bool_attr)
 
 ///|
 typealias @reactive_web.(
   HTMLDivElement,
   ReactiveElement as RE,
-  ReactiveAttr as RA
+  HTMLButtonElement
 )
 
 ///|
+fn disabled_button(
+  label : String,
+  state : @reactive_core.Signal[Bool],
+  nodes : Array[&@reactive_web.TAttachableNode],
+) -> HTMLButtonElement {
+  let disabled_attr = bool_attr("disabled")
+  let btn = button(label, nodes)
+  state.subscribe_permanent(disable => if disable {
+    btn.set_attribute_node(disabled_attr)
+  } else {
+    btn.remove_attribute_node(disabled_attr)
+  })
+  btn
+}
+
+///|
 fn counter(initial_count : Int) -> HTMLDivElement {
-  let state = @reactive_core.new(initial_count) // root signal
+  let state = @reactive_core.new(initial_count) // root signal  
   div([
-    style("display: flex; flex-direction: column; align-items: center;"),
+    attr("style", "display: flex; flex-direction: column; align-items: center;"),
     h("h2", ["The Greatest Counter Ever!"]),
     div([
-      style("display: flex; flex-direction: row; column-gap: 1em;"),
-      button("Decrement", [
+      attr("style", "display: flex; flex-direction: row; column-gap: 1em;"),
+      disabled_button("Decrement", state.map(count => count <= 0), [
         onclick(_ => state.update(state.val() - 1)),
-        RA::disabled(state.map(count => count <= 0)), // Disable button when count is 0
       ]),
       RE::text(state, (txt, cur_count) => txt.set_text_content(cur_count)),
       button("Increment", [onclick(_ => state.update(state.val() + 1))]),
-      button("Reset", [
+      disabled_button("Reset", state.map(count => count == initial_count), [
         onclick(_ => state.update(initial_count)),
-        RA::disabled(state.map(count => count == initial_count)), // Disable reset when at initial count        
       ]),
     ]),
   ])
