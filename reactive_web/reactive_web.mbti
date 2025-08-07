@@ -291,16 +291,6 @@ fn[A] Promise::resolve(A) -> Self[A]
 fn[A, B] Promise::then(Self[A], (A) -> Self[B]) -> Self[B]
 async fn[T] Promise::wait(Self[T]) -> T raise
 
-type ReactiveElement[T]
-fn[A] ReactiveElement::div(@reactive_core.Signal[A], (HTMLDivElement, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
-fn[A] ReactiveElement::h(String, @reactive_core.Signal[A], (Element, A) -> Unit, Array[&TAttachableNode]) -> Self[Element]
-fn[T] ReactiveElement::text(@reactive_core.Signal[T], (Text, T) -> Unit) -> Self[Text]
-impl[A : TNode] TAttachableNode for ReactiveElement[A]
-impl[A : TNode] TElement for ReactiveElement[A]
-impl[A : TNode] TEventTarget for ReactiveElement[A]
-impl[A : TNode] TJsValue for ReactiveElement[A]
-impl[A : TNode] TNode for ReactiveElement[A]
-
 type Response
 fn Response::array_buffer(Self) -> Promise[ArrayBuffer]
 fn Response::ok(Self) -> Bool

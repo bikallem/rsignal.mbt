@@ -31,7 +31,19 @@ fn counter(initial_count : Int) -> HTMLDivElement {
       disabled_button("Decrement", count.map(count => count <= 0), [
         onclick(_ => count.update(count.val() - 1)),
       ]),
-      h("span", [attr("style", ""), count]),
+      h("span", [
+        attr(
+          "style",
+          count.map(count => if count >= 5 {
+            "color: green"
+          } else if count == 0 {
+            "color: red"
+          } else {
+            ""
+          }),
+        ),
+        count,
+      ]),
       button("Increment", [onclick(_ => count.update(count.val() + 1))]),
       disabled_button("Reset", count.map(count => count == initial_count), [
         onclick(_ => count.update(initial_count)),
