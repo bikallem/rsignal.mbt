@@ -23,7 +23,7 @@ fn disabled_button(
 ///|
 fn counter(initial_count : Int) -> HTMLDivElement {
   let count = @reactive_core.new(initial_count) // signal to keep track of the count
-  // Update color based on the count value
+  // Update color based on the count value: a dynamic style attribute value
   let color_signal = count.map(count => "color: " +
     (if count >= 5 { "green" } else if count == 0 { "red" } else { "" }))
   div([
