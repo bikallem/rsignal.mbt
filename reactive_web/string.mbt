@@ -18,10 +18,3 @@ pub impl TAttachableNode for String
 pub impl TAttrValue for String with set_value(self : String, attr : Attr) -> Unit {
   attr.set_value(self)
 }
-
-// -- String as Text Value --
-
-///|
-pub impl TTextValue for String with set_value(self : String, node : Text) -> Unit {
-  node.set_text_content(self)
-}

@@ -5,13 +5,6 @@ pub impl TAttrValue for Bool with set_value(self : Bool, attr : Attr) -> Unit {
   attr.set_value(self)
 }
 
-// -- Boolean Text Value --
-
-///|
-pub impl TTextValue for Bool with set_value(self : Bool, node : Text) -> Unit {
-  node.set_text_content(self)
-}
-
 // -- Boolean as Text Node --
 
 ///|

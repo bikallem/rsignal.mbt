@@ -13,10 +13,3 @@ pub impl TJsValue for Text with to_jv(self : Text) -> JsValue = "%identity"
 
 ///|
 pub impl TEventTarget for Text
-
-///| Create a new text node with the given content
-pub fn[T : TTextValue] text(content : T) -> Text {
-  let text = document.create_text_node("")
-  content.set_value(text)
-  text
-}

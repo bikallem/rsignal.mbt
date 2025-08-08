@@ -59,8 +59,6 @@ fn span(Array[&TAttachableNode]) -> Element
 
 fn style(String) -> Attr
 
-fn[T : TTextValue] text(T) -> Text
-
 let window : Window
 
 // Errors
@@ -458,22 +456,6 @@ impl TNode for Double
 impl TNode for String
 impl[T : Show] TNode for @reactive_core.Signal[T]
 impl TNode for @bigint.BigInt
-
-pub(open) trait TTextValue {
-  set_value(Self, Text) -> Unit
-}
-impl TTextValue for Bool
-impl TTextValue for Int
-impl TTextValue for Int16
-impl TTextValue for Int64
-impl TTextValue for UInt
-impl TTextValue for UInt16
-impl TTextValue for UInt64
-impl TTextValue for Float
-impl TTextValue for Double
-impl TTextValue for String
-impl[T : Show] TTextValue for @reactive_core.Signal[T]
-impl TTextValue for @bigint.BigInt
 
 pub(open) trait TTypedArray {
   buffer(Self) -> ArrayBuffer

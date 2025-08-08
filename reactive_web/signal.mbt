@@ -8,16 +8,6 @@ pub impl[T : Show] TAttrValue for @reactive_core.Signal[T] with set_value(
   self.subscribe_permanent(value => attr.set_value(value))
 }
 
-// -- Signal Text Value --
-
-///|
-pub impl[T : Show] TTextValue for @reactive_core.Signal[T] with set_value(
-  self : @reactive_core.Signal[T],
-  node : Text,
-) -> Unit {
-  self.subscribe_permanent(value => node.set_text_content(value))
-}
-
 // -- Signal as Text Node --
 
 ///|
