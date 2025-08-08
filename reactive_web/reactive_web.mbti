@@ -51,10 +51,6 @@ fn mount_to_body(&TAttachableNode) -> Unit
 
 fn[T] on(String, (T) -> Unit) -> EventHandlerAttr[T]
 
-fn onchange((Event) -> Unit) -> EventHandlerAttr[Event]
-
-fn onclick((PointerEvent) -> Unit) -> EventHandlerAttr[PointerEvent]
-
 fn read_as_array_buffer_ffi(FileReader, JsValue) -> Unit
 
 fn span(Array[&TAttachableNode]) -> Element

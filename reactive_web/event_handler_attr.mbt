@@ -44,18 +44,6 @@ pub impl[T] TAttachableNode for EventHandlerAttr[T] with attach(
 ///|
 pub impl[T] TEventTarget for EventHandlerAttr[T]
 
-///| onclick attribute
-pub fn onclick(
-  handler : (PointerEvent) -> Unit,
-) -> EventHandlerAttr[PointerEvent] {
-  EventHandlerAttr::new("click", handler)
-}
-
-///|
-pub fn onchange(handler : (Event) -> Unit) -> EventHandlerAttr[Event] {
-  EventHandlerAttr::new("change", handler)
-}
-
 ///|
 /// Creates a event handler attribute for any event type.
 ///

@@ -1,5 +1,5 @@
 ///|
-fnalias @reactive_web.(div, button, onclick, on, h, a, bool_attr)
+fnalias @reactive_web.(div, button, on, h, a, bool_attr)
 
 ///|
 typealias @reactive_web.(HTMLDivElement, HTMLButtonElement, MouseEvent)
@@ -24,7 +24,7 @@ fn disabled_button(
 ///|
 fn counter(initial_count : Int) -> HTMLDivElement {
   let count = @reactive_core.new(initial_count) // signal to keep track of the count
-  // Update color based on the count value: a dynamic style attribute value
+  // Dynamic style attribute value: updates color based on the count value
   let color = count.map(count => "color: " +
     (if count >= 5 { "green" } else if count == 0 { "red" } else { "" }))
   div([
@@ -36,9 +36,11 @@ fn counter(initial_count : Int) -> HTMLDivElement {
         on("click", (_ : MouseEvent) => count.update(count.val() - 1)),
       ]),
       h("span", [a("style", color), count]), // Display the current count with dynamic color
-      button("Increment", [onclick(_ => count.update(count.val() + 1))]),
+      button("Increment", [
+        on("click", (_ : MouseEvent) => count.update(count.val() + 1)),
+      ]),
       disabled_button("Reset", count.map(count => count == initial_count), [
-        onclick(_ => count.update(initial_count)),
+        on("click", (_ : MouseEvent) => count.update(initial_count)),
       ]),
     ]),
   ])
