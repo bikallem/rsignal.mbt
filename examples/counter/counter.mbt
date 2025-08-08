@@ -1,5 +1,5 @@
 ///|
-fnalias @reactive_web.(div, button, on, h, a, bool_attr)
+fnalias @reactive_web.(div, button, on, h, attr, bool_attr)
 
 ///|
 typealias @reactive_web.(HTMLDivElement, HTMLButtonElement, MouseEvent)
@@ -31,16 +31,16 @@ fn counter(initial_count : Int) -> HTMLDivElement {
   let color = count.map(count => "color: " +
     (if count >= 5 { "green" } else if count == 0 { "red" } else { "" }))
   div([
-    a("style", "display: flex; flex-direction: column; align-items: center;"),
+    attr("style", "display: flex; flex-direction: column; align-items: center;"),
     h("h2", ["The Greatest Counter Ever!"]),
     div([
-      a("style", "display: flex; flex-direction: row; column-gap: 1em;"),
+      attr("style", "display: flex; flex-direction: row; column-gap: 1em;"),
       disabled_button("Decrement", count.map(count => count <= 0), [
         on("click", (_ : MouseEvent) => count.update(count.val() - 1)),
       ]),
-      h("span", [a("style", color), count]), // Display the current count with dynamic color      
+      h("span", [attr("style", color), count]), // Display the current count with dynamic color
       h("span", [
-        a("style", "font-style: italic;"),
+        attr("style", "font-style: italic;"),
         count.map(count => "(" + pronunce_number(count) + ")"),
       ]),
       button("Increment", [

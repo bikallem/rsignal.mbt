@@ -28,5 +28,5 @@ pub fn input(
   type_ : String,
   nodes : Array[&TAttachableNode],
 ) -> HTMLInputElement {
-  h("input", [a("type", type_)] + nodes).into()
+  h("input", [attr("type", type_)] + nodes).into()
 }

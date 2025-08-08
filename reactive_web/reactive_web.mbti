@@ -15,8 +15,6 @@ const ELEMENT_NODE : Int = 1
 
 const TEXT_NODE : Int = 3
 
-fn[T : TAttrValue] a(String, T) -> Attr
-
 fn async_run(async () -> Unit) -> Unit
 
 fn[T : TAttrValue] attr(String, T) -> Attr

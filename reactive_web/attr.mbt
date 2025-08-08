@@ -65,6 +65,3 @@ pub fn class(class : String) -> Attr {
 pub fn style(style : String) -> Attr {
   attr("style", style)
 }
-
-///|
-pub fnalias attr as a
