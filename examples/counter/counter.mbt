@@ -5,6 +5,7 @@ fnalias @reactive_web.(div, button, onclick, h, a, bool_attr)
 typealias @reactive_web.(HTMLDivElement, HTMLButtonElement)
 
 ///| Create a button that can be disabled based on a signal value.
+/// If the signal is true, the button will be disabled otherwise it will be enabled.
 fn disabled_button(
   label : String,
   state : @reactive_core.Signal[Bool],
@@ -24,7 +25,7 @@ fn disabled_button(
 fn counter(initial_count : Int) -> HTMLDivElement {
   let count = @reactive_core.new(initial_count) // signal to keep track of the count
   // Update color based on the count value: a dynamic style attribute value
-  let color_signal = count.map(count => "color: " +
+  let color = count.map(count => "color: " +
     (if count >= 5 { "green" } else if count == 0 { "red" } else { "" }))
   div([
     a("style", "display: flex; flex-direction: column; align-items: center;"),
@@ -34,7 +35,7 @@ fn counter(initial_count : Int) -> HTMLDivElement {
       disabled_button("Decrement", count.map(count => count <= 0), [
         onclick(_ => count.update(count.val() - 1)),
       ]),
-      h("span", [a("style", color_signal), count]), // Display the current count with dynamic color
+      h("span", [a("style", color), count]), // Display the current count with dynamic color
       button("Increment", [onclick(_ => count.update(count.val() + 1))]),
       disabled_button("Reset", count.map(count => count == initial_count), [
         onclick(_ => count.update(initial_count)),
