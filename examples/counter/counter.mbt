@@ -8,10 +8,9 @@ typealias @reactive_web.(HTMLDivElement, HTMLButtonElement, MouseEvent)
 traitalias @reactive_web.TAttachableNode
 
 ///| Create a button that can be disabled based on a signal value.
-/// If the signal is true, the button will be disabled otherwise it will be enabled.
 fn disabled_button(
   label : String,
-  state : @reactive_core.Signal[Bool],
+  state : @reactive_core.Signal[Bool], // If the signal is true, the button will be disabled
   nodes : Array[&TAttachableNode],
 ) -> HTMLButtonElement {
   let disabled_attr = bool_attr("disabled")
