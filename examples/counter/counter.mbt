@@ -1,8 +1,8 @@
 ///|
-fnalias @reactive_web.(div, button, onclick, h, a, bool_attr)
+fnalias @reactive_web.(div, button, onclick, on, h, a, bool_attr)
 
 ///|
-typealias @reactive_web.(HTMLDivElement, HTMLButtonElement)
+typealias @reactive_web.(HTMLDivElement, HTMLButtonElement, MouseEvent)
 
 ///| Create a button that can be disabled based on a signal value.
 /// If the signal is true, the button will be disabled otherwise it will be enabled.
@@ -33,7 +33,7 @@ fn counter(initial_count : Int) -> HTMLDivElement {
     div([
       a("style", "display: flex; flex-direction: row; column-gap: 1em;"),
       disabled_button("Decrement", count.map(count => count <= 0), [
-        onclick(_ => count.update(count.val() - 1)),
+        on("click", (_ : MouseEvent) => count.update(count.val() - 1)),
       ]),
       h("span", [a("style", color), count]), // Display the current count with dynamic color
       button("Increment", [onclick(_ => count.update(count.val() + 1))]),
