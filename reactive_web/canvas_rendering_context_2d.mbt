@@ -18,7 +18,7 @@ pub extern "js" fn CanvasRenderingContext2D::put_image_data(
 ///|
 pub extern "js" fn CanvasRenderingContext2D::draw_image(
   self : CanvasRenderingContext2D,
-  image : JsValue,
+  image : HTMLImageElement,
   sx : Int,
   sy : Int,
   swidth : Int,
