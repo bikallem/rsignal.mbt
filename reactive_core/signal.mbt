@@ -6,7 +6,7 @@ struct Signal[T] {
   id : String // unique ID for this signal
   sub_id : () -> Int // for generating unique subscriber IDs
   mut value : T // any changes to this value will trigger subscribers
-  subscribers : @hashmap.T[SubId, Subscriber[T]] // subscribers to this signal
+  subscribers : @hashmap.HashMap[SubId, Subscriber[T]] // subscribers to this signal
 }
 
 ///|
