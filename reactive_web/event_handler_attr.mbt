@@ -1,4 +1,5 @@
-///| EventHandlerAttr - represents an event handler attribute such as onclick, onmouseover, etc.
+///|
+/// EventHandlerAttr - represents an event handler attribute such as onclick, onmouseover, etc.
 /// These can be used as `h([onclick(fun(ev){..})])` when specifying element attributes.
 struct EventHandlerAttr[E] {
   event_name : String

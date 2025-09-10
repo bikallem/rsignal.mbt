@@ -1,4 +1,5 @@
-///| Javascript DOM Text Node - https://developer.mozilla.org/en-US/docs/Web/API/Text
+///|
+/// Javascript DOM Text Node - https://developer.mozilla.org/en-US/docs/Web/API/Text
 #external
 type Text
 

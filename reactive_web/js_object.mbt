@@ -1,4 +1,5 @@
-///| JavaScript Object
+///|
+/// JavaScript Object
 #external
 type JsObject
 

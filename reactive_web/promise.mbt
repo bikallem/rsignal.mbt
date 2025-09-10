@@ -1,11 +1,12 @@
-///| JavaScript Promise
+///|
+/// JavaScript Promise
 #external
 type Promise[T]
 
 ///|
 extern "js" fn then_ffi(p : JsValue, f : JsValue) -> JsValue = "(p, f) => p.then(f)"
 
-///| 
+///|
 async fn[T, E : Error] suspend(
   f : ((T) -> Unit, (E) -> Unit) -> Unit,
 ) -> T raise E = "%async.suspend"

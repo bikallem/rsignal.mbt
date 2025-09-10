@@ -1,4 +1,5 @@
-///| JavaScript Response
+///|
+/// JavaScript Response
 #external
 type Response
 

@@ -1,4 +1,5 @@
-///| JavaScript Attr Object - https://developer.mozilla.org/en-US/docs/Web/API/Attr
+///|
+/// JavaScript Attr Object - https://developer.mozilla.org/en-US/docs/Web/API/Attr
 #external
 type Attr
 
@@ -11,7 +12,8 @@ pub extern "js" fn Attr::value(self : Attr) -> String = "(self) => self.value"
 ///|
 extern "js" fn Attr::set_value_ffi(self : Attr, value : String) -> Unit = "(self, value) => self.value = value"
 
-///| Set the value of an attribute
+///|
+/// Set the value of an attribute
 pub fn[T : Show] Attr::set_value(self : Attr, value : T) -> Unit {
   self.set_value_ffi(value.to_string())
 }
@@ -51,17 +53,20 @@ pub fn bool_attr(name : String) -> Attr {
   at
 }
 
-///| id attribute
+///|
+/// id attribute
 pub fn id(id : String) -> Attr {
   attr("id", id)
 }
 
-///| class attribute
+///|
+/// class attribute
 pub fn class(class : String) -> Attr {
   attr("class", class)
 }
 
-///| style attribute
+///|
+/// style attribute
 pub fn style(style : String) -> Attr {
   attr("style", style)
 }

@@ -48,7 +48,8 @@ impl TEvent with stop_immediate_propagation(self : Self) -> Unit {
   stop_immediate_propagation_ffi(self.to_jv())
 }
 
-///| Get event type
+///|
+/// Get event type
 extern "js" fn event_type_ffi(ev : JsValue) -> String = "(ev) => ev.type"
 
 ///|

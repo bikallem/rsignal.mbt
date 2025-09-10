@@ -1,4 +1,5 @@
-///| EventTarget - https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
+///|
+/// EventTarget - https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
 pub(open) trait TEventTarget: TJsValue {
   add_event_listener(
     self : Self,
@@ -38,7 +39,7 @@ fn[T] add_event_listener(
   target : &TJsValue,
   event : String,
   listener : (T) -> Unit,
-  use_capture~ : Bool = false,
+  use_capture? : Bool = false,
 ) -> Unit {
   add_event_listener_ffi(
     target.to_jv(),

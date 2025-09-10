@@ -15,7 +15,7 @@ const ELEMENT_NODE : Int = 1
 
 const TEXT_NODE : Int = 3
 
-fn async_run(async () -> Unit) -> Unit
+fn async_run(async () -> Unit noraise) -> Unit
 
 fn[T : TAttrValue] attr(String, T) -> Attr
 
@@ -218,6 +218,16 @@ impl THTMLelement for HTMLDivElement
 impl TJsValue for HTMLDivElement
 impl TNode for HTMLDivElement
 
+type HTMLImageElement
+fn HTMLImageElement::image(width~ : Int?, height~ : Int?) -> Self
+fn HTMLImageElement::set_src(Self, String) -> Unit
+impl TAttachableNode for HTMLImageElement
+impl TElement for HTMLImageElement
+impl TEventTarget for HTMLImageElement
+impl THTMLelement for HTMLImageElement
+impl TJsValue for HTMLImageElement
+impl TNode for HTMLImageElement
+
 type HTMLInputElement
 fn HTMLInputElement::files(Self) -> FileList
 impl TAttachableNode for HTMLInputElement
@@ -246,6 +256,7 @@ fn JsValue::define_property(Self, String, Self) -> Unit
 fn JsValue::is_none(Self) -> Bool
 fn JsValue::is_null(Self) -> Bool
 fn JsValue::is_undefined(Self) -> Bool
+fn JsValue::null() -> Self
 fn[T] JsValue::of_jv(Self) -> T
 fn[T] JsValue::to_jv(T) -> Self
 fnalias JsValue::to_jv
@@ -283,7 +294,7 @@ fn[A, B] Promise::map(Self[A], (A) -> B) -> Self[B]
 fn[T] Promise::new(((T) -> Unit, (Error) -> Unit) -> Unit) -> Self[T]
 fn[A] Promise::resolve(A) -> Self[A]
 fn[A, B] Promise::then(Self[A], (A) -> Self[B]) -> Self[B]
-async fn[T] Promise::wait(Self[T]) -> T raise
+async fn[T] Promise::wait(Self[T]) -> T
 
 type Response
 fn Response::array_buffer(Self) -> Promise[ArrayBuffer]

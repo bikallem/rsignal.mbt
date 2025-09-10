@@ -1,7 +1,9 @@
-///| Subscriber ID
+///|
+/// Subscriber ID
 priv struct SubId(Int) derive(Eq, Hash)
 
-///| A reactive signal that can be subscribed to and updated.
+///|
+/// A reactive signal that can be subscribed to and updated.
 struct Signal[T] {
   id : String // unique ID for this signal
   sub_id : () -> Int // for generating unique subscriber IDs
@@ -29,17 +31,20 @@ fn id_generator() -> () -> Int {
   }
 }
 
-///| Creates a new unique ID for signals
+///|
+/// Creates a new unique ID for signals
 let signal_id : () -> Int = id_generator()
 
-///| Creates a new signal with the given initial value.
-pub fn[T] new(value : T, label~ : String = "signal") -> Signal[T] {
+///|
+/// Creates a new signal with the given initial value.
+pub fn[T] new(value : T, label? : String = "signal") -> Signal[T] {
   let sub_id = id_generator()
   let id = "\{label}#\{signal_id()}"
   Signal::{ id, value, sub_id, subscribers: @hashmap.new() }
 }
 
-///| Returns the unique ID of the signal
+///|
+/// Returns the unique ID of the signal
 ///
 /// Parameters:
 /// - `self`: The signal to get the ID from.
@@ -58,7 +63,8 @@ pub fn[T] Signal::id(self : Signal[T]) -> String {
   self.id
 }
 
-///| Returns the current value of the signal `s`
+///|
+/// Returns the current value of the signal `s`
 /// 
 /// Parameters:
 /// - `s`: The signal to get the value from.
@@ -77,7 +83,8 @@ pub fn[T] Signal::val(s : Signal[T]) -> T {
   s.value
 }
 
-///| Sets the value of the signal `s` to `value` without notifying subscribers
+///|
+/// Sets the value of the signal `s` to `value` without notifying subscribers
 /// This is useful for cases where you want to set the value without triggering any side effects.
 ///
 /// Parameters:
@@ -100,12 +107,14 @@ pub fn[T] Signal::set(s : Signal[T], value : T) -> Unit {
   s.value = value
 }
 
-///| Returns the unique subscriber ID for this signal
+///|
+/// Returns the unique subscriber ID for this signal
 fn[T] Signal::sub_id(self : Signal[T]) -> SubId {
   (self.sub_id)()
 }
 
-///| Subscribes to a signal and immediately calls the effect function with the current value
+///|
+/// Subscribes to a signal and immediately calls the effect function with the current value
 pub fn[T] Signal::subscribe(
   self : Signal[T],
   effect : (T) -> Unit,
@@ -116,7 +125,8 @@ pub fn[T] Signal::subscribe(
   subscriber
 }
 
-///| Subscribes to a signal without immediately calling the effect function
+///|
+/// Subscribes to a signal without immediately calling the effect function
 /// This is useful for cases where you want to set up a subscription but don't want to
 /// trigger the effect function until the signal changes.
 pub fn[T] Signal::subscribe_only(
@@ -128,7 +138,8 @@ pub fn[T] Signal::subscribe_only(
   subscriber
 }
 
-///| Subscribes to a signal permanently and immediately calls the effect function with the current value.
+///|
+/// Subscribes to a signal permanently and immediately calls the effect function with the current value.
 /// This is useful for cases where you want to set up a subscription that will not be removed
 pub fn[T] Signal::subscribe_permanent(
   self : Signal[T],
@@ -137,7 +148,8 @@ pub fn[T] Signal::subscribe_permanent(
   self.subscribe(effect) |> ignore
 }
 
-///| Subscribes to a signal permanently without immediately calling the effect function.
+///|
+/// Subscribes to a signal permanently without immediately calling the effect function.
 pub fn[T] Signal::subscribe_permanent_only(
   self : Signal[T],
   effect : (T) -> Unit,
@@ -145,7 +157,8 @@ pub fn[T] Signal::subscribe_permanent_only(
   self.subscribe_only(effect) |> ignore
 }
 
-///| Updates the value of the signal and notifies all subscribers
+///|
+/// Updates the value of the signal and notifies all subscribers
 /// 
 /// Parameters:
 /// - `self`: The signal to update.
@@ -173,7 +186,8 @@ pub fn[T : Eq] Signal::update(self : Signal[T], new_value : T) -> Unit {
   }
 }
 
-///| Unsubscribes a subscriber from a signal.
+///|
+/// Unsubscribes a subscriber from a signal.
 /// 
 /// Parameters:
 /// - `self`: The signal to unsubscribe from.
@@ -201,7 +215,8 @@ pub fn[T] Signal::unsubscribe(
   self.subscribers.remove(subscription.id)
 }
 
-///| Creates a new signal that maps the value of `self` using the function `f`.
+///|
+/// Creates a new signal that maps the value of `self` using the function `f`.
 /// 
 /// Parameters:
 /// - `self`: The original signal.
@@ -227,7 +242,8 @@ pub fn[T, U : Eq] Signal::map(self : Signal[T], f : (T) -> U) -> Signal[U] {
   s
 }
 
-///| Creates a new signal that maps the values of two signals using the function `f`.
+///|
+/// Creates a new signal that maps the values of two signals using the function `f`.
 /// 
 /// Parameters:
 /// - `s1`: The first signal.
@@ -260,7 +276,8 @@ pub fn[T, U, V : Eq] map2(
   s
 }
 
-///| Creates a new signal that receives values from `self` where `f(new_value)` is `true`.
+///|
+/// Creates a new signal that receives values from `self` where `f(new_value)` is `true`.
 /// If the initial value of `f(self.get()) == false`, the new signal will be 
 /// initialized with the given `seed` value.
 /// 
@@ -294,7 +311,8 @@ pub fn[T : Eq] Signal::filter(
   s
 }
 
-///| Creates a new signal that maps the values of `self` iff `f(self.get()) == Some(v)`.
+///|
+/// Creates a new signal that maps the values of `self` iff `f(self.get()) == Some(v)`.
 /// If `f(self.get())` returns `None`, the new signal will be initialized with the given `seed` value
 /// 
 /// This combines the functionality of `map` and `filter` into a single operation.
@@ -334,7 +352,8 @@ pub fn[T, U : Eq] Signal::filter_map(
 
 // -- Combinators ---
 
-///| Creates a new signal which re-emits the latest signal from one of the 
+///|
+/// Creates a new signal which re-emits the latest signal from one of the 
 /// signals in `signals` array.
 /// 
 /// This is useful for combining multiple signals into a single signal.
@@ -368,7 +387,8 @@ pub fn[T : Default + Eq] select_one(signals : Array[Signal[T]]) -> Signal[T] {
   s
 }
 
-///| Creates a new signal that emits a tuple of the latest values from both signals.
+///|
+/// Creates a new signal that emits a tuple of the latest values from both signals.
 /// 
 /// Parameters:
 /// - `s1`: The first signal.
@@ -399,7 +419,8 @@ pub fn[T : Eq, U : Eq] combine_pair(
   s
 }
 
-///| Creates a new signal that emits a tuple of the latest values from three signals.
+///|
+/// Creates a new signal that emits a tuple of the latest values from three signals.
 ///
 /// Parameters:
 /// - `s1`: The first signal.
@@ -435,7 +456,8 @@ pub fn[T : Eq, U : Eq, V : Eq] combine_triple(
   s
 }
 
-///| Combines all signals in `signals` into a single signal `s`. If any of the signals
+///|
+/// Combines all signals in `signals` into a single signal `s`. If any of the signals
 /// change, `s` will emit an array of the latest values from all signals.
 /// 
 /// Parameters:

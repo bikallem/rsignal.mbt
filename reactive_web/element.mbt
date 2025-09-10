@@ -1,4 +1,5 @@
-///| Javascript DOM Element
+///|
+/// Javascript DOM Element
 #external
 type Element
 
@@ -20,7 +21,8 @@ pub impl TEventTarget for Element
 ///|
 pub fn[T : TElement] Element::into(self : Element) -> T = "%identity"
 
-///| Create a new HTML element representing the given tag name
+///|
+/// Create a new HTML element representing the given tag name
 pub fn h(tag : String, nodes : Array[&TAttachableNode]) -> Element {
   let el = document.create_element(tag)
   nodes.each(node => node.attach(el))

@@ -1,4 +1,5 @@
-///| MouseEvent - https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
+///|
+/// MouseEvent - https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent
 #external
 type MouseEvent
 

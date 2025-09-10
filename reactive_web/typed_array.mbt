@@ -1,4 +1,5 @@
-///| JavaScript ArrayBuffer
+///|
+/// JavaScript ArrayBuffer
 #external
 type ArrayBuffer
 
@@ -10,7 +11,8 @@ pub(open) trait TTypedArray {
 ///|
 pub fn ArrayBuffer::to_jv(self : ArrayBuffer) -> JsValue = "%identity"
 
-///| https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set
+///|
+/// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set
 #external
 pub type Uint8Array
 

@@ -1,4 +1,5 @@
-///| FileReader - https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+///|
+/// FileReader - https://developer.mozilla.org/en-US/docs/Web/API/FileReader
 #external
 type FileReader
 
@@ -36,7 +37,7 @@ extern "js" fn read_as_text_ffi(
 pub fn FileReader::read_as_text(
   self : FileReader,
   blob : &TBlob,
-  encoding~ : String = "utf-8",
+  encoding? : String = "utf-8",
 ) -> Unit {
   read_as_text_ffi(self, blob.to_jv(), encoding)
 }

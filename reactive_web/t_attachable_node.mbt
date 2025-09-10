@@ -1,4 +1,5 @@
-///| Represents a node that can be attached to another node in the DOM.
+///|
+/// Represents a node that can be attached to another node in the DOM.
 /// Examples include elements, text nodes, attributes and event handlers 
 /// attributes. 
 /// Not all nodes can be attached. For example, a document node cannot 

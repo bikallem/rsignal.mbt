@@ -24,7 +24,8 @@ impl TElement with tag_name(self : Self) -> String {
   tag_name_ffi(self.to_jv())
 }
 
-///| Set an attribute on the element
+///|
+/// Set an attribute on the element
 extern "js" fn set_attribute_ffi(
   element : JsValue,
   name : String,

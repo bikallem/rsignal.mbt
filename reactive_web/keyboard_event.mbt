@@ -1,4 +1,5 @@
-///| KeyboardEvent - https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
+///|
+/// KeyboardEvent - https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent
 #external
 type KeyboardEvent
 
@@ -8,7 +9,8 @@ pub impl TJsValue for KeyboardEvent with to_jv(self : KeyboardEvent) -> JsValue 
 ///|
 pub impl TEvent for KeyboardEvent
 
-///| key property - https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
+///|
+/// key property - https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key
 pub extern "js" fn KeyboardEvent::key(self : KeyboardEvent) -> String = "(self) => self.key"
 
 ///|
