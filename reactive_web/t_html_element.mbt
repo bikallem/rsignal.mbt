@@ -1,12 +1,18 @@
 ///|
 pub(open) trait THTMLelement: TElement {
   onchange(self : Self, listener : (Event) -> Unit) -> Unit = _
+  onload(self : Self, listener : (Event) -> Unit) -> Unit = _
   style(self : Self) -> CSSStyleDeclaration = _
 }
 
 ///|
 impl THTMLelement with onchange(self : Self, listener : (Event) -> Unit) -> Unit {
   add_event_listener(self, "change", listener)
+}
+
+///|
+impl THTMLelement with onload(self : Self, listener : (Event) -> Unit) -> Unit {
+  add_event_listener(self, "load", listener)
 }
 
 ///|
