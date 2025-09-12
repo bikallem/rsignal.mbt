@@ -27,10 +27,7 @@ extern "js" fn HTMLImageElement::image_ffi(
 ) -> HTMLImageElement = "(width, height) => new Image(width, height)"
 
 ///|
-pub fn HTMLImageElement::image(
-  width~ : Int?,
-  height~ : Int?,
-) -> HTMLImageElement {
+pub fn HTMLImageElement::image(width? : Int, height? : Int) -> HTMLImageElement {
   let width = match width {
     None => JsValue::null()
     Some(w) => JsValue::to_jv(w)
@@ -47,3 +44,19 @@ pub extern "js" fn HTMLImageElement::set_src(
   self : HTMLImageElement,
   url : String,
 ) -> Unit = "(image, url) => image.src = url"
+
+///|
+pub extern "js" fn HTMLImageElement::width(self : HTMLImageElement) -> Int = "(self) => self.width"
+
+///|
+pub extern "js" fn HTMLImageElement::natural_width(
+  self : HTMLImageElement,
+) -> Int = "(self) => self.naturalWidth"
+
+///|
+pub extern "js" fn HTMLImageElement::height(self : HTMLImageElement) -> Int = "(self) => self.height"
+
+///|
+pub extern "js" fn HTMLImageElement::natural_height(
+  self : HTMLImageElement,
+) -> Int = "(self) => self.naturalHeight"

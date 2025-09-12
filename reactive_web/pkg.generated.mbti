@@ -88,7 +88,7 @@ fn CSSStyleDeclaration::set_property(Self, String, String, priority? : String) -
 type CanvasRenderingContext2D
 fn CanvasRenderingContext2D::begin_path(Self) -> Unit
 fn CanvasRenderingContext2D::clear_rect(Self, Int, Int, Int, Int) -> Unit
-fn CanvasRenderingContext2D::draw_image(Self, JsValue, Int, Int, Int, Int, Int, Int, Int, Int) -> Unit
+fn CanvasRenderingContext2D::draw_image(Self, HTMLImageElement, Int, Int, Int, Int, Int, Int, Int, Int) -> Unit
 fn CanvasRenderingContext2D::fill_rect(Self, Int, Int, Int, Int) -> Unit
 fn CanvasRenderingContext2D::image_smoothing_enabled(Self) -> Bool
 fn CanvasRenderingContext2D::image_smoothing_quality(Self) -> String
@@ -219,8 +219,12 @@ impl TJsValue for HTMLDivElement
 impl TNode for HTMLDivElement
 
 type HTMLImageElement
-fn HTMLImageElement::image(width~ : Int?, height~ : Int?) -> Self
+fn HTMLImageElement::height(Self) -> Int
+fn HTMLImageElement::image(width? : Int, height? : Int) -> Self
+fn HTMLImageElement::natural_height(Self) -> Int
+fn HTMLImageElement::natural_width(Self) -> Int
 fn HTMLImageElement::set_src(Self, String) -> Unit
+fn HTMLImageElement::width(Self) -> Int
 impl TAttachableNode for HTMLImageElement
 impl TElement for HTMLImageElement
 impl TEventTarget for HTMLImageElement
@@ -416,6 +420,7 @@ impl TEventTarget for @bigint.BigInt
 
 pub(open) trait THTMLelement : TElement {
   onchange(Self, (Event) -> Unit) -> Unit = _
+  onload(Self, (Event) -> Unit) -> Unit = _
   style(Self) -> CSSStyleDeclaration = _
 }
 
