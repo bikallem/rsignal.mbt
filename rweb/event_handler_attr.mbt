@@ -46,27 +46,6 @@ pub impl[T] TAttachableNode for EventHandlerAttr[T] with attach(
 pub impl[T] TEventTarget for EventHandlerAttr[T]
 
 ///|
-/// Creates a event handler attribute for any event type.
-///
-/// Parameters:
-///
-/// * `event` : The name of the event to listen for (e.g., "click", "mouseover",
-///   "keydown").
-/// * `handler` : The function to execute when the event occurs.
-///
-/// Returns an `EventHandlerAttr[T]` that can be attached to DOM elements.
-///
-/// Example:
-/// ```moonbit
-/// // Create a custom keydown event handler
-/// let keydown_handler = on("keydown", fn(ev : KeyboardEvent) {
-///   println("Key pressed: " + ev.key())
-/// })
-///
-/// // Use it in an element
-/// let _ = div([keydown_handler])
-/// ```
-///
 pub fn[T] on(event : String, handler : (T) -> Unit) -> EventHandlerAttr[T] {
   EventHandlerAttr::new(event, handler)
 }
