@@ -17,7 +17,16 @@ pub extern "js" fn JsValue::define_property(
 ) -> Unit = "(self, key, value) => self[key] = value"
 
 ///|
-pub extern "js" fn JsValue::null() -> JsValue = "() => null"
+extern "js" fn JsValue::null() -> JsValue = "() => null"
+
+///|
+pub let null : JsValue = JsValue::null()
+
+///|
+extern "js" fn JsValue::undefined() -> JsValue = "() => undefined"
+
+///|
+pub let undefined : JsValue = JsValue::undefined()
 
 ///|
 pub extern "js" fn JsValue::is_null(self : JsValue) -> Bool = "(self) => Object.is(self, null)"
