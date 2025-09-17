@@ -17,20 +17,18 @@ fn[T : Default + Eq] select_one(Array[Rsignal[T]]) -> Rsignal[T]
 // Errors
 
 // Types and methods
+type Observer[T]
+
 type Rsignal[T]
 fn[T : Eq] Rsignal::filter(Self[T], (T) -> Bool, T) -> Self[T]
 fn[T, U : Eq] Rsignal::filter_map(Self[T], (T) -> U?, U) -> Self[U]
 fn[T] Rsignal::id(Self[T]) -> String
 fn[T, U : Eq] Rsignal::map(Self[T], (T) -> U) -> Self[U]
-fn[T] Rsignal::subscribe(Self[T], (T) -> Unit) -> Subscriber[T]
-fn[T] Rsignal::subscribe_only(Self[T], (T) -> Unit) -> Subscriber[T]
-fn[T] Rsignal::subscribe_permanent(Self[T], (T) -> Unit) -> Unit
-fn[T] Rsignal::subscribe_permanent_only(Self[T], (T) -> Unit) -> Unit
-fn[T] Rsignal::unsubscribe(Self[T], Subscriber[T]) -> Unit
+fn[T] Rsignal::observe(Self[T], (T) -> Unit, exec_effect? : Bool) -> Observer[T]
+fn[T] Rsignal::observer_forever(Self[T], (T) -> Unit, exec_effect? : Bool) -> Unit
+fn[T] Rsignal::remove_observer(Self[T], Observer[T]) -> Unit
 fn[T : Eq] Rsignal::update(Self[T], T, notify? : Bool) -> Unit
 fn[T] Rsignal::val(Self[T]) -> T
-
-type Subscriber[T]
 
 // Type aliases
 

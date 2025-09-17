@@ -23,6 +23,11 @@ pub fn log(obj : &TJsValue) -> Unit {
 }
 
 ///|
+pub fn log_str(s : String) -> Unit {
+  log_ffi(JsValue::to_jv(s))
+}
+
+///|
 pub fn mount_to_body(element : &TAttachableNode) -> Unit {
   document.body().append_child(element)
 }

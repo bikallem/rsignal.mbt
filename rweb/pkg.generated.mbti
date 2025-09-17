@@ -43,6 +43,8 @@ fn input(String, Array[&TAttachableNode]) -> HTMLInputElement
 
 fn log(&TJsValue) -> Unit
 
+fn log_str(String) -> Unit
+
 fn mount_to_body(&TAttachableNode) -> Unit
 
 let null : JsValue
