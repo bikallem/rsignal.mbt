@@ -15,10 +15,10 @@ pub fn BoolAttr::name(self : BoolAttr) -> String {
 #as_free_fn
 pub fn BoolAttr::bool_attr(
   name : String,
-  rsignal? : @rsignal.Rsignal[Bool],
+  rs? : @rsignal.Rsignal[Bool],
 ) -> BoolAttr {
   let attr = document.create_attribute(name)
-  BoolAttr::{ name, attr, rsignal }
+  BoolAttr::{ name, attr, rsignal: rs }
 }
 
 ///|
@@ -38,7 +38,7 @@ pub impl TAttachableNode for BoolAttr with attach(
   parent : Element,
 ) -> Unit {
   set_attribute_node_ffi(parent.to_jv(), self.attr.to_jv())
-  guard self.rsignal is Some(signal)
+  guard self.rsignal is Some(signal) else {  }
   signal.subscribe_permanent(attach_attr => if attach_attr {
     parent.set_attribute_node(self.attr)
   } else {

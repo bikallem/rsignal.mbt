@@ -19,7 +19,7 @@ fn counter(initial_count : Int) -> HTMLDivElement {
     div([
       attr("style", "display: flex; flex-direction: row; column-gap: 1em;"),
       button("-", [
-        bool_attr("disabled", rsignal=count.map(count => count == 0)),
+        bool_attr("disabled", rs=count.map(count => count == 0)),
         on("click", (_ : MouseEvent) => count.update(count.val() - 1)),
       ]),
       h("span", [attr("style", color), count]), // Display the current count with dynamic color
@@ -29,7 +29,7 @@ fn counter(initial_count : Int) -> HTMLDivElement {
       button("Reset", [
         bool_attr(
           "disabled",
-          rsignal=count.map(count => count == initial_count),
+          rs=count.map(count => count == initial_count),
         ),
         on("click", (_ : MouseEvent) => count.update(initial_count)),
       ]),

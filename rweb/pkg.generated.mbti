@@ -86,7 +86,7 @@ impl TJsValue for Blob
 
 type BoolAttr
 #as_free_fn
-fn BoolAttr::bool_attr(String, rsignal? : @rsignal.Rsignal[Bool]) -> Self
+fn BoolAttr::bool_attr(String, rs? : @rsignal.Rsignal[Bool]) -> Self
 fn BoolAttr::name(Self) -> String
 impl TAttachableNode for BoolAttr
 impl TEventTarget for BoolAttr
