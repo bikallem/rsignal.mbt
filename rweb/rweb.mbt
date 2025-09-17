@@ -17,7 +17,7 @@ pub fnalias JsValue::to_jv
 extern "js" fn log_ffi(s : JsValue) -> Unit = "(v) => console.log(v)"
 
 ///|
-pub fn log(obj : &TJsValue) -> Unit {
+pub fn log_js_value(obj : &TJsValue) -> Unit {
   let js_obj = obj.to_jv()
   log_ffi(js_obj)
 }

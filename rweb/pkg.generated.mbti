@@ -41,7 +41,7 @@ fn id(String) -> Attr
 
 fn input(String, Array[&TAttachableNode]) -> HTMLInputElement
 
-fn log(&TJsValue) -> Unit
+fn log_js_value(&TJsValue) -> Unit
 
 fn log_str(String) -> Unit
 
