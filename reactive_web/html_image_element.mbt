@@ -21,22 +21,13 @@ pub impl THTMLelement for HTMLImageElement
 pub impl TAttachableNode for HTMLImageElement
 
 ///|
-extern "js" fn HTMLImageElement::image_ffi(
-  width : JsValue,
-  height : JsValue,
-) -> HTMLImageElement = "(width, height) => new Image(width, height)"
+extern "js" fn image_ffi(width : JsValue, height : JsValue) -> HTMLImageElement = "(width, height) => new Image(width, height)"
 
 ///|
 pub fn HTMLImageElement::image(width? : Int, height? : Int) -> HTMLImageElement {
-  let width = match width {
-    None => JsValue::null()
-    Some(w) => JsValue::to_jv(w)
-  }
-  let height = match height {
-    None => JsValue::null()
-    Some(h) => JsValue::to_jv(h)
-  }
-  HTMLImageElement::image_ffi(width, height)
+  let width = if width is Some(w) { to_jv(w) } else { undefined }
+  let height = if height is Some(h) { to_jv(h) } else { undefined }
+  image_ffi(width, height)
 }
 
 ///|
