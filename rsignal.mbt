@@ -414,14 +414,14 @@ pub fn[T : Default + Eq] select_one(signals : Array[Rsignal[T]]) -> Rsignal[T] {
 /// let values = []
 /// let s1 = new(1)
 /// let s2 = new(2)
-/// let s3 = combine_pair(s1, s2)
+/// let s3 = pair(s1, s2)
 /// s3.observer_forever(fn(v) { values.push(v) })
 /// s1.update(3) // This will trigger the observer effect with value (3, 2).
 /// s2.update(4) // This will trigger the observer effect with value (3, 4).
 /// s1.update(5) // This will trigger the observer effect with value (5, 4).
 /// inspect(values, content="[(1, 2), (3, 2), (3, 4), (5, 4)]")
 /// ```
-pub fn[T : Eq, U : Eq] combine_pair(
+pub fn[T : Eq, U : Eq] pair(
   s1 : Rsignal[T],
   s2 : Rsignal[U],
 ) -> Rsignal[(T, U)] {
@@ -448,7 +448,7 @@ pub fn[T : Eq, U : Eq] combine_pair(
 /// let s1 = new(1)
 /// let s2 = new(2)
 /// let s3 = new(3)
-/// let s4 = combine_triple(s1, s2, s3)
+/// let s4 = triple(s1, s2, s3)
 /// s4.observer_forever(fn(v) { values.push(v) })
 /// s1.update(4) // This will trigger the observer effect with value (4, 2, 3).
 /// s2.update(5) // This will trigger the observer effect with value (4, 5, 3).
@@ -456,7 +456,7 @@ pub fn[T : Eq, U : Eq] combine_pair(
 /// s1.update(7) // This will trigger the observer effect with value (7, 5, 6).
 /// inspect(values, content="[(1, 2, 3), (4, 2, 3), (4, 5, 3), (4, 5, 6), (7, 5, 6)]")
 /// ```
-pub fn[T : Eq, U : Eq, V : Eq] combine_triple(
+pub fn[T : Eq, U : Eq, V : Eq] triple(
   s1 : Rsignal[T],
   s2 : Rsignal[U],
   s3 : Rsignal[V],
@@ -485,7 +485,7 @@ pub fn[T : Eq, U : Eq, V : Eq] combine_triple(
 /// let s2 = new(2)
 /// let s3 = new(3)
 /// let s4 = new(4)
-/// let combined_signal = combine_all([s1, s2, s3, s4])
+/// let combined_signal = all([s1, s2, s3, s4])
 /// combined_signal.observer_forever(fn(v) { values.push(v) })
 /// s1.update(5) // This will trigger the observer effect with value [5, 2, 3, 4].
 /// s2.update(6) // This will trigger the observer effect with value [5, 6, 3, 4].
@@ -493,7 +493,7 @@ pub fn[T : Eq, U : Eq, V : Eq] combine_triple(
 /// s4.update(8) // This will trigger the observer effect with value [5, 6, 7, 8].
 /// inspect(values, content="[[1, 2, 3, 4], [5, 2, 3, 4], [5, 6, 3, 4], [5, 6, 7, 4], [5, 6, 7, 8]]")
 /// ```
-pub fn[T : Eq] combine_all(signals : Array[Rsignal[T]]) -> Rsignal[Array[T]] {
+pub fn[T : Eq] all(signals : Array[Rsignal[T]]) -> Rsignal[Array[T]] {
   let latest_values = []
   for signal in signals {
     latest_values.push(signal.value)

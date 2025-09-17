@@ -2,17 +2,17 @@
 package "bikallem/rsignal"
 
 // Values
-fn[T : Eq] combine_all(Array[Rsignal[T]]) -> Rsignal[Array[T]]
-
-fn[T : Eq, U : Eq] combine_pair(Rsignal[T], Rsignal[U]) -> Rsignal[(T, U)]
-
-fn[T : Eq, U : Eq, V : Eq] combine_triple(Rsignal[T], Rsignal[U], Rsignal[V]) -> Rsignal[(T, U, V)]
+fn[T : Eq] all(Array[Rsignal[T]]) -> Rsignal[Array[T]]
 
 fn[T, U, V : Eq] map2(Rsignal[T], Rsignal[U], (T, U) -> V) -> Rsignal[V]
 
 fn[T] new(T, label? : String) -> Rsignal[T]
 
+fn[T : Eq, U : Eq] pair(Rsignal[T], Rsignal[U]) -> Rsignal[(T, U)]
+
 fn[T : Default + Eq] select_one(Array[Rsignal[T]]) -> Rsignal[T]
+
+fn[T : Eq, U : Eq, V : Eq] triple(Rsignal[T], Rsignal[U], Rsignal[V]) -> Rsignal[(T, U, V)]
 
 // Errors
 
