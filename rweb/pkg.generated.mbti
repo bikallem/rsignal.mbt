@@ -354,11 +354,13 @@ impl TAttachableNode for UInt64
 impl TAttachableNode for Float
 impl TAttachableNode for Double
 impl TAttachableNode for String
-impl[T : Show] TAttachableNode for @rsignal.Signal[T]
+impl[T : Show] TAttachableNode for @rsignal.Rsignal[T]
 impl TAttachableNode for @bigint.BigInt
 
 pub(open) trait TAttrValue {
-  set_value(Self, Attr) -> Unit
+  #deprecated
+  set_value(Self, Attr) -> Unit = _
+  set_attr(Self, Attr) -> Unit
 }
 impl TAttrValue for Bool
 impl TAttrValue for Int
@@ -370,7 +372,7 @@ impl TAttrValue for UInt64
 impl TAttrValue for Float
 impl TAttrValue for Double
 impl TAttrValue for String
-impl[T : Show] TAttrValue for @rsignal.Signal[T]
+impl[T : Show] TAttrValue for @rsignal.Rsignal[T]
 impl TAttrValue for @bigint.BigInt
 
 pub(open) trait TBlob : TJsValue {
@@ -418,7 +420,7 @@ impl TEventTarget for UInt64
 impl TEventTarget for Float
 impl TEventTarget for Double
 impl TEventTarget for String
-impl[T : Show] TEventTarget for @rsignal.Signal[T]
+impl[T : Show] TEventTarget for @rsignal.Rsignal[T]
 impl TEventTarget for @bigint.BigInt
 
 pub(open) trait THTMLelement : TElement {
@@ -440,7 +442,7 @@ impl TJsValue for UInt64
 impl TJsValue for Float
 impl TJsValue for Double
 impl TJsValue for String
-impl[T : Show] TJsValue for @rsignal.Signal[T]
+impl[T : Show] TJsValue for @rsignal.Rsignal[T]
 impl TJsValue for @bigint.BigInt
 
 pub(open) trait TMouseEvent : TEvent {
@@ -469,7 +471,7 @@ impl TNode for UInt64
 impl TNode for Float
 impl TNode for Double
 impl TNode for String
-impl[T : Show] TNode for @rsignal.Signal[T]
+impl[T : Show] TNode for @rsignal.Rsignal[T]
 impl TNode for @bigint.BigInt
 
 pub(open) trait TTypedArray {

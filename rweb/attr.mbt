@@ -43,7 +43,7 @@ pub impl TEventTarget for Attr
 ///|
 pub fn[T : TAttrValue] attr(name : String, v : T) -> Attr {
   let at = document.create_attribute(name)
-  v.set_value(at)
+  v.set_attr(at)
   at
 }
 

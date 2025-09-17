@@ -1,7 +1,7 @@
 // -- Signal Attribute Value --
 
 ///|
-pub impl[T : Show] TAttrValue for @rsignal.Rsignal[T] with set_value(
+pub impl[T : Show] TAttrValue for @rsignal.Rsignal[T] with set_attr(
   self : @rsignal.Rsignal[T],
   attr : Attr,
 ) -> Unit {
