@@ -3,29 +3,44 @@
 
 At the core of the library is a type called `Rsignal`. Any changes/updates to a `Rsignal` can be observed by observers. Observers register to observe changes to `Rsignal`. Once registered, the observers are notified whenever a `Rsignal` is updated or modified. Observers can then initiate a change operation called `effect` based on these changes. A `Rsignal` can have many observers.
 
-A simple **counter** app in `reactive`:
+A simple **counter** app in `rsignal`:
 ```moonbit
 
 ///|
-fnalias @rsignal.(div, button, style, onclick, h)
+fnalias @rweb.(div, button, on, h, attr, bool_attr)
 
 ///|
-typealias @web.(HTMLDivElement, ReactiveElement as RE, ReactiveAttr as RA)
+typealias @rweb.(HTMLDivElement, MouseEvent)
 
 ///|
 fn counter(initial_count : Int) -> HTMLDivElement {
-  let state = @reactive_core.new(initial_count) // root signal
+  let count = @rsignal.new(initial_count) // rsignal to keep track of the count
+
+  // Dynamic style attribute value: updates color based on the count value
+  let color = count.map(count => "color: " +
+    (if count >= 5 { "green" } else if count == 0 { "red" } else { "" }))
+
+  // Component view
   div([
-    style("display: flex; flex-direction: column; align-items: center;"),
+    attr("style", "display: flex; flex-direction: column; align-items: center;"),
     h("h2", ["The Greatest Counter Ever!"]),
     div([
-      style("display: flex; flex-direction: row; column-gap: 1em;"),
-      button("Decrement", [
-        onclick(_ => state.update(state.val() - 1)),
-        RA::disabled(state.map(count => count <= 0)), // Disable button when count is 0
+      attr("style", "display: flex; flex-direction: row; column-gap: 1em;"),
+      button("-", [
+        bool_attr("disabled", rsignal=count.map(count => count == 0)),
+        on("click", (_ : MouseEvent) => count.update(count.val() - 1)),
       ]),
-      RE::text(state, (txt, cur_count) => txt.set_text_content(cur_count)),
-      button("Increment", [onclick(_ => state.update(state.val() + 1))]),
+      h("span", [attr("style", color), count]), // Display the current count with dynamic color
+      button("+", [
+        on("click", (_ : MouseEvent) => count.update(count.val() + 1)),
+      ]),
+      button("Reset", [
+        bool_attr(
+          "disabled",
+          rsignal=count.map(count => count == initial_count),
+        ),
+        on("click", (_ : MouseEvent) => count.update(initial_count)),
+      ]),
     ]),
   ])
 }
@@ -33,7 +48,7 @@ fn counter(initial_count : Int) -> HTMLDivElement {
 ///|
 fn main {
   let el = counter(0)
-  @reactive_web.mount_to_body(el)
+  @rweb.mount_to_body(el)
 }
 ```
 
