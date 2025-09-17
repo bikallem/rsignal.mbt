@@ -2,32 +2,32 @@
 package "bikallem/rsignal"
 
 // Values
-fn[T] combine_all(Array[Rsignal[T]]) -> Rsignal[Array[T]]
+fn[T : Eq] combine_all(Array[Rsignal[T]]) -> Rsignal[Array[T]]
 
-fn[T, U] combine_pair(Rsignal[T], Rsignal[U]) -> Rsignal[(T, U)]
+fn[T : Eq, U : Eq] combine_pair(Rsignal[T], Rsignal[U]) -> Rsignal[(T, U)]
 
-fn[T, U, V] combine_triple(Rsignal[T], Rsignal[U], Rsignal[V]) -> Rsignal[(T, U, V)]
+fn[T : Eq, U : Eq, V : Eq] combine_triple(Rsignal[T], Rsignal[U], Rsignal[V]) -> Rsignal[(T, U, V)]
 
-fn[T, U, V] map2(Rsignal[T], Rsignal[U], (T, U) -> V) -> Rsignal[V]
+fn[T, U, V : Eq] map2(Rsignal[T], Rsignal[U], (T, U) -> V) -> Rsignal[V]
 
 fn[T] new(T, label? : String) -> Rsignal[T]
 
-fn[T : Default] select_one(Array[Rsignal[T]]) -> Rsignal[T]
+fn[T : Default + Eq] select_one(Array[Rsignal[T]]) -> Rsignal[T]
 
 // Errors
 
 // Types and methods
 type Rsignal[T]
-fn[T] Rsignal::filter(Self[T], (T) -> Bool, T) -> Self[T]
-fn[T, U] Rsignal::filter_map(Self[T], (T) -> U?, U) -> Self[U]
+fn[T : Eq] Rsignal::filter(Self[T], (T) -> Bool, T) -> Self[T]
+fn[T, U : Eq] Rsignal::filter_map(Self[T], (T) -> U?, U) -> Self[U]
 fn[T] Rsignal::id(Self[T]) -> String
-fn[T, U] Rsignal::map(Self[T], (T) -> U) -> Self[U]
+fn[T, U : Eq] Rsignal::map(Self[T], (T) -> U) -> Self[U]
 fn[T] Rsignal::subscribe(Self[T], (T) -> Unit) -> Subscriber[T]
 fn[T] Rsignal::subscribe_only(Self[T], (T) -> Unit) -> Subscriber[T]
 fn[T] Rsignal::subscribe_permanent(Self[T], (T) -> Unit) -> Unit
 fn[T] Rsignal::subscribe_permanent_only(Self[T], (T) -> Unit) -> Unit
 fn[T] Rsignal::unsubscribe(Self[T], Subscriber[T]) -> Unit
-fn[T] Rsignal::update(Self[T], T, notify? : Bool) -> Unit
+fn[T : Eq] Rsignal::update(Self[T], T, notify? : Bool) -> Unit
 fn[T] Rsignal::val(Self[T]) -> T
 
 type Subscriber[T]

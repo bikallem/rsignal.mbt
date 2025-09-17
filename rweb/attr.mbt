@@ -48,12 +48,6 @@ pub fn[T : TAttrValue] attr(name : String, v : T) -> Attr {
 }
 
 ///|
-pub fn bool_attr(name : String) -> Attr {
-  let at = document.create_attribute(name)
-  at
-}
-
-///|
 /// id attribute
 pub fn id(id : String) -> Attr {
   attr("id", id)

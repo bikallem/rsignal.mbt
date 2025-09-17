@@ -19,8 +19,6 @@ fn async_run(async () -> Unit noraise) -> Unit
 
 fn[T : TAttrValue] attr(String, T) -> Attr
 
-fn bool_attr(String) -> Attr
-
 fn button(String, Array[&TAttachableNode]) -> HTMLButtonElement
 
 fn canvas(Array[&TAttachableNode]) -> HTMLCanvasElement
@@ -85,6 +83,15 @@ type Blob
 fn Blob::new(Array[JsValue], JsObject) -> Self
 impl TBlob for Blob
 impl TJsValue for Blob
+
+type BoolAttr
+#as_free_fn
+fn BoolAttr::bool_attr(String, rsignal? : @rsignal.Rsignal[Bool]) -> Self
+fn BoolAttr::name(Self) -> String
+impl TAttachableNode for BoolAttr
+impl TEventTarget for BoolAttr
+impl TJsValue for BoolAttr
+impl TNode for BoolAttr
 
 type CSSStyleDeclaration
 fn CSSStyleDeclaration::set_property(Self, String, String, priority? : String) -> Unit
@@ -358,8 +365,6 @@ impl[T : Show] TAttachableNode for @rsignal.Rsignal[T]
 impl TAttachableNode for @bigint.BigInt
 
 pub(open) trait TAttrValue {
-  #deprecated
-  set_value(Self, Attr) -> Unit = _
   set_attr(Self, Attr) -> Unit
 }
 impl TAttrValue for Bool

@@ -179,15 +179,17 @@ pub fn[T] Rsignal::subscribe_permanent_only(
 /// assert_eq(s.val(), 10)
 /// assert_eq(values, [0, 5, 10])
 /// ```
-pub fn[T] Rsignal::update(
+pub fn[T : Eq] Rsignal::update(
   self : Rsignal[T],
   new_value : T,
   notify? : Bool = true,
 ) -> Unit {
-  self.value = new_value
-  if notify {
-    for _, subscriber in self.subscribers {
-      subscriber.effect(self.value)
+  if self.value != new_value {
+    self.value = new_value
+    if notify {
+      for _, subscriber in self.subscribers {
+        subscriber.effect(self.value)
+      }
     }
   }
 }
@@ -242,7 +244,7 @@ pub fn[T] Rsignal::unsubscribe(
 /// s.update(20) // This will trigger the subscriber with value 21.
 /// inspect(values, content="[1, 6, 11, 21]")
 /// ```
-pub fn[T, U] Rsignal::map(self : Rsignal[T], f : (T) -> U) -> Rsignal[U] {
+pub fn[T, U : Eq] Rsignal::map(self : Rsignal[T], f : (T) -> U) -> Rsignal[U] {
   let s = new(f(self.value))
   self.subscribe_permanent(v => s.update(f(v)))
   s
@@ -271,7 +273,7 @@ pub fn[T, U] Rsignal::map(self : Rsignal[T], f : (T) -> U) -> Rsignal[U] {
 /// s1.update(5) // This will trigger the subscriber with value 9.
 /// inspect(values, content="[3, 5, 7, 9]")
 /// ```
-pub fn[T, U, V] map2(
+pub fn[T, U, V : Eq] map2(
   s1 : Rsignal[T],
   s2 : Rsignal[U],
   f : (T, U) -> V,
@@ -306,7 +308,7 @@ pub fn[T, U, V] map2(
 /// s.update(3) // This will not trigger the subscriber.
 /// inspect(filtered_values, content="[10, 7]")
 /// ```
-pub fn[T] Rsignal::filter(
+pub fn[T : Eq] Rsignal::filter(
   self : Rsignal[T],
   f : (T) -> Bool,
   seed : T,
@@ -342,7 +344,7 @@ pub fn[T] Rsignal::filter(
 /// s.update(3) // This will not trigger the subscriber.
 /// inspect(mapped_values, content="[12, 9]")
 /// ```
-pub fn[T, U] Rsignal::filter_map(
+pub fn[T, U : Eq] Rsignal::filter_map(
   self : Rsignal[T],
   f : (T) -> U?,
   seed : U,
@@ -385,7 +387,7 @@ pub fn[T, U] Rsignal::filter_map(
 /// s3.update(6) // This will trigger the subscriber with value 6.
 /// inspect(values, content="[4, 5, 6]")
 /// ```
-pub fn[T : Default] select_one(signals : Array[Rsignal[T]]) -> Rsignal[T] {
+pub fn[T : Default + Eq] select_one(signals : Array[Rsignal[T]]) -> Rsignal[T] {
   let s = new(T::default())
   for signal in signals {
     signal.subscribe_permanent_only(v => s.update(v))
@@ -415,7 +417,10 @@ pub fn[T : Default] select_one(signals : Array[Rsignal[T]]) -> Rsignal[T] {
 /// s1.update(5) // This will trigger the subscriber with value (5, 4).
 /// inspect(values, content="[(1, 2), (3, 2), (3, 4), (5, 4)]")
 /// ```
-pub fn[T, U] combine_pair(s1 : Rsignal[T], s2 : Rsignal[U]) -> Rsignal[(T, U)] {
+pub fn[T : Eq, U : Eq] combine_pair(
+  s1 : Rsignal[T],
+  s2 : Rsignal[U],
+) -> Rsignal[(T, U)] {
   let s = new((s1.value, s2.value))
   s1.subscribe_permanent_only(v => s.update((v, s2.value)))
   s2.subscribe_permanent_only(v => s.update((s1.value, v)))
@@ -447,7 +452,7 @@ pub fn[T, U] combine_pair(s1 : Rsignal[T], s2 : Rsignal[U]) -> Rsignal[(T, U)] {
 /// s1.update(7) // This will trigger the subscriber with value (7, 5, 6).
 /// inspect(values, content="[(1, 2, 3), (4, 2, 3), (4, 5, 3), (4, 5, 6), (7, 5, 6)]")
 /// ```
-pub fn[T, U, V] combine_triple(
+pub fn[T : Eq, U : Eq, V : Eq] combine_triple(
   s1 : Rsignal[T],
   s2 : Rsignal[U],
   s3 : Rsignal[V],
@@ -484,7 +489,7 @@ pub fn[T, U, V] combine_triple(
 /// s4.update(8) // This will trigger the subscriber with value [5, 6, 7, 8].
 /// inspect(values, content="[[1, 2, 3, 4], [5, 2, 3, 4], [5, 6, 3, 4], [5, 6, 7, 4], [5, 6, 7, 8]]")
 /// ```
-pub fn[T] combine_all(signals : Array[Rsignal[T]]) -> Rsignal[Array[T]] {
+pub fn[T : Eq] combine_all(signals : Array[Rsignal[T]]) -> Rsignal[Array[T]] {
   let latest_values = []
   for signal in signals {
     latest_values.push(signal.value)
