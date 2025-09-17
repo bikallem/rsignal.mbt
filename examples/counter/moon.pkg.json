@@ -1,7 +1,7 @@
 {
   "is-main": true,
   "import": [
-    "bikallem/reactive/reactive_core",
-    "bikallem/reactive/reactive_web"
+    "bikallem/rsignal/",
+    "bikallem/rsignal/rweb"
   ]
 }

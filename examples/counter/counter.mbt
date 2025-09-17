@@ -1,16 +1,17 @@
 ///|
-fnalias @reactive_web.(div, button, on, h, attr, bool_attr)
+fnalias @rweb.(div, button, on, h, attr, bool_attr)
 
 ///|
-typealias @reactive_web.(HTMLDivElement, HTMLButtonElement, MouseEvent)
+typealias @rweb.(HTMLDivElement, HTMLButtonElement, MouseEvent)
 
 ///|
-traitalias @reactive_web.TAttachableNode
+traitalias @rweb.TAttachableNode
 
-///| Create a button that can be disabled based on a signal value.
+///|
+/// Create a button that can be disabled based on a signal value.
 fn disabled_button(
   label : String,
-  state : @reactive_core.Signal[Bool], // If the signal is true, the button will be disabled
+  state : @rsignal.Signal[Bool], // If the signal is true, the button will be disabled
   nodes : Array[&TAttachableNode],
 ) -> HTMLButtonElement {
   let disabled_attr = bool_attr("disabled")
@@ -25,7 +26,7 @@ fn disabled_button(
 
 ///|
 fn counter(initial_count : Int) -> HTMLDivElement {
-  let count = @reactive_core.new(initial_count) // signal to keep track of the count
+  let count = @rsignal.new(initial_count) // signal to keep track of the count
   // Dynamic style attribute value: updates color based on the count value
   let color = count.map(count => "color: " +
     (if count >= 5 { "green" } else if count == 0 { "red" } else { "" }))
@@ -51,5 +52,5 @@ fn counter(initial_count : Int) -> HTMLDivElement {
 ///|
 fn main {
   let el = counter(0)
-  @reactive_web.mount_to_body(el)
+  @rweb.mount_to_body(el)
 }

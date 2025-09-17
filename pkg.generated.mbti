@@ -1,0 +1,38 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/rsignal"
+
+// Values
+fn[T] combine_all(Array[Signal[T]]) -> Signal[Array[T]]
+
+fn[T, U] combine_pair(Signal[T], Signal[U]) -> Signal[(T, U)]
+
+fn[T, U, V] combine_triple(Signal[T], Signal[U], Signal[V]) -> Signal[(T, U, V)]
+
+fn[T, U, V] map2(Signal[T], Signal[U], (T, U) -> V) -> Signal[V]
+
+fn[T] new(T, label? : String) -> Signal[T]
+
+fn[T : Default] select_one(Array[Signal[T]]) -> Signal[T]
+
+// Errors
+
+// Types and methods
+type Signal[T]
+fn[T] Signal::filter(Self[T], (T) -> Bool, T) -> Self[T]
+fn[T, U] Signal::filter_map(Self[T], (T) -> U?, U) -> Self[U]
+fn[T] Signal::id(Self[T]) -> String
+fn[T, U] Signal::map(Self[T], (T) -> U) -> Self[U]
+fn[T] Signal::subscribe(Self[T], (T) -> Unit) -> Subscriber[T]
+fn[T] Signal::subscribe_only(Self[T], (T) -> Unit) -> Subscriber[T]
+fn[T] Signal::subscribe_permanent(Self[T], (T) -> Unit) -> Unit
+fn[T] Signal::subscribe_permanent_only(Self[T], (T) -> Unit) -> Unit
+fn[T] Signal::unsubscribe(Self[T], Subscriber[T]) -> Unit
+fn[T] Signal::update(Self[T], T, notify? : Bool) -> Unit
+fn[T] Signal::val(Self[T]) -> T
+
+type Subscriber[T]
+
+// Type aliases
+
+// Traits
+

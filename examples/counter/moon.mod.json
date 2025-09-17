@@ -5,10 +5,11 @@
   "repository": "",
   "license": "Apache-2.0",
   "keywords": [],
-  "description": "",  
+  "description": "",
   "deps": {
-    "bikallem/reactive": {
+    "bikallem/rsignal": {
       "path": "../../."
     }
-  }
+  },
+  "preferred-target": "js"
 }
