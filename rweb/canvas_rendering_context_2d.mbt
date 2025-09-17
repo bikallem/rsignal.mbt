@@ -19,35 +19,32 @@ pub extern "js" fn CanvasRenderingContext2D::put_image_data(
 extern "js" fn draw_image_ffi(
   ctx : CanvasRenderingContext2D,
   image : HTMLImageElement,
-  sx~ : JsValue,
-  sy~ : JsValue,
-  swidth~ : JsValue,
-  sheight~ : JsValue,
+  sx~ : Int,
+  sy~ : Int,
+  swidth~ : Int,
+  sheight~ : Int,
   dx~ : Int,
   dy~ : Int,
-  dwidth~ : JsValue,
-  dheight~ : JsValue,
-) -> Unit = "(ctx, image, sx, sy, swidth, sheight, dx, dy, dwidth, dheight) => ctx.drawImage(image, sx, sy, swidth, sheight, dx, dy, dwidth, dheight)"
+  dwidth~ : Int,
+  dheight~ : Int,
+) -> Unit =
+  #|(ctx, image, sx, sy, swidth, sheight, dx, dy, dwidth, dheight) => ctx.drawImage(image, sx, sy, swidth, sheight, dx, dy, dwidth, dheight)
 
 ///|
 pub fn CanvasRenderingContext2D::draw_image(
   self : CanvasRenderingContext2D,
   image : HTMLImageElement,
-  sx? : Int,
-  sy? : Int,
+  sx? : Int = 0,
+  sy? : Int = 0,
   swidth? : Int,
   sheight? : Int,
   dx? : Int = 0,
   dy? : Int = 0,
-  dwidth? : Int,
-  dheight? : Int,
+  dwidth~ : Int,
+  dheight~ : Int,
 ) -> Unit {
-  let sx = if sx is Some(v) { JsValue::to_jv(v) } else { undefined }
-  let sy = if sy is Some(v) { JsValue::to_jv(v) } else { undefined }
-  let swidth = if swidth is Some(v) { JsValue::to_jv(v) } else { undefined }
-  let sheight = if sheight is Some(v) { JsValue::to_jv(v) } else { undefined }
-  let dwidth = if dwidth is Some(v) { to_jv(v) } else { undefined }
-  let dheight = if dheight is Some(v) { to_jv(v) } else { undefined }
+  let swidth = if swidth is Some(w) { w } else { dwidth }
+  let sheight = if sheight is Some(h) { h } else { dheight }
   draw_image_ffi(
     self,
     image,
