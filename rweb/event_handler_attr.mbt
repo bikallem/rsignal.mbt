@@ -49,3 +49,16 @@ pub impl[T] TEventTarget for EventHandlerAttr[T]
 pub fn[T] on(event : String, handler : (T) -> Unit) -> EventHandlerAttr[T] {
   EventHandlerAttr::new(event, handler)
 }
+
+///|
+/// onclick attribute
+pub fn onclick(
+  handler : (PointerEvent) -> Unit,
+) -> EventHandlerAttr[PointerEvent] {
+  EventHandlerAttr::new("click", handler)
+}
+
+///|
+pub fn onchange(handler : (Event) -> Unit) -> EventHandlerAttr[Event] {
+  EventHandlerAttr::new("change", handler)
+}

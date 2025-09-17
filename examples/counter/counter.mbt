@@ -1,8 +1,8 @@
 ///|
-fnalias @rweb.(div, button, on, h, attr, bool_attr)
+fnalias @rweb.(div, button, on, h, attr, bool_attr, onclick)
 
 ///|
-typealias @rweb.(HTMLDivElement, MouseEvent)
+typealias @rweb.(HTMLDivElement, PointerEvent)
 
 ///|
 fn counter(initial_count : Int) -> HTMLDivElement {
@@ -12,7 +12,13 @@ fn counter(initial_count : Int) -> HTMLDivElement {
   let color = count.map(count => "color: " +
     (if count >= 5 { "green" } else if count == 0 { "red" } else { "" }))
 
-  // Component view
+  // Decrement button click handler
+  let decrement = fn(_ : PointerEvent) { count.update(count.val() - 1) }
+
+  // Increment button click handler
+  let increment = _ => count.update(count.val() + 1)
+
+  // view
   div([
     attr("style", "display: flex; flex-direction: column; align-items: center;"),
     h("h2", ["The Greatest Counter Ever!"]),
@@ -20,18 +26,13 @@ fn counter(initial_count : Int) -> HTMLDivElement {
       attr("style", "display: flex; flex-direction: row; column-gap: 1em;"),
       button("-", [
         bool_attr("disabled", rs=count.map(count => count == 0)),
-        on("click", (_ : MouseEvent) => count.update(count.val() - 1)),
+        on("click", decrement),
       ]),
       h("span", [attr("style", color), count]), // Display the current count with dynamic color
-      button("+", [
-        on("click", (_ : MouseEvent) => count.update(count.val() + 1)),
-      ]),
+      button("+", [onclick(increment)]),
       button("Reset", [
-        bool_attr(
-          "disabled",
-          rs=count.map(count => count == initial_count),
-        ),
-        on("click", (_ : MouseEvent) => count.update(initial_count)),
+        bool_attr("disabled", rs=count.map(count => count == initial_count)),
+        onclick(_ => count.update(initial_count)),
       ]),
     ]),
   ])
