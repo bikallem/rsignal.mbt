@@ -4,7 +4,7 @@ priv struct SubId(Int) derive(Eq, Hash)
 
 ///|
 /// A reactive signal that can be subscribed to and updated.
-struct Signal[T] {
+struct Rsignal[T] {
   id : String // unique ID for this signal
   sub_id : () -> Int // for generating unique subscriber IDs
   mut value : T // any changes to this value will trigger subscribers
@@ -37,10 +37,10 @@ let signal_id : () -> Int = id_generator()
 
 ///|
 /// Creates a new signal with the given initial value.
-pub fn[T] new(value : T, label? : String = "signal") -> Signal[T] {
+pub fn[T] new(value : T, label? : String = "signal") -> Rsignal[T] {
   let sub_id = id_generator()
   let id = "\{label}#\{signal_id()}"
-  Signal::{ id, value, sub_id, subscribers: @hashmap.new() }
+  Rsignal::{ id, value, sub_id, subscribers: @hashmap.new() }
 }
 
 ///|
@@ -59,7 +59,7 @@ pub fn[T] new(value : T, label? : String = "signal") -> Signal[T] {
 /// let s2 = new(1, label="my_signal")
 /// assert_eq(s2.id(), "my_signal#1")
 /// ```
-pub fn[T] Signal::id(self : Signal[T]) -> String {
+pub fn[T] Rsignal::id(self : Rsignal[T]) -> String {
   self.id
 }
 
@@ -79,7 +79,7 @@ pub fn[T] Signal::id(self : Signal[T]) -> String {
 /// s.update(5)
 /// assert_eq(s.val(), 5)
 /// ```
-pub fn[T] Signal::val(s : Signal[T]) -> T {
+pub fn[T] Rsignal::val(s : Rsignal[T]) -> T {
   s.value
 }
 
@@ -109,14 +109,14 @@ pub fn[T] Signal::val(s : Signal[T]) -> T {
 
 ///|
 /// Returns the unique subscriber ID for this signal
-fn[T] Signal::sub_id(self : Signal[T]) -> SubId {
+fn[T] Rsignal::sub_id(self : Rsignal[T]) -> SubId {
   (self.sub_id)()
 }
 
 ///|
 /// Subscribes to a signal and immediately calls the effect function with the current value
-pub fn[T] Signal::subscribe(
-  self : Signal[T],
+pub fn[T] Rsignal::subscribe(
+  self : Rsignal[T],
   effect : (T) -> Unit,
 ) -> Subscriber[T] {
   let subscriber = Subscriber::{ id: self.sub_id(), effect }
@@ -129,8 +129,8 @@ pub fn[T] Signal::subscribe(
 /// Subscribes to a signal without immediately calling the effect function
 /// This is useful for cases where you want to set up a subscription but don't want to
 /// trigger the effect function until the signal changes.
-pub fn[T] Signal::subscribe_only(
-  self : Signal[T],
+pub fn[T] Rsignal::subscribe_only(
+  self : Rsignal[T],
   effect : (T) -> Unit,
 ) -> Subscriber[T] {
   let subscriber = Subscriber::{ id: self.sub_id(), effect }
@@ -141,8 +141,8 @@ pub fn[T] Signal::subscribe_only(
 ///|
 /// Subscribes to a signal permanently and immediately calls the effect function with the current value.
 /// This is useful for cases where you want to set up a subscription that will not be removed
-pub fn[T] Signal::subscribe_permanent(
-  self : Signal[T],
+pub fn[T] Rsignal::subscribe_permanent(
+  self : Rsignal[T],
   effect : (T) -> Unit,
 ) -> Unit {
   self.subscribe(effect) |> ignore
@@ -150,8 +150,8 @@ pub fn[T] Signal::subscribe_permanent(
 
 ///|
 /// Subscribes to a signal permanently without immediately calling the effect function.
-pub fn[T] Signal::subscribe_permanent_only(
-  self : Signal[T],
+pub fn[T] Rsignal::subscribe_permanent_only(
+  self : Rsignal[T],
   effect : (T) -> Unit,
 ) -> Unit {
   self.subscribe_only(effect) |> ignore
@@ -179,8 +179,8 @@ pub fn[T] Signal::subscribe_permanent_only(
 /// assert_eq(s.val(), 10)
 /// assert_eq(values, [0, 5, 10])
 /// ```
-pub fn[T] Signal::update(
-  self : Signal[T],
+pub fn[T] Rsignal::update(
+  self : Rsignal[T],
   new_value : T,
   notify? : Bool = true,
 ) -> Unit {
@@ -214,8 +214,8 @@ pub fn[T] Signal::update(
 /// assert_eq(s.val(), 10)
 /// assert_eq(values, [0, 5])
 /// ```
-pub fn[T] Signal::unsubscribe(
-  self : Signal[T],
+pub fn[T] Rsignal::unsubscribe(
+  self : Rsignal[T],
   subscription : Subscriber[T],
 ) -> Unit {
   self.subscribers.remove(subscription.id)
@@ -242,7 +242,7 @@ pub fn[T] Signal::unsubscribe(
 /// s.update(20) // This will trigger the subscriber with value 21.
 /// inspect(values, content="[1, 6, 11, 21]")
 /// ```
-pub fn[T, U] Signal::map(self : Signal[T], f : (T) -> U) -> Signal[U] {
+pub fn[T, U] Rsignal::map(self : Rsignal[T], f : (T) -> U) -> Rsignal[U] {
   let s = new(f(self.value))
   self.subscribe_permanent(v => s.update(f(v)))
   s
@@ -272,10 +272,10 @@ pub fn[T, U] Signal::map(self : Signal[T], f : (T) -> U) -> Signal[U] {
 /// inspect(values, content="[3, 5, 7, 9]")
 /// ```
 pub fn[T, U, V] map2(
-  s1 : Signal[T],
-  s2 : Signal[U],
+  s1 : Rsignal[T],
+  s2 : Rsignal[U],
   f : (T, U) -> V,
-) -> Signal[V] {
+) -> Rsignal[V] {
   let s = new(f(s1.value, s2.value))
   s1.subscribe_permanent(v => s.update(f(v, s2.value)))
   s2.subscribe_permanent(v => s.update(f(s1.value, v)))
@@ -306,11 +306,11 @@ pub fn[T, U, V] map2(
 /// s.update(3) // This will not trigger the subscriber.
 /// inspect(filtered_values, content="[10, 7]")
 /// ```
-pub fn[T] Signal::filter(
-  self : Signal[T],
+pub fn[T] Rsignal::filter(
+  self : Rsignal[T],
   f : (T) -> Bool,
   seed : T,
-) -> Signal[T] {
+) -> Rsignal[T] {
   let v = if f(self.value) { self.value } else { seed }
   let s = new(v)
   self.subscribe_permanent(v => if f(v) { s.update(v) })
@@ -342,11 +342,11 @@ pub fn[T] Signal::filter(
 /// s.update(3) // This will not trigger the subscriber.
 /// inspect(mapped_values, content="[12, 9]")
 /// ```
-pub fn[T, U] Signal::filter_map(
-  self : Signal[T],
+pub fn[T, U] Rsignal::filter_map(
+  self : Rsignal[T],
   f : (T) -> U?,
   seed : U,
-) -> Signal[U] {
+) -> Rsignal[U] {
   let v = f(self.value).unwrap_or_else(() => seed)
   let s = new(v)
   self.subscribe_permanent(v => match f(v) {
@@ -385,7 +385,7 @@ pub fn[T, U] Signal::filter_map(
 /// s3.update(6) // This will trigger the subscriber with value 6.
 /// inspect(values, content="[4, 5, 6]")
 /// ```
-pub fn[T : Default] select_one(signals : Array[Signal[T]]) -> Signal[T] {
+pub fn[T : Default] select_one(signals : Array[Rsignal[T]]) -> Rsignal[T] {
   let s = new(T::default())
   for signal in signals {
     signal.subscribe_permanent_only(v => s.update(v))
@@ -415,7 +415,7 @@ pub fn[T : Default] select_one(signals : Array[Signal[T]]) -> Signal[T] {
 /// s1.update(5) // This will trigger the subscriber with value (5, 4).
 /// inspect(values, content="[(1, 2), (3, 2), (3, 4), (5, 4)]")
 /// ```
-pub fn[T, U] combine_pair(s1 : Signal[T], s2 : Signal[U]) -> Signal[(T, U)] {
+pub fn[T, U] combine_pair(s1 : Rsignal[T], s2 : Rsignal[U]) -> Rsignal[(T, U)] {
   let s = new((s1.value, s2.value))
   s1.subscribe_permanent_only(v => s.update((v, s2.value)))
   s2.subscribe_permanent_only(v => s.update((s1.value, v)))
@@ -448,10 +448,10 @@ pub fn[T, U] combine_pair(s1 : Signal[T], s2 : Signal[U]) -> Signal[(T, U)] {
 /// inspect(values, content="[(1, 2, 3), (4, 2, 3), (4, 5, 3), (4, 5, 6), (7, 5, 6)]")
 /// ```
 pub fn[T, U, V] combine_triple(
-  s1 : Signal[T],
-  s2 : Signal[U],
-  s3 : Signal[V],
-) -> Signal[(T, U, V)] {
+  s1 : Rsignal[T],
+  s2 : Rsignal[U],
+  s3 : Rsignal[V],
+) -> Rsignal[(T, U, V)] {
   let s = new((s1.value, s2.value, s3.value))
   s1.subscribe_permanent_only(v => s.update((v, s2.value, s3.value)))
   s2.subscribe_permanent_only(v => s.update((s1.value, v, s3.value)))
@@ -484,7 +484,7 @@ pub fn[T, U, V] combine_triple(
 /// s4.update(8) // This will trigger the subscriber with value [5, 6, 7, 8].
 /// inspect(values, content="[[1, 2, 3, 4], [5, 2, 3, 4], [5, 6, 3, 4], [5, 6, 7, 4], [5, 6, 7, 8]]")
 /// ```
-pub fn[T] combine_all(signals : Array[Signal[T]]) -> Signal[Array[T]] {
+pub fn[T] combine_all(signals : Array[Rsignal[T]]) -> Rsignal[Array[T]] {
   let latest_values = []
   for signal in signals {
     latest_values.push(signal.value)

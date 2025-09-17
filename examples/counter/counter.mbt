@@ -11,7 +11,7 @@ traitalias @rweb.TAttachableNode
 /// Create a button that can be disabled based on a signal value.
 fn disabled_button(
   label : String,
-  state : @rsignal.Signal[Bool], // If the signal is true, the button will be disabled
+  state : @rsignal.Rsignal[Bool], // If the signal is true, the button will be disabled
   nodes : Array[&TAttachableNode],
 ) -> HTMLButtonElement {
   let disabled_attr = bool_attr("disabled")
