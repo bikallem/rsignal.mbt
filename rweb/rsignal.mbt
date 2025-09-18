@@ -5,7 +5,7 @@ pub impl[T : Show] TAttrValue for @rsignal.Rsignal[T] with set_attr(
   self : @rsignal.Rsignal[T],
   attr : Attr,
 ) -> Unit {
-  self.observer_forever(value => attr.set_value(value))
+  self.observe(value => attr.set_value(value))
 }
 
 // -- Signal as Text Node --
@@ -15,7 +15,7 @@ pub impl[T : Show] TJsValue for @rsignal.Rsignal[T] with to_jv(
   self : @rsignal.Rsignal[T],
 ) -> JsValue {
   let text = document.create_text_node("")
-  self.observer_forever(value => text.set_text_content(value))
+  self.observe(value => text.set_text_content(value))
   text.to_jv()
 }
 
