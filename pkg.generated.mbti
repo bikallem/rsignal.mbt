@@ -18,14 +18,15 @@ fn[T : Eq, U : Eq, V : Eq] triple(Rsignal[T], Rsignal[U], Rsignal[V]) -> Rsignal
 
 // Types and methods
 type Observer[T]
+fn[T] Observer::id(Self[T]) -> String
 
 type Rsignal[T]
 fn[T : Eq] Rsignal::filter(Self[T], (T) -> Bool, T) -> Self[T]
 fn[T, U : Eq] Rsignal::filter_map(Self[T], (T) -> U?, U) -> Self[U]
 fn[T] Rsignal::id(Self[T]) -> String
 fn[T, U : Eq] Rsignal::map(Self[T], (T) -> U) -> Self[U]
-fn[T] Rsignal::observe(Self[T], (T) -> Unit, exec_effect? : Bool) -> Unit
-fn[T] Rsignal::observer(Self[T], (T) -> Unit, exec_effect? : Bool) -> Observer[T]
+fn[T] Rsignal::observe(Self[T], (T) -> Unit, exec_immediate? : Bool) -> Unit
+fn[T] Rsignal::observer(Self[T], (T) -> Unit, exec_immediate? : Bool) -> Observer[T]
 fn[T] Rsignal::remove_observer(Self[T], Observer[T]) -> Unit
 fn[T : Eq] Rsignal::update(Self[T], T, notify? : Bool) -> Unit
 fn[T] Rsignal::val(Self[T]) -> T

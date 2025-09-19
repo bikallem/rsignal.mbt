@@ -84,7 +84,7 @@ fn[T] Rsignal::new_observer_id(self : Rsignal[T]) -> ObserverId {
 /// * `self` : The signal to observe.
 /// * `effect` : A function that will be called with the signal's value whenever
 ///   it changes.
-/// * `exec_effect` : Whether to immediately execute the effect function with
+/// * `exec_immediate` : Whether to immediately execute `effect` function with
 ///   the current signal value. Defaults to `true`.
 ///
 /// Returns an `Observer[T]` that can be used to unsubscribe from the signal
@@ -104,11 +104,11 @@ fn[T] Rsignal::new_observer_id(self : Rsignal[T]) -> ObserverId {
 pub fn[T] Rsignal::observer(
   self : Rsignal[T],
   effect : (T) -> Unit,
-  exec_effect? : Bool = true,
+  exec_immediate? : Bool = true,
 ) -> Observer[T] {
   let observer = Observer::{ id: self.new_observer_id(), effect }
   self.observers[observer.id] = observer
-  if exec_effect {
+  if exec_immediate {
     observer.effect(self.value)
   }
   observer
@@ -123,9 +123,9 @@ pub fn[T] Rsignal::observer(
 /// Parameters:
 ///
 /// * `self` : The signal to observe.
-/// * `effect` : A function that will be called with the signal's value whenever
+/// * `effect` : A function that will be called with the signal's current value whenever
 ///   it changes.
-/// * `exec_effect` : Whether to immediately execute the effect function with
+/// * `exec_immediate` : Whether to immediately execute `effect` function with
 ///   the current signal value. Defaults to `true`.
 ///
 /// Example:
@@ -141,9 +141,9 @@ pub fn[T] Rsignal::observer(
 pub fn[T] Rsignal::observe(
   self : Rsignal[T],
   effect : (T) -> Unit,
-  exec_effect? : Bool = true,
+  exec_immediate? : Bool = true,
 ) -> Unit {
-  self.observer(effect, exec_effect~) |> ignore
+  self.observer(effect, exec_immediate~) |> ignore
 }
 
 ///|
@@ -291,7 +291,7 @@ pub fn[T, U, V : Eq] map2(
 /// let filtered_values: Array[Int] = []
 /// let s = new(1)
 /// let s2 = s.filter(fn(v) { v > 5 }, 0)
-/// s2.observe(fn(v) { filtered_values.push(v) }, exec_effect=false)
+/// s2.observe(fn(v) { filtered_values.push(v) }, exec_immediate=false)
 /// s.update(10) // This will trigger the observer effect with value 10.
 /// s.update(7) // This will trigger the observer effect with value 7.
 /// s.update(3) // This will not trigger the observer effect.
@@ -327,7 +327,7 @@ pub fn[T : Eq] Rsignal::filter(
 /// let mapped_values = []
 /// let s = new(1)
 /// let s2 = s.filter_map(fn(v) { if v > 5 { Some(v+2) } else { None } }, 0)
-/// s2.observe(fn(v) { mapped_values.push(v) }, exec_effect=false)
+/// s2.observe(fn(v) { mapped_values.push(v) }, exec_immediate=false)
 /// s.update(10) // This will trigger the observer effect with value 12.
 /// s.update(7) // This will trigger the observer effect with value 9.
 /// s.update(3) // This will not trigger the observer effect.
@@ -370,7 +370,7 @@ pub fn[T, U : Eq] Rsignal::filter_map(
 /// let s2 = new(2)
 /// let s3 = new(3)
 /// let combined_signal = select_one([s1, s2, s3])
-/// combined_signal.observe(fn(v) { values.push(v) }, exec_effect=false)
+/// combined_signal.observe(fn(v) { values.push(v) }, exec_immediate=false)
 /// s1.update(4) // This will trigger the observer effect with value 4.
 /// s2.update(5) // This will trigger the observer effect with value 5.
 /// s3.update(6) // This will trigger the observer effect with value 6.
@@ -379,7 +379,7 @@ pub fn[T, U : Eq] Rsignal::filter_map(
 pub fn[T : Default + Eq] select_one(signals : Array[Rsignal[T]]) -> Rsignal[T] {
   let s = new(T::default())
   for signal in signals {
-    signal.observe(v => s.update(v), exec_effect=false)
+    signal.observe(v => s.update(v), exec_immediate=false)
   }
   s
 }
@@ -411,8 +411,8 @@ pub fn[T : Eq, U : Eq] pair(
   s2 : Rsignal[U],
 ) -> Rsignal[(T, U)] {
   let s = new((s1.value, s2.value))
-  s1.observe(v => s.update((v, s2.value)), exec_effect=false)
-  s2.observe(v => s.update((s1.value, v)), exec_effect=false)
+  s1.observe(v => s.update((v, s2.value)), exec_immediate=false)
+  s2.observe(v => s.update((s1.value, v)), exec_immediate=false)
   s
 }
 
@@ -447,9 +447,9 @@ pub fn[T : Eq, U : Eq, V : Eq] triple(
   s3 : Rsignal[V],
 ) -> Rsignal[(T, U, V)] {
   let s = new((s1.value, s2.value, s3.value))
-  s1.observe(v => s.update((v, s2.value, s3.value)), exec_effect=false)
-  s2.observe(v => s.update((s1.value, v, s3.value)), exec_effect=false)
-  s3.observe(v => s.update((s1.value, s2.value, v)), exec_effect=false)
+  s1.observe(v => s.update((v, s2.value, s3.value)), exec_immediate=false)
+  s2.observe(v => s.update((s1.value, v, s3.value)), exec_immediate=false)
+  s3.observe(v => s.update((s1.value, s2.value, v)), exec_immediate=false)
   s
 }
 
@@ -497,7 +497,7 @@ pub fn[T : Eq] all(signals : Array[Rsignal[T]]) -> Rsignal[Array[T]] {
         }
         s.update(vals)
       },
-      exec_effect=false,
+      exec_immediate=false,
     )
   }
   s
