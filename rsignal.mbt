@@ -1,25 +1,10 @@
 ///|
-/// Observer ID
-priv struct ObserverId(Int) derive(Eq, Hash)
-
-///|
 /// A reactive signal. Its changes/updates can be observed by its registered observers.
 struct Rsignal[T] {
   id : String // unique ID for this signal
   sub_id : () -> Int // for generating unique observer IDs
   mut value : T // any changes to this value will notify observers
   observers : @hashmap.HashMap[ObserverId, Observer[T]] // observers of this signal
-}
-
-///|
-struct Observer[T] {
-  id : ObserverId // unique ID for this observer, used to subscribe/unsubscribe
-  effect : (T) -> Unit // function to call when the signal changes
-}
-
-///|
-fn[T] Observer::effect(self : Observer[T], value : T) -> Unit {
-  (self.effect)(value)
 }
 
 ///|
@@ -110,9 +95,10 @@ fn[T] Rsignal::new_observer_id(self : Rsignal[T]) -> ObserverId {
 /// ```moonbit
 /// let values = []
 /// let signal = @rsignal.new(42)
-/// let _observer = signal.observe(fn(v) { values.push(v) })
+/// let observer = signal.observer(fn(v) { values.push(v) })
 /// signal.update(100)
 /// inspect(values, content="[42, 100]")
+/// inspect(observer.id(), content="ObserverId(0)")
 /// ```
 ///
 pub fn[T] Rsignal::observer(
