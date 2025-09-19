@@ -28,13 +28,3 @@ pub fn Window::beforeunload(
   let f = JsValue::to_jv(handler)
   beforeunload_ffi(self, f)
 }
-
-///|
-#external
-type ImageBitmap
-
-///|
-pub extern "js" fn Window::create_image_bitmap(
-  self : Window,
-  image : ImageData,
-) -> Promise[ImageBitmap] = "(self, image) => createImageBitmap(image)"
