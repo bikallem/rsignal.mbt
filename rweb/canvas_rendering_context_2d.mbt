@@ -40,11 +40,13 @@ pub fn CanvasRenderingContext2D::draw_image(
   sheight? : Int,
   dx? : Int = 0,
   dy? : Int = 0,
-  dwidth~ : Int,
-  dheight~ : Int,
+  dwidth? : Int,
+  dheight? : Int,
 ) -> Unit {
-  let swidth = if swidth is Some(w) { w } else { dwidth }
-  let sheight = if sheight is Some(h) { h } else { dheight }
+  let swidth = if swidth is Some(w) { w } else { image.width() }
+  let sheight = if sheight is Some(h) { h } else { image.height() }
+  let dwidth = if dwidth is Some(w) { w } else { swidth }
+  let dheight = if dheight is Some(w) { w } else { sheight }
   draw_image_ffi(
     self,
     image,

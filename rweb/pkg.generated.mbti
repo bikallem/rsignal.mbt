@@ -105,7 +105,7 @@ fn CSSStyleDeclaration::set_property(Self, String, String, priority? : String) -
 type CanvasRenderingContext2D
 fn CanvasRenderingContext2D::begin_path(Self) -> Unit
 fn CanvasRenderingContext2D::clear_rect(Self, Int, Int, Int, Int) -> Unit
-fn CanvasRenderingContext2D::draw_image(Self, HTMLImageElement, sx? : Int, sy? : Int, swidth? : Int, sheight? : Int, dx? : Int, dy? : Int, dwidth~ : Int, dheight~ : Int) -> Unit
+fn CanvasRenderingContext2D::draw_image(Self, HTMLImageElement, sx? : Int, sy? : Int, swidth? : Int, sheight? : Int, dx? : Int, dy? : Int, dwidth? : Int, dheight? : Int) -> Unit
 fn CanvasRenderingContext2D::fill_rect(Self, Int, Int, Int, Int) -> Unit
 fn CanvasRenderingContext2D::image_smoothing_enabled(Self) -> Bool
 fn CanvasRenderingContext2D::image_smoothing_quality(Self) -> String
