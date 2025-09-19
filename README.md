@@ -1,4 +1,8 @@
-# rsignal (alpha release) - previously known as reactive
+# rsignal 
+status - (alpha/experimental)
+
+NOTE: previously known as **reactive**
+
 `rsignal` is a reactive programming library for Moonbit. It is built with both web and terminal cli applications in mind. `rsignal` is short for `Reactive Signal`.
 
 At the core of the library is a type called `Rsignal`. Any changes/updates to a `Rsignal` can be observed by observers. Observers register to observe changes to `Rsignal`. Once registered, the observers are notified whenever a `Rsignal` is updated or modified. Observers can then initiate a change operation called `effect` based on these changes. A `Rsignal` can have many observers.
