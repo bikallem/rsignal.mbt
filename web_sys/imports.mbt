@@ -1,2 +1,2 @@
 ///|
-typealias @js_sys.(JsValue, JsObject, Promise)
+typealias @js_sys.(JsValue, JsObject, Promise, ArrayBuffer, Uint8ClampedArray)

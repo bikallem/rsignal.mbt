@@ -27,9 +27,6 @@ let window : Window
 // Errors
 
 // Types and methods
-type ArrayBuffer
-fn ArrayBuffer::to_jv(Self) -> @js_sys.JsValue
-
 type Attr
 fn Attr::name(Self) -> String
 fn Attr::owner_element(Self) -> Element?
@@ -131,14 +128,7 @@ impl TEventTarget for FileReader
 impl TJsValue for FileReader
 
 type FileReaderResult
-fn FileReaderResult::to_array_buffer(Self) -> ArrayBuffer
-
-#external
-pub type Float64Array
-fn Float64Array::new(ArrayBuffer, Int, Int) -> Self
-fn Float64Array::op_get(Self, Int) -> Double
-fn Float64Array::to_jv(Self) -> @js_sys.JsValue
-impl TTypedArray for Float64Array
+fn FileReaderResult::to_array_buffer(Self) -> @js_sys.ArrayBuffer
 
 type HTMLButtonElement
 fn HTMLButtonElement::disabled(Self) -> Bool
@@ -195,9 +185,9 @@ impl TNode for HTMLInputElement
 type ImageBitmap
 
 type ImageData
-fn ImageData::data(Self) -> Uint8ClampedArray
+fn ImageData::data(Self) -> @js_sys.Uint8ClampedArray
 fn ImageData::height(Self) -> Int
-fn ImageData::new(Uint8ClampedArray, Int, Int) -> Self
+fn ImageData::new(@js_sys.Uint8ClampedArray, Int, Int) -> Self
 fn ImageData::width(Self) -> Int
 
 type KeyboardEvent
@@ -226,33 +216,11 @@ type ProgressEvent
 impl TEvent for ProgressEvent
 impl TJsValue for ProgressEvent
 
-type Response
-fn Response::array_buffer(Self) -> @js_sys.Promise[ArrayBuffer]
-fn Response::ok(Self) -> Bool
-fn Response::status(Self) -> Int
-fn Response::status_text(Self) -> String
-fn Response::text(Self) -> @js_sys.Promise[String]
-
 type Text
 fn Text::whole_text(Self) -> String
 impl TEventTarget for Text
 impl TJsValue for Text
 impl TNode for Text
-
-#external
-pub type Uint8Array
-fn Uint8Array::byte_length(Self) -> Int
-fn Uint8Array::new(ArrayBuffer) -> Self
-fn Uint8Array::op_get(Self, Int) -> Int
-fn Uint8Array::set(Self, Self, Int) -> Unit
-fn Uint8Array::subarray(Self, Int, Int) -> Self
-fn Uint8Array::to_jv(Self) -> @js_sys.JsValue
-impl TTypedArray for Uint8Array
-
-#external
-pub type Uint8ClampedArray
-fn Uint8ClampedArray::new(Uint8Array) -> Self
-fn Uint8ClampedArray::to_jv(Self) -> @js_sys.JsValue
 
 type Window
 fn Window::beforeunload(Self, (BeforeUnloadEvent) -> Unit) -> Unit
@@ -268,7 +236,7 @@ pub(open) trait TBlob : TJsValue {
   type_(Self) -> String = _
   size(Self) -> Int = _
   slice(Self, Int, Int, String) -> Blob = _
-  array_buffer(Self) -> @js_sys.Promise[ArrayBuffer] = _
+  array_buffer(Self) -> @js_sys.Promise[@js_sys.ArrayBuffer] = _
   text(Self) -> @js_sys.Promise[String] = _
 }
 
@@ -362,8 +330,4 @@ impl TNode for Double
 impl TNode for String
 impl[T : Show] TNode for @rsignal.Rsignal[T]
 impl TNode for @bigint.BigInt
-
-pub(open) trait TTypedArray {
-  buffer(Self) -> ArrayBuffer
-}
 

@@ -19,21 +19,11 @@ fn class(String) -> @web_sys.Attr
 
 fn div(Array[&TAttachableNode]) -> @web_sys.HTMLDivElement
 
-fn dynamic_import(String) -> @js_sys.Promise[@js_sys.JsValue]
-
-fn fetch(String) -> @js_sys.Promise[@web_sys.Response]
-
-let globalThis : @js_sys.JsValue
-
 fn h(String, Array[&TAttachableNode]) -> @web_sys.Element
 
 fn id(String) -> @web_sys.Attr
 
 fn input(String, Array[&TAttachableNode]) -> @web_sys.HTMLInputElement
-
-fn log_js_value(&@web_sys.TJsValue) -> Unit
-
-fn log_str(String) -> Unit
 
 fn mount_to_body(&TAttachableNode) -> Unit
 
@@ -46,8 +36,6 @@ fn onclick((@web_sys.PointerEvent) -> Unit) -> EventHandlerAttr[@web_sys.Pointer
 fn span(Array[&TAttachableNode]) -> @web_sys.Element
 
 fn style(String) -> @web_sys.Attr
-
-fn[T] to_jv(T) -> @js_sys.JsValue
 
 // Errors
 
