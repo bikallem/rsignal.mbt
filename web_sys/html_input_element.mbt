@@ -18,15 +18,4 @@ pub impl TEventTarget for HTMLInputElement
 pub impl THTMLelement for HTMLInputElement
 
 ///|
-pub impl TAttachableNode for HTMLInputElement
-
-///|
 pub extern "js" fn HTMLInputElement::files(self : HTMLInputElement) -> FileList = "(self) => self.files"
-
-///|
-pub fn input(
-  type_ : String,
-  nodes : Array[&TAttachableNode],
-) -> HTMLInputElement {
-  h("input", [attr("type", type_)] + nodes).into()
-}

@@ -39,7 +39,7 @@ pub impl[T] TAttachableNode for EventHandlerAttr[T] with attach(
   self : EventHandlerAttr[T],
   parent : Element,
 ) -> Unit {
-  add_event_listener(parent, self.event_name, self.handler)
+  @web_sys.add_event_listener(parent, self.event_name, self.handler)
 }
 
 ///|

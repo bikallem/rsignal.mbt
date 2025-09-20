@@ -16,11 +16,3 @@ pub impl TElement for HTMLDivElement
 
 ///|
 pub impl THTMLelement for HTMLDivElement
-
-///|
-pub impl TAttachableNode for HTMLDivElement
-
-///|
-pub fn div(nodes : Array[&TAttachableNode]) -> HTMLDivElement {
-  h("div", nodes).into()
-}

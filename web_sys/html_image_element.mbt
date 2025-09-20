@@ -18,15 +18,20 @@ pub impl TElement for HTMLImageElement
 pub impl THTMLelement for HTMLImageElement
 
 ///|
-pub impl TAttachableNode for HTMLImageElement
-
-///|
 extern "js" fn image_ffi(width : JsValue, height : JsValue) -> HTMLImageElement = "(width, height) => new Image(width, height)"
 
 ///|
 pub fn HTMLImageElement::image(width? : Int, height? : Int) -> HTMLImageElement {
-  let width = if width is Some(w) { to_jv(w) } else { undefined }
-  let height = if height is Some(h) { to_jv(h) } else { undefined }
+  let width = if width is Some(w) {
+    JsValue::to_jv(w)
+  } else {
+    @js_sys.undefined
+  }
+  let height = if height is Some(h) {
+    JsValue::to_jv(h)
+  } else {
+    @js_sys.undefined
+  }
   image_ffi(width, height)
 }
 

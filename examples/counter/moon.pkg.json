@@ -2,6 +2,7 @@
   "is-main": true,
   "import": [
     "bikallem/rsignal/",
-    "bikallem/rsignal/rweb"
+    "bikallem/rsignal/rweb",
+    "bikallem/rsignal/web_sys"
   ]
 }

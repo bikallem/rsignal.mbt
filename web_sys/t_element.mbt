@@ -38,14 +38,8 @@ impl TElement with set_attribute(self : Self, name : String, value : String) -> 
 }
 
 ///|
-extern "js" fn set_attribute_node_ffi(
-  element : JsValue,
-  attr : JsValue,
-) -> Unit = "(self, attr) => self.setAttributeNode(attr)"
-
-///|
 impl TElement with set_attribute_node(self : Self, attr : Attr) -> Unit {
-  set_attribute_node_ffi(self.to_jv(), attr.to_jv())
+  @ffi.set_attribute_node(self.to_jv(), attr.to_jv())
 }
 
 ///|

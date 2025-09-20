@@ -3,6 +3,9 @@
     "js"
   ],
   "import": [
-    "bikallem/rsignal"
+    "bikallem/rsignal",
+    "bikallem/rsignal/web_sys",
+    "bikallem/rsignal/internal/ffi",
+    "bikallem/rsignal/js_sys"
   ]
 }

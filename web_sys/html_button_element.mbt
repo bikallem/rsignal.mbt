@@ -15,9 +15,6 @@ pub impl TElement for HTMLButtonElement
 pub impl TEventTarget for HTMLButtonElement
 
 ///|
-pub impl TAttachableNode for HTMLButtonElement
-
-///|
 pub extern "js" fn HTMLButtonElement::disabled(
   self : HTMLButtonElement,
 ) -> Bool = "(self) => self.disabled"
@@ -45,11 +42,3 @@ pub extern "js" fn HTMLButtonElement::set_value(
   self : HTMLButtonElement,
   value : String,
 ) -> Unit = "(self, value) => self.value = value"
-
-///|
-pub fn button(
-  label : String,
-  nodes : Array[&TAttachableNode],
-) -> HTMLButtonElement {
-  h("button", [label] + nodes).into()
-}

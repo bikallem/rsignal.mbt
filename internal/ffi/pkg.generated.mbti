@@ -1,0 +1,20 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/rsignal/internal/ffi"
+
+import(
+  "bikallem/rsignal/js_sys"
+)
+
+// Values
+fn add_event_listener(@js_sys.JsValue, String, @js_sys.JsValue, Bool) -> Unit
+
+fn set_attribute_node(@js_sys.JsValue, @js_sys.JsValue) -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

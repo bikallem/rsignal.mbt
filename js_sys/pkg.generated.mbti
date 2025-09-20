@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bikallem/rsignal/js_sys"
+
+// Values
+fn async_run(async () -> Unit noraise) -> Unit
+
+let null : JsValue
+
+let undefined : JsValue
+
+// Errors
+
+// Types and methods
+type JsObject
+fn[T] JsObject::get(Self, String) -> T
+fn JsObject::new() -> Self
+fn JsObject::set(Self, String, JsValue) -> Unit
+fn JsObject::to_jv(Self) -> JsValue
+
+type JsValue
+fn JsValue::define_property(Self, String, Self) -> Unit
+fn JsValue::is_none(Self) -> Bool
+fn JsValue::is_null(Self) -> Bool
+fn JsValue::is_undefined(Self) -> Bool
+fn[T] JsValue::of_jv(Self) -> T
+fn[T] JsValue::to_jv(T) -> Self
+fn[T] JsValue::to_option(Self) -> T?
+fn[T] JsValue::unwrap(Self) -> T
+
+type Promise[T]
+fn[A, B] Promise::map(Self[A], (A) -> B) -> Self[B]
+fn[T] Promise::new(((T) -> Unit, (Error) -> Unit) -> Unit) -> Self[T]
+fn[A] Promise::resolve(A) -> Self[A]
+fn[A, B] Promise::then(Self[A], (A) -> Self[B]) -> Self[B]
+async fn[T] Promise::wait(Self[T]) -> T
+
+// Type aliases
+
+// Traits
+pub(open) trait TJsValue {
+  to_jv(Self) -> JsValue
+}
+

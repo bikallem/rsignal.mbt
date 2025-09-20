@@ -1,0 +1,36 @@
+///|
+/// JavaScript Attr Object - https://developer.mozilla.org/en-US/docs/Web/API/Attr
+#external
+type Attr
+
+///|
+pub extern "js" fn Attr::name(self : Attr) -> String = "(self) => self.name"
+
+///|
+pub extern "js" fn Attr::value(self : Attr) -> String = "(self) => self.value"
+
+///|
+extern "js" fn Attr::set_value_ffi(self : Attr, value : String) -> Unit = "(self, value) => self.value = value"
+
+///|
+/// Set the value of an attribute
+pub fn[T : Show] Attr::set_value(self : Attr, value : T) -> Unit {
+  self.set_value_ffi(value.to_string())
+}
+
+///|
+extern "js" fn owner_element_ffi(attr : Attr) -> JsValue = "(attr) => attr.ownerElement"
+
+///|
+pub fn Attr::owner_element(self : Attr) -> Element? {
+  JsValue::to_option(owner_element_ffi(self))
+}
+
+///|
+pub impl TJsValue for Attr with to_jv(self : Attr) -> JsValue = "%identity"
+
+///|
+pub impl TNode for Attr
+
+///|
+pub impl TEventTarget for Attr

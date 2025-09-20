@@ -15,9 +15,6 @@ pub impl TElement for HTMLCanvasElement
 pub impl TEventTarget for HTMLCanvasElement
 
 ///|
-pub impl TAttachableNode for HTMLCanvasElement
-
-///|
 pub impl THTMLelement for HTMLCanvasElement
 
 ///|
@@ -37,8 +34,3 @@ pub extern "js" fn HTMLCanvasElement::set_height(
   self : HTMLCanvasElement,
   height : Int,
 ) -> Unit = "(self, height) => self.height = height"
-
-///|
-pub fn canvas(nodes : Array[&TAttachableNode]) -> HTMLCanvasElement {
-  h("canvas", nodes).into()
-}

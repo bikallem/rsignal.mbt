@@ -1,0 +1,5 @@
+{
+    "import": [
+        "bikallem/rsignal/js_sys"
+    ]
+}
