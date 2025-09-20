@@ -12,13 +12,13 @@ pub fn[T : TAttrValue] attr(name : String, v : T) -> Attr {
 
 ///|
 /// id attribute
-pub fn id(id : String) -> Attr {
+pub fn[T : TAttrValue] id(id : T) -> Attr {
   attr("id", id)
 }
 
 ///|
 /// class attribute
-pub fn class(class : String) -> Attr {
+pub fn[T : TAttrValue] class(class : T) -> Attr {
   attr("class", class)
 }
 

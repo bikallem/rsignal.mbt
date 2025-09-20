@@ -15,13 +15,13 @@ fn button(String, Array[&TAttachableNode]) -> @web_sys.HTMLButtonElement
 
 fn canvas(Array[&TAttachableNode]) -> @web_sys.HTMLCanvasElement
 
-fn class(String) -> @web_sys.Attr
+fn[T : TAttrValue] class(T) -> @web_sys.Attr
 
 fn div(Array[&TAttachableNode]) -> @web_sys.HTMLDivElement
 
 fn h(String, Array[&TAttachableNode]) -> @web_sys.Element
 
-fn id(String) -> @web_sys.Attr
+fn[T : TAttrValue] id(T) -> @web_sys.Attr
 
 fn input(String, Array[&TAttachableNode]) -> @web_sys.HTMLInputElement
 
