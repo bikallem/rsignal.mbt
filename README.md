@@ -13,7 +13,7 @@ A simple **counter** app in `rsignal`:
 fnalias @rweb.(div, button, on, h, attr, bool_attr, onclick)
 
 ///|
-fn counter(initial_count : Int) -> @rweb.HTMLDivElement {
+fn counter(initial_count : Int) -> @web_sys.HTMLDivElement {
   // count keeps track of the count value.
   let count = @rsignal.new(initial_count)
 
@@ -22,7 +22,7 @@ fn counter(initial_count : Int) -> @rweb.HTMLDivElement {
     (if count >= 5 { "green" } else if count == 0 { "red" } else { "" }))
 
   // Different ways to create event handlers
-  let decrement = on("click", fn(_ : @rweb.PointerEvent) {
+  let decrement = on("click", fn(_ : @web_sys.PointerEvent) {
     count.update(count.val() - 1)
   })
   let increment = _ => count.update(count.val() + 1)
@@ -51,6 +51,7 @@ fn main {
   let el = counter(0)
   @rweb.mount_to_body(el)
 }
+
 ```
 
 ## Add to your project
