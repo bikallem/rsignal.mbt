@@ -8,6 +8,7 @@ fmt:
 
 build:
 	moon build
+	moon build -C examples/counter
 
 info:
 	moon info 
