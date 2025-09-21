@@ -35,7 +35,7 @@ fn onclick((@web_sys.PointerEvent) -> Unit) -> EventHandlerAttr[@web_sys.Pointer
 
 fn span(Array[&TAttachableNode]) -> @web_sys.Element
 
-fn style(String) -> @web_sys.Attr
+fn[T : TAttrValue] style(T) -> @web_sys.Attr
 
 // Errors
 
@@ -57,6 +57,14 @@ impl[T] TAttachableNode for EventHandlerAttr[T]
 impl[T] @web_sys.TEventTarget for EventHandlerAttr[T]
 impl[T] @web_sys.TJsValue for EventHandlerAttr[T]
 impl[T] @web_sys.TNode for EventHandlerAttr[T]
+
+type Styles
+fn Styles::add(Self, String, String) -> Self
+fn Styles::new(Map[String, String]) -> Self
+fn Styles::remove(Self, String) -> Self
+impl TAttrValue for Styles
+impl Eq for Styles
+impl Show for Styles
 
 // Type aliases
 

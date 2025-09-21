@@ -24,6 +24,6 @@ pub fn[T : TAttrValue] class(class : T) -> Attr {
 
 ///|
 /// style attribute
-pub fn style(style : String) -> Attr {
+pub fn[T : TAttrValue] style(style : T) -> Attr {
   attr("style", style)
 }
