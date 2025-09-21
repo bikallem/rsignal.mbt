@@ -12,14 +12,21 @@ fn counter(initial_count : Int) -> @web_sys.HTMLDivElement {
   let count_rs : Rsignal[Int] = @rsignal.new(initial_count) // count rsignal keeps track of the count value.
   let count_style_rs : Rsignal[Styles] = { // Derived - mapped -  signal from `count_rs`
     let styles = Styles::new({})
-    count_rs.map(count => if count > 5 {
-      styles.add("color", "green")
-    } else if count == 0 {
-      styles.add("color", "red")
-    } else {
-      styles
+    count_rs.map(fn(count) {
+      let color = if count > 5 {
+        "green"
+      } else if count == 0 {
+        "red"
+      } else {
+        ""
+      }
+      styles.add("color", color)
     })
   }
+  let show_hide_reset = count_rs.map(fn(count) {
+    let display = if count == initial_count { "none" } else { "inherit" }
+    "display: \{display}"
+  })
 
   // Different ways to create event handlers
   let decrement = on("click", fn(_ : @web_sys.PointerEvent) {
@@ -35,10 +42,7 @@ fn counter(initial_count : Int) -> @web_sys.HTMLDivElement {
       button("-", [disabled(rs=count_rs.map(count => count == 0)), decrement]),
       h("span", [style(count_style_rs), count_rs]), // Display the current count with dynamic color
       button("+", [onclick(increment)]),
-      button("Reset", [
-        disabled(rs=count_rs.map(count => count == initial_count)),
-        reset,
-      ]),
+      button("Reset", [style(show_hide_reset), reset]),
     ]),
   ])
 }
