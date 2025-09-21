@@ -5,7 +5,7 @@ pub fn mount_to_body(element : &TAttachableNode) -> Unit {
 
 ///|
 pub fn button(
-  label : String,
+  label : &TAttachableNode,
   nodes : Array[&TAttachableNode],
 ) -> HTMLButtonElement {
   h("button", [label] + nodes).into()

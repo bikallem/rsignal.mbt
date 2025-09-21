@@ -11,7 +11,7 @@ import(
 // Values
 fn[T : TAttrValue] attr(String, T) -> @web_sys.Attr
 
-fn button(String, Array[&TAttachableNode]) -> @web_sys.HTMLButtonElement
+fn button(&TAttachableNode, Array[&TAttachableNode]) -> @web_sys.HTMLButtonElement
 
 fn canvas(Array[&TAttachableNode]) -> @web_sys.HTMLCanvasElement
 
