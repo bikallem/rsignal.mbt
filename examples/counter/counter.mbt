@@ -1,5 +1,5 @@
 ///|
-fnalias @rweb.(div, button, on, h, attr, bool_attr, onclick, style)
+fnalias @rweb.(div, button, on, h, attr, onclick, style, disabled)
 
 ///|
 typealias @rweb.Styles
@@ -32,14 +32,11 @@ fn counter(initial_count : Int) -> @web_sys.HTMLDivElement {
     h("h2", ["The Greatest Counter Ever!"]),
     div([
       attr("style", "display: flex; flex-direction: row; column-gap: 1em;"),
-      button("-", [
-        bool_attr("disabled", rs=count_rs.map(count => count == 0)),
-        decrement,
-      ]),
+      button("-", [disabled(rs=count_rs.map(count => count == 0)), decrement]),
       h("span", [style(count_style_rs), count_rs]), // Display the current count with dynamic color
       button("+", [onclick(increment)]),
       button("Reset", [
-        bool_attr("disabled", rs=count_rs.map(count => count == initial_count)),
+        disabled(rs=count_rs.map(count => count == initial_count)),
         reset,
       ]),
     ]),

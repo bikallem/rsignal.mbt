@@ -45,3 +45,13 @@ pub impl TAttachableNode for BoolAttr with attach(
     parent.remove_attribute_node(self.attr)
   })
 }
+
+///|
+pub fn disabled(rs? : @rsignal.Rsignal[Bool]) -> BoolAttr {
+  bool_attr("disabled", rs?)
+}
+
+///|
+pub fn checked(rs? : @rsignal.Rsignal[Bool]) -> BoolAttr {
+  bool_attr("checked", rs?)
+}

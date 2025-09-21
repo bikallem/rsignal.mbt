@@ -15,7 +15,11 @@ fn button(String, Array[&TAttachableNode]) -> @web_sys.HTMLButtonElement
 
 fn canvas(Array[&TAttachableNode]) -> @web_sys.HTMLCanvasElement
 
+fn checked(rs? : @rsignal.Rsignal[Bool]) -> BoolAttr
+
 fn[T : TAttrValue] class(T) -> @web_sys.Attr
+
+fn disabled(rs? : @rsignal.Rsignal[Bool]) -> BoolAttr
 
 fn div(Array[&TAttachableNode]) -> @web_sys.HTMLDivElement
 
