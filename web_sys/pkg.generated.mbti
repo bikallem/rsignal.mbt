@@ -28,20 +28,40 @@ let window : Window
 
 // Types and methods
 type Attr
+fn Attr::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
+fn Attr::append_child(Self, &TNode) -> Unit // from trait `TNode`
 fn Attr::name(Self) -> String
+fn Attr::node_name(Self) -> String // from trait `TNode`
+fn Attr::node_type(Self) -> Int // from trait `TNode`
 fn Attr::owner_element(Self) -> Element?
+fn Attr::set_text_content(Self, &Show) -> Unit // from trait `TNode`
 fn[T : Show] Attr::set_value(Self, T) -> Unit
+fn Attr::text_content(Self) -> String // from trait `TNode`
+fn Attr::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
 fn Attr::value(Self) -> String
 impl TEventTarget for Attr
 impl TJsValue for Attr
 impl TNode for Attr
 
 type BeforeUnloadEvent
+fn BeforeUnloadEvent::current_target(Self) -> EventTarget // from trait `TEvent`
+fn BeforeUnloadEvent::prevent_default(Self) -> Unit // from trait `TEvent`
+fn BeforeUnloadEvent::stop_immediate_propagation(Self) -> Unit // from trait `TEvent`
+fn BeforeUnloadEvent::stop_propagation(Self) -> Unit // from trait `TEvent`
+fn BeforeUnloadEvent::target(Self) -> EventTarget // from trait `TEvent`
+fn BeforeUnloadEvent::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn BeforeUnloadEvent::type_(Self) -> String // from trait `TEvent`
 impl TEvent for BeforeUnloadEvent
 impl TJsValue for BeforeUnloadEvent
 
 type Blob
+fn Blob::array_buffer(Self) -> @js_sys.Promise[@js_sys.ArrayBuffer] // from trait `TBlob`
 fn Blob::new(Array[@js_sys.JsValue], @js_sys.JsObject) -> Self
+fn Blob::size(Self) -> Int // from trait `TBlob`
+fn Blob::slice(Self, Int, Int, String) -> Self // from trait `TBlob`
+fn Blob::text(Self) -> @js_sys.Promise[String] // from trait `TBlob`
+fn Blob::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn Blob::type_(Self) -> String // from trait `TBlob`
 impl TBlob for Blob
 impl TJsValue for Blob
 
@@ -77,36 +97,75 @@ fn DOMRect::top(Self) -> Double
 fn DOMRect::width(Self) -> Double
 
 type Document
+fn Document::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
+fn Document::append_child(Self, &TNode) -> Unit // from trait `TNode`
 fn Document::body(Self) -> Element
 fn Document::create_attribute(Self, String) -> Attr
 fn Document::create_element(Self, String) -> Element
 fn[T : Show] Document::create_text_node(Self, T) -> Text
 fn Document::get_element_by_id(Self, String) -> Element?
+fn Document::node_name(Self) -> String // from trait `TNode`
+fn Document::node_type(Self) -> Int // from trait `TNode`
+fn Document::set_text_content(Self, &Show) -> Unit // from trait `TNode`
+fn Document::text_content(Self) -> String // from trait `TNode`
+fn Document::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
 impl TEventTarget for Document
 impl TJsValue for Document
 impl TNode for Document
 
 type Element
+fn Element::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
+fn Element::append_child(Self, &TNode) -> Unit // from trait `TNode`
+fn Element::get_bounding_client_rect(Self) -> DOMRect // from trait `TElement`
 fn[T : TElement] Element::into(Self) -> T
+fn Element::node_name(Self) -> String // from trait `TNode`
+fn Element::node_type(Self) -> Int // from trait `TNode`
+fn Element::onclick(Self, (PointerEvent) -> Unit) -> Unit // from trait `TElement`
+fn Element::onkeydown(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn Element::onkeyup(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn Element::onmousedown(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn Element::onmousemove(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn Element::onmouseup(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn Element::remove_attribute_node(Self, Attr) -> Unit // from trait `TElement`
+fn Element::set_attribute(Self, String, String) -> Unit // from trait `TElement`
+fn Element::set_attribute_node(Self, Attr) -> Unit // from trait `TElement`
+fn Element::set_text_content(Self, &Show) -> Unit // from trait `TNode`
+fn Element::tag_name(Self) -> String // from trait `TElement`
+fn Element::text_content(Self) -> String // from trait `TNode`
+fn Element::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn Element::toggle_attribute(Self, String, Bool) -> Unit // from trait `TElement`
 impl TElement for Element
 impl TEventTarget for Element
 impl TJsValue for Element
 impl TNode for Element
 
 type Event
+fn Event::current_target(Self) -> EventTarget // from trait `TEvent`
 fn[T : TEvent] Event::into(Self) -> T
+fn Event::prevent_default(Self) -> Unit // from trait `TEvent`
+fn Event::stop_immediate_propagation(Self) -> Unit // from trait `TEvent`
+fn Event::stop_propagation(Self) -> Unit // from trait `TEvent`
+fn Event::target(Self) -> EventTarget // from trait `TEvent`
+fn Event::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn Event::type_(Self) -> String // from trait `TEvent`
 impl TEvent for Event
 impl TJsValue for Event
 
 type EventTarget
+fn EventTarget::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
 fn[T : TEventTarget] EventTarget::into(Self) -> T
+fn EventTarget::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
 impl TEventTarget for EventTarget
 impl TJsValue for EventTarget
 
 type File
+fn File::array_buffer(Self) -> @js_sys.Promise[@js_sys.ArrayBuffer] // from trait `TBlob`
 fn File::last_modified(Self) -> Int
 fn File::name(Self) -> String
 fn File::size(Self) -> Int
+fn File::slice(Self, Int, Int, String) -> Blob // from trait `TBlob`
+fn File::text(Self) -> @js_sys.Promise[String] // from trait `TBlob`
+fn File::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
 fn File::type_(Self) -> String
 fn File::webkit_relative_path(Self) -> String
 impl TBlob for File
@@ -117,6 +176,7 @@ fn FileList::item(Self, Int) -> File?
 fn FileList::length(Self) -> Int
 
 type FileReader
+fn FileReader::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
 fn FileReader::new() -> Self
 fn FileReader::onerror(Self, (ProgressEvent) -> Unit) -> Unit
 fn FileReader::onload(Self, (ProgressEvent) -> Unit) -> Unit
@@ -124,6 +184,7 @@ fn FileReader::read_as_array_buffer(Self, &TBlob) -> Unit
 fn FileReader::read_as_data_url(Self, &TBlob) -> Unit
 fn FileReader::read_as_text(Self, &TBlob, encoding? : String) -> Unit
 fn FileReader::result(Self) -> FileReaderResult
+fn FileReader::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
 impl TEventTarget for FileReader
 impl TJsValue for FileReader
 
@@ -131,11 +192,30 @@ type FileReaderResult
 fn FileReaderResult::to_array_buffer(Self) -> @js_sys.ArrayBuffer
 
 type HTMLButtonElement
+fn HTMLButtonElement::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
+fn HTMLButtonElement::append_child(Self, &TNode) -> Unit // from trait `TNode`
 fn HTMLButtonElement::disabled(Self) -> Bool
+fn HTMLButtonElement::get_bounding_client_rect(Self) -> DOMRect // from trait `TElement`
 fn HTMLButtonElement::name(Self) -> String
+fn HTMLButtonElement::node_name(Self) -> String // from trait `TNode`
+fn HTMLButtonElement::node_type(Self) -> Int // from trait `TNode`
+fn HTMLButtonElement::onclick(Self, (PointerEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLButtonElement::onkeydown(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLButtonElement::onkeyup(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLButtonElement::onmousedown(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLButtonElement::onmousemove(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLButtonElement::onmouseup(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLButtonElement::remove_attribute_node(Self, Attr) -> Unit // from trait `TElement`
+fn HTMLButtonElement::set_attribute(Self, String, String) -> Unit // from trait `TElement`
+fn HTMLButtonElement::set_attribute_node(Self, Attr) -> Unit // from trait `TElement`
 fn HTMLButtonElement::set_disabled(Self, Bool) -> Unit
 fn HTMLButtonElement::set_name(Self, String) -> Unit
+fn HTMLButtonElement::set_text_content(Self, &Show) -> Unit // from trait `TNode`
 fn HTMLButtonElement::set_value(Self, String) -> Unit
+fn HTMLButtonElement::tag_name(Self) -> String // from trait `TElement`
+fn HTMLButtonElement::text_content(Self) -> String // from trait `TNode`
+fn HTMLButtonElement::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn HTMLButtonElement::toggle_attribute(Self, String, Bool) -> Unit // from trait `TElement`
 fn HTMLButtonElement::value(Self) -> String
 impl TElement for HTMLButtonElement
 impl TEventTarget for HTMLButtonElement
@@ -143,10 +223,32 @@ impl TJsValue for HTMLButtonElement
 impl TNode for HTMLButtonElement
 
 type HTMLCanvasElement
+fn HTMLCanvasElement::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
+fn HTMLCanvasElement::append_child(Self, &TNode) -> Unit // from trait `TNode`
 fn HTMLCanvasElement::get_2d_context(Self) -> CanvasRenderingContext2D
+fn HTMLCanvasElement::get_bounding_client_rect(Self) -> DOMRect // from trait `TElement`
 fn HTMLCanvasElement::height(Self) -> Int
+fn HTMLCanvasElement::node_name(Self) -> String // from trait `TNode`
+fn HTMLCanvasElement::node_type(Self) -> Int // from trait `TNode`
+fn HTMLCanvasElement::onchange(Self, (Event) -> Unit) -> Unit // from trait `THTMLelement`
+fn HTMLCanvasElement::onclick(Self, (PointerEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLCanvasElement::onkeydown(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLCanvasElement::onkeyup(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLCanvasElement::onload(Self, (Event) -> Unit) -> Unit // from trait `THTMLelement`
+fn HTMLCanvasElement::onmousedown(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLCanvasElement::onmousemove(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLCanvasElement::onmouseup(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLCanvasElement::remove_attribute_node(Self, Attr) -> Unit // from trait `TElement`
+fn HTMLCanvasElement::set_attribute(Self, String, String) -> Unit // from trait `TElement`
+fn HTMLCanvasElement::set_attribute_node(Self, Attr) -> Unit // from trait `TElement`
 fn HTMLCanvasElement::set_height(Self, Int) -> Unit
+fn HTMLCanvasElement::set_text_content(Self, &Show) -> Unit // from trait `TNode`
 fn HTMLCanvasElement::set_width(Self, Int) -> Unit
+fn HTMLCanvasElement::style(Self) -> CSSStyleDeclaration // from trait `THTMLelement`
+fn HTMLCanvasElement::tag_name(Self) -> String // from trait `TElement`
+fn HTMLCanvasElement::text_content(Self) -> String // from trait `TNode`
+fn HTMLCanvasElement::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn HTMLCanvasElement::toggle_attribute(Self, String, Bool) -> Unit // from trait `TElement`
 fn HTMLCanvasElement::width(Self) -> Int
 impl TElement for HTMLCanvasElement
 impl TEventTarget for HTMLCanvasElement
@@ -155,6 +257,28 @@ impl TJsValue for HTMLCanvasElement
 impl TNode for HTMLCanvasElement
 
 type HTMLDivElement
+fn HTMLDivElement::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
+fn HTMLDivElement::append_child(Self, &TNode) -> Unit // from trait `TNode`
+fn HTMLDivElement::get_bounding_client_rect(Self) -> DOMRect // from trait `TElement`
+fn HTMLDivElement::node_name(Self) -> String // from trait `TNode`
+fn HTMLDivElement::node_type(Self) -> Int // from trait `TNode`
+fn HTMLDivElement::onchange(Self, (Event) -> Unit) -> Unit // from trait `THTMLelement`
+fn HTMLDivElement::onclick(Self, (PointerEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLDivElement::onkeydown(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLDivElement::onkeyup(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLDivElement::onload(Self, (Event) -> Unit) -> Unit // from trait `THTMLelement`
+fn HTMLDivElement::onmousedown(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLDivElement::onmousemove(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLDivElement::onmouseup(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLDivElement::remove_attribute_node(Self, Attr) -> Unit // from trait `TElement`
+fn HTMLDivElement::set_attribute(Self, String, String) -> Unit // from trait `TElement`
+fn HTMLDivElement::set_attribute_node(Self, Attr) -> Unit // from trait `TElement`
+fn HTMLDivElement::set_text_content(Self, &Show) -> Unit // from trait `TNode`
+fn HTMLDivElement::style(Self) -> CSSStyleDeclaration // from trait `THTMLelement`
+fn HTMLDivElement::tag_name(Self) -> String // from trait `TElement`
+fn HTMLDivElement::text_content(Self) -> String // from trait `TNode`
+fn HTMLDivElement::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn HTMLDivElement::toggle_attribute(Self, String, Bool) -> Unit // from trait `TElement`
 impl TElement for HTMLDivElement
 impl TEventTarget for HTMLDivElement
 impl THTMLelement for HTMLDivElement
@@ -162,11 +286,33 @@ impl TJsValue for HTMLDivElement
 impl TNode for HTMLDivElement
 
 type HTMLImageElement
+fn HTMLImageElement::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
+fn HTMLImageElement::append_child(Self, &TNode) -> Unit // from trait `TNode`
+fn HTMLImageElement::get_bounding_client_rect(Self) -> DOMRect // from trait `TElement`
 fn HTMLImageElement::height(Self) -> Int
 fn HTMLImageElement::image(width? : Int, height? : Int) -> Self
 fn HTMLImageElement::natural_height(Self) -> Int
 fn HTMLImageElement::natural_width(Self) -> Int
+fn HTMLImageElement::node_name(Self) -> String // from trait `TNode`
+fn HTMLImageElement::node_type(Self) -> Int // from trait `TNode`
+fn HTMLImageElement::onchange(Self, (Event) -> Unit) -> Unit // from trait `THTMLelement`
+fn HTMLImageElement::onclick(Self, (PointerEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLImageElement::onkeydown(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLImageElement::onkeyup(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLImageElement::onload(Self, (Event) -> Unit) -> Unit // from trait `THTMLelement`
+fn HTMLImageElement::onmousedown(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLImageElement::onmousemove(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLImageElement::onmouseup(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLImageElement::remove_attribute_node(Self, Attr) -> Unit // from trait `TElement`
+fn HTMLImageElement::set_attribute(Self, String, String) -> Unit // from trait `TElement`
+fn HTMLImageElement::set_attribute_node(Self, Attr) -> Unit // from trait `TElement`
 fn HTMLImageElement::set_src(Self, String) -> Unit
+fn HTMLImageElement::set_text_content(Self, &Show) -> Unit // from trait `TNode`
+fn HTMLImageElement::style(Self) -> CSSStyleDeclaration // from trait `THTMLelement`
+fn HTMLImageElement::tag_name(Self) -> String // from trait `TElement`
+fn HTMLImageElement::text_content(Self) -> String // from trait `TNode`
+fn HTMLImageElement::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn HTMLImageElement::toggle_attribute(Self, String, Bool) -> Unit // from trait `TElement`
 fn HTMLImageElement::width(Self) -> Int
 impl TElement for HTMLImageElement
 impl TEventTarget for HTMLImageElement
@@ -175,7 +321,29 @@ impl TJsValue for HTMLImageElement
 impl TNode for HTMLImageElement
 
 type HTMLInputElement
+fn HTMLInputElement::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
+fn HTMLInputElement::append_child(Self, &TNode) -> Unit // from trait `TNode`
 fn HTMLInputElement::files(Self) -> FileList
+fn HTMLInputElement::get_bounding_client_rect(Self) -> DOMRect // from trait `TElement`
+fn HTMLInputElement::node_name(Self) -> String // from trait `TNode`
+fn HTMLInputElement::node_type(Self) -> Int // from trait `TNode`
+fn HTMLInputElement::onchange(Self, (Event) -> Unit) -> Unit // from trait `THTMLelement`
+fn HTMLInputElement::onclick(Self, (PointerEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLInputElement::onkeydown(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLInputElement::onkeyup(Self, (KeyboardEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLInputElement::onload(Self, (Event) -> Unit) -> Unit // from trait `THTMLelement`
+fn HTMLInputElement::onmousedown(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLInputElement::onmousemove(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLInputElement::onmouseup(Self, (MouseEvent) -> Unit) -> Unit // from trait `TElement`
+fn HTMLInputElement::remove_attribute_node(Self, Attr) -> Unit // from trait `TElement`
+fn HTMLInputElement::set_attribute(Self, String, String) -> Unit // from trait `TElement`
+fn HTMLInputElement::set_attribute_node(Self, Attr) -> Unit // from trait `TElement`
+fn HTMLInputElement::set_text_content(Self, &Show) -> Unit // from trait `TNode`
+fn HTMLInputElement::style(Self) -> CSSStyleDeclaration // from trait `THTMLelement`
+fn HTMLInputElement::tag_name(Self) -> String // from trait `TElement`
+fn HTMLInputElement::text_content(Self) -> String // from trait `TNode`
+fn HTMLInputElement::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn HTMLInputElement::toggle_attribute(Self, String, Bool) -> Unit // from trait `TElement`
 impl TElement for HTMLInputElement
 impl TEventTarget for HTMLInputElement
 impl THTMLelement for HTMLInputElement
@@ -194,38 +362,87 @@ type KeyboardEvent
 fn KeyboardEvent::alt_key(Self) -> Bool
 fn KeyboardEvent::code(Self) -> String
 fn KeyboardEvent::ctrl_key(Self) -> Bool
+fn KeyboardEvent::current_target(Self) -> EventTarget // from trait `TEvent`
 fn KeyboardEvent::key(Self) -> String
 fn KeyboardEvent::meta_key(Self) -> Bool
+fn KeyboardEvent::prevent_default(Self) -> Unit // from trait `TEvent`
 fn KeyboardEvent::repeat(Self) -> Bool
 fn KeyboardEvent::shift_key(Self) -> Bool
+fn KeyboardEvent::stop_immediate_propagation(Self) -> Unit // from trait `TEvent`
+fn KeyboardEvent::stop_propagation(Self) -> Unit // from trait `TEvent`
+fn KeyboardEvent::target(Self) -> EventTarget // from trait `TEvent`
+fn KeyboardEvent::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn KeyboardEvent::type_(Self) -> String // from trait `TEvent`
 impl TEvent for KeyboardEvent
 impl TJsValue for KeyboardEvent
 
 type MouseEvent
+fn MouseEvent::alt_key(Self) -> Bool // from trait `TMouseEvent`
+fn MouseEvent::client_x(Self) -> Double // from trait `TMouseEvent`
+fn MouseEvent::client_y(Self) -> Double // from trait `TMouseEvent`
+fn MouseEvent::ctrl_key(Self) -> Bool // from trait `TMouseEvent`
+fn MouseEvent::current_target(Self) -> EventTarget // from trait `TEvent`
+fn MouseEvent::meta_key(Self) -> Bool // from trait `TMouseEvent`
+fn MouseEvent::prevent_default(Self) -> Unit // from trait `TEvent`
+fn MouseEvent::shift_key(Self) -> Bool // from trait `TMouseEvent`
+fn MouseEvent::stop_immediate_propagation(Self) -> Unit // from trait `TEvent`
+fn MouseEvent::stop_propagation(Self) -> Unit // from trait `TEvent`
+fn MouseEvent::target(Self) -> EventTarget // from trait `TEvent`
+fn MouseEvent::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn MouseEvent::type_(Self) -> String // from trait `TEvent`
 impl TEvent for MouseEvent
 impl TJsValue for MouseEvent
 impl TMouseEvent for MouseEvent
 
 type PointerEvent
+fn PointerEvent::alt_key(Self) -> Bool // from trait `TMouseEvent`
+fn PointerEvent::client_x(Self) -> Double // from trait `TMouseEvent`
+fn PointerEvent::client_y(Self) -> Double // from trait `TMouseEvent`
+fn PointerEvent::ctrl_key(Self) -> Bool // from trait `TMouseEvent`
+fn PointerEvent::current_target(Self) -> EventTarget // from trait `TEvent`
 fn PointerEvent::from_event(&TEvent) -> Self
+fn PointerEvent::meta_key(Self) -> Bool // from trait `TMouseEvent`
+fn PointerEvent::prevent_default(Self) -> Unit // from trait `TEvent`
+fn PointerEvent::shift_key(Self) -> Bool // from trait `TMouseEvent`
+fn PointerEvent::stop_immediate_propagation(Self) -> Unit // from trait `TEvent`
+fn PointerEvent::stop_propagation(Self) -> Unit // from trait `TEvent`
+fn PointerEvent::target(Self) -> EventTarget // from trait `TEvent`
+fn PointerEvent::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn PointerEvent::type_(Self) -> String // from trait `TEvent`
 impl TEvent for PointerEvent
 impl TJsValue for PointerEvent
 impl TMouseEvent for PointerEvent
 
 type ProgressEvent
+fn ProgressEvent::current_target(Self) -> EventTarget // from trait `TEvent`
+fn ProgressEvent::prevent_default(Self) -> Unit // from trait `TEvent`
+fn ProgressEvent::stop_immediate_propagation(Self) -> Unit // from trait `TEvent`
+fn ProgressEvent::stop_propagation(Self) -> Unit // from trait `TEvent`
+fn ProgressEvent::target(Self) -> EventTarget // from trait `TEvent`
+fn ProgressEvent::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
+fn ProgressEvent::type_(Self) -> String // from trait `TEvent`
 impl TEvent for ProgressEvent
 impl TJsValue for ProgressEvent
 
 type Text
+fn Text::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
+fn Text::append_child(Self, &TNode) -> Unit // from trait `TNode`
+fn Text::node_name(Self) -> String // from trait `TNode`
+fn Text::node_type(Self) -> Int // from trait `TNode`
+fn Text::set_text_content(Self, &Show) -> Unit // from trait `TNode`
+fn Text::text_content(Self) -> String // from trait `TNode`
+fn Text::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
 fn Text::whole_text(Self) -> String
 impl TEventTarget for Text
 impl TJsValue for Text
 impl TNode for Text
 
 type Window
+fn Window::add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit // from trait `TEventTarget`
 fn Window::beforeunload(Self, (BeforeUnloadEvent) -> Unit) -> Unit
 fn Window::create_image_bitmap(Self, ImageData) -> @js_sys.Promise[ImageBitmap]
 fn Window::device_pixel_ratio(Self) -> Double
+fn Window::to_jv(Self) -> @js_sys.JsValue // from trait `TJsValue`
 impl TEventTarget for Window
 impl TJsValue for Window
 

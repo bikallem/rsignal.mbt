@@ -8,7 +8,7 @@
   "description": "",
   "deps": {
     "bikallem/rsignal": {
-      "path": "../../."
+      "path": "../.."
     }
   },
   "preferred-target": "js"
