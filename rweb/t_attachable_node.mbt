@@ -13,3 +13,21 @@ pub(open) trait TAttachableNode: TNode {
 impl TAttachableNode with attach(self : Self, parent : Element) -> Unit {
   parent.append_child(self)
 }
+
+///|
+pub impl TAttachableNode for Element
+
+///|
+pub impl TAttachableNode for HTMLButtonElement
+
+///|
+pub impl TAttachableNode for HTMLCanvasElement
+
+///|
+pub impl TAttachableNode for HTMLInputElement
+
+///|
+pub impl TAttachableNode for HTMLDivElement
+
+///|
+pub impl TAttachableNode for HTMLImageElement

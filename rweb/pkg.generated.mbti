@@ -25,7 +25,21 @@ fn div(Array[&TAttachableNode]) -> @web_sys.HTMLDivElement
 
 fn h(String, Array[&TAttachableNode]) -> @web_sys.Element
 
+fn h1(Array[&TAttachableNode]) -> @web_sys.Element
+
+fn h2(Array[&TAttachableNode]) -> @web_sys.Element
+
+fn h3(Array[&TAttachableNode]) -> @web_sys.Element
+
+fn h4(Array[&TAttachableNode]) -> @web_sys.Element
+
+fn h5(Array[&TAttachableNode]) -> @web_sys.Element
+
+fn h6(Array[&TAttachableNode]) -> @web_sys.Element
+
 fn[T : TAttrValue] id(T) -> @web_sys.Attr
+
+fn img(Array[&TAttachableNode]) -> @web_sys.HTMLImageElement
 
 fn input(String, Array[&TAttachableNode]) -> @web_sys.HTMLInputElement
 
@@ -36,6 +50,8 @@ fn[T] on(String, (T) -> Unit) -> EventHandlerAttr[T]
 fn onchange((@web_sys.Event) -> Unit) -> EventHandlerAttr[@web_sys.Event]
 
 fn onclick((@web_sys.PointerEvent) -> Unit) -> EventHandlerAttr[@web_sys.PointerEvent]
+
+fn p(Array[&TAttachableNode]) -> @web_sys.Element
 
 fn span(Array[&TAttachableNode]) -> @web_sys.Element
 
