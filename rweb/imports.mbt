@@ -19,3 +19,6 @@ traitalias @web_sys.(TJsValue, TNode, TEventTarget)
 
 ///|
 typealias @js_sys.JsValue
+
+///|
+typealias @immut/hashmap.HashMap

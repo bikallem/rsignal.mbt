@@ -1,5 +1,5 @@
 ///|
-struct Styles(@immut/hashmap.HashMap[String, String])
+struct Styles(HashMap[String, String])
 
 ///|
 pub impl Show for Styles with output(self : Styles, logger : &Logger) {
@@ -15,7 +15,7 @@ pub impl Eq for Styles with equal(self : Styles, other : Styles) -> Bool {
 
 ///|
 pub fn Styles::new() -> Styles {
-  Styles(@immut/hashmap.HashMap::new())
+  Styles(HashMap::new())
 }
 
 ///|
