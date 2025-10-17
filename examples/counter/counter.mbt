@@ -11,7 +11,7 @@ typealias @rsignal.Rsignal
 fn counter(initial_count : Int) -> @web_sys.HTMLDivElement {
   let count_rs : Rsignal[Int] = @rsignal.new(initial_count) // count rsignal keeps track of the count value.
   let count_style_rs : Rsignal[Styles] = { // Derived - mapped -  signal from `count_rs`
-    let styles = Styles::new({})
+    let styles = Styles::new()
     count_rs.map(fn(count) {
       let color = if count > 5 {
         "green"

@@ -97,7 +97,7 @@ impl[T] @web_sys.TNode for EventHandlerAttr[T]
 type Styles
 fn Styles::add(Self, String, String) -> Self
 fn Styles::equal(Self, Self) -> Bool // from trait `Eq`
-fn Styles::new(Map[String, String]) -> Self
+fn Styles::new() -> Self
 #deprecated
 fn Styles::op_equal(Self, Self) -> Bool // from trait `Eq`
 fn Styles::output(Self, &Logger) -> Unit // from trait `Show`
