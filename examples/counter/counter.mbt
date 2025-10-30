@@ -2,10 +2,10 @@
 using @rweb {div, button, attr, onclick, style, disabled, h2, span}
 
 ///|
-typealias @rweb.Styles
+using @rweb {type Styles}
 
 ///|
-typealias @rsignal.Rsignal
+using @rsignal {type Rsignal}
 
 ///|
 fn counter(initial_count : Int) -> @web_sys.HTMLDivElement {
