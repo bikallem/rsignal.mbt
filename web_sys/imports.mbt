@@ -1,2 +1,8 @@
 ///|
-typealias @js_sys.(JsValue, JsObject, Promise, ArrayBuffer, Uint8ClampedArray)
+using @js_sys {
+  type JsValue,
+  type JsObject,
+  type Promise,
+  type ArrayBuffer,
+  type Uint8ClampedArray
+}

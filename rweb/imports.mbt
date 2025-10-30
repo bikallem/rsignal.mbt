@@ -1,24 +1,24 @@
 ///|
-typealias @web_sys.(
-  Attr,
-  Element,
-  PointerEvent,
-  Event,
-  HTMLButtonElement,
-  HTMLCanvasElement,
-  HTMLDivElement,
-  HTMLInputElement,
-  HTMLImageElement
-)
+using @web_sys {
+  type Attr,
+  type Element,
+  type PointerEvent,
+  type Event,
+  type HTMLButtonElement,
+  type HTMLCanvasElement,
+  type HTMLDivElement,
+  type HTMLInputElement,
+  type HTMLImageElement
+}
 
 ///|
 let document = @web_sys.document
 
 ///|
-traitalias @web_sys.(TJsValue, TNode, TEventTarget)
+using @web_sys {trait TJsValue, trait TNode, trait TEventTarget}
 
 ///|
-typealias @js_sys.JsValue
+using @js_sys {type JsValue}
 
 ///|
-typealias @immut/hashmap.HashMap
+using @immut/hashmap {type HashMap}

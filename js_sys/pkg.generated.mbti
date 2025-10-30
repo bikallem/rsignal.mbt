@@ -26,7 +26,6 @@ fn ArrayBuffer::to_jv(Self) -> JsValue
 
 #external
 pub type Float64Array
-fn Float64Array::buffer(Self) -> ArrayBuffer // from trait `TTypedArray`
 fn Float64Array::new(ArrayBuffer, Int, Int) -> Self
 fn Float64Array::op_get(Self, Int) -> Double
 fn Float64Array::to_jv(Self) -> JsValue
@@ -64,7 +63,6 @@ fn Response::text(Self) -> Promise[String]
 
 #external
 pub type Uint8Array
-fn Uint8Array::buffer(Self) -> ArrayBuffer // from trait `TTypedArray`
 fn Uint8Array::byte_length(Self) -> Int
 fn Uint8Array::new(ArrayBuffer) -> Self
 fn Uint8Array::op_get(Self, Int) -> Int

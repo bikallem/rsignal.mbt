@@ -1,2 +1,2 @@
 ///|
-typealias @js_sys.JsValue
+using @js_sys {type JsValue}

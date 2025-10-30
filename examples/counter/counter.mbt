@@ -1,5 +1,5 @@
 ///|
-fnalias @rweb.(div, button, attr, onclick, style, disabled, h2, span)
+using @rweb {div, button, attr, onclick, style, disabled, h2, span}
 
 ///|
 typealias @rweb.Styles
