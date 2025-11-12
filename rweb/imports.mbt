@@ -8,7 +8,7 @@ using @web_sys {
   type HTMLCanvasElement,
   type HTMLDivElement,
   type HTMLInputElement,
-  type HTMLImageElement
+  type HTMLImageElement,
 }
 
 ///|

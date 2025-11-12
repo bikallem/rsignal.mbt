@@ -4,5 +4,5 @@ using @js_sys {
   type JsObject,
   type Promise,
   type ArrayBuffer,
-  type Uint8ClampedArray
+  type Uint8ClampedArray,
 }

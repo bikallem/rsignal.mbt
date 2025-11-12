@@ -1,16 +1,16 @@
-all : clean fmt build info
+all : clean fmt info build 
 
 clean:
-	moon clean
+	NEW_MOON=1 moon clean
 
 fmt:
-	moon fmt
+	NEW_MOON=1 moon fmt
 
 build:
-	moon build
-	moon build -C examples/counter
+	NEW_MOON=1 moon build
+	NEW_MOON=1 moon build -C examples/counter
 
 info:
-	moon info 
+	NEW_MOON=1 moon info 
 
 .PHONY: all clean fmt build info
