@@ -2,79 +2,79 @@
 package "bikallem/rsignal/js_sys"
 
 // Values
-fn async_run(async () -> Unit noraise) -> Unit
+pub fn async_run(async () -> Unit noraise) -> Unit
 
-fn dynamic_import(String) -> Promise[JsValue]
+pub fn dynamic_import(String) -> Promise[JsValue]
 
-fn fetch(String) -> Promise[Response]
+pub fn fetch(String) -> Promise[Response]
 
-let globalThis : JsValue
+pub let globalThis : JsValue
 
-fn log_js_value(&TJsValue) -> Unit
+pub fn log_js_value(&TJsValue) -> Unit
 
-fn log_str(String) -> Unit
+pub fn log_str(String) -> Unit
 
-let null : JsValue
+pub let null : JsValue
 
-let undefined : JsValue
+pub let undefined : JsValue
 
 // Errors
 
 // Types and methods
 type ArrayBuffer
-fn ArrayBuffer::to_jv(Self) -> JsValue
+pub fn ArrayBuffer::to_jv(Self) -> JsValue
 
 #external
 pub type Float64Array
-fn Float64Array::new(ArrayBuffer, Int, Int) -> Self
-fn Float64Array::op_get(Self, Int) -> Double
-fn Float64Array::to_jv(Self) -> JsValue
-impl TTypedArray for Float64Array
+pub fn Float64Array::new(ArrayBuffer, Int, Int) -> Self
+pub fn Float64Array::op_get(Self, Int) -> Double
+pub fn Float64Array::to_jv(Self) -> JsValue
+pub impl TTypedArray for Float64Array
 
 type JsObject
-fn[T] JsObject::get(Self, String) -> T
-fn JsObject::new() -> Self
-fn JsObject::set(Self, String, JsValue) -> Unit
-fn JsObject::to_jv(Self) -> JsValue
+pub fn[T] JsObject::get(Self, String) -> T
+pub fn JsObject::new() -> Self
+pub fn JsObject::set(Self, String, JsValue) -> Unit
+pub fn JsObject::to_jv(Self) -> JsValue
 
 type JsValue
-fn JsValue::define_property(Self, String, Self) -> Unit
-fn JsValue::is_none(Self) -> Bool
-fn JsValue::is_null(Self) -> Bool
-fn JsValue::is_undefined(Self) -> Bool
-fn[T] JsValue::of_jv(Self) -> T
-fn[T] JsValue::to_jv(T) -> Self
-fn[T] JsValue::to_option(Self) -> T?
-fn[T] JsValue::unwrap(Self) -> T
+pub fn JsValue::define_property(Self, String, Self) -> Unit
+pub fn JsValue::is_none(Self) -> Bool
+pub fn JsValue::is_null(Self) -> Bool
+pub fn JsValue::is_undefined(Self) -> Bool
+pub fn[T] JsValue::of_jv(Self) -> T
+pub fn[T] JsValue::to_jv(T) -> Self
+pub fn[T] JsValue::to_option(Self) -> T?
+pub fn[T] JsValue::unwrap(Self) -> T
 
 type Promise[T]
-fn[A, B] Promise::map(Self[A], (A) -> B) -> Self[B]
-fn[T] Promise::new(((T) -> Unit, (Error) -> Unit) -> Unit) -> Self[T]
-fn[A] Promise::resolve(A) -> Self[A]
-fn[A, B] Promise::then(Self[A], (A) -> Self[B]) -> Self[B]
-async fn[T] Promise::wait(Self[T]) -> T
+pub fn[A, B] Promise::map(Self[A], (A) -> B) -> Self[B]
+pub fn[T] Promise::new(((T) -> Unit, (Error) -> Unit) -> Unit) -> Self[T]
+pub fn[A] Promise::resolve(A) -> Self[A]
+pub fn[A, B] Promise::then(Self[A], (A) -> Self[B]) -> Self[B]
+pub async fn[T] Promise::wait(Self[T]) -> T
 
 type Response
-fn Response::array_buffer(Self) -> Promise[ArrayBuffer]
-fn Response::ok(Self) -> Bool
-fn Response::status(Self) -> Int
-fn Response::status_text(Self) -> String
-fn Response::text(Self) -> Promise[String]
+pub fn Response::array_buffer(Self) -> Promise[ArrayBuffer]
+pub fn Response::ok(Self) -> Bool
+pub fn Response::status(Self) -> Int
+pub fn Response::status_text(Self) -> String
+pub fn Response::text(Self) -> Promise[String]
 
 #external
 pub type Uint8Array
-fn Uint8Array::byte_length(Self) -> Int
-fn Uint8Array::new(ArrayBuffer) -> Self
-fn Uint8Array::op_get(Self, Int) -> Int
-fn Uint8Array::set(Self, Self, Int) -> Unit
-fn Uint8Array::subarray(Self, Int, Int) -> Self
-fn Uint8Array::to_jv(Self) -> JsValue
-impl TTypedArray for Uint8Array
+pub fn Uint8Array::byte_length(Self) -> Int
+pub fn Uint8Array::new(ArrayBuffer) -> Self
+pub fn Uint8Array::op_get(Self, Int) -> Int
+pub fn Uint8Array::set(Self, Self, Int) -> Unit
+pub fn Uint8Array::subarray(Self, Int, Int) -> Self
+pub fn Uint8Array::to_jv(Self) -> JsValue
+pub impl TTypedArray for Uint8Array
 
 #external
 pub type Uint8ClampedArray
-fn Uint8ClampedArray::new(Uint8Array) -> Self
-fn Uint8ClampedArray::to_jv(Self) -> JsValue
+pub fn Uint8ClampedArray::new(Uint8Array) -> Self
+pub fn Uint8ClampedArray::to_jv(Self) -> JsValue
 
 // Type aliases
 

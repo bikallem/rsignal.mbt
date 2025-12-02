@@ -1,5 +1,5 @@
 ///|
-/// An observer observes changes to a signal and runs an effect function when the signal changes.
+/// An observer observes changes to a signal and executes an effect function when the signal changes.
 struct Observer[T] {
   id : ObserverId // unique ID for this observer, used to subscribe/unsubscribe
   effect : (T) -> Unit // function to call when the signal changes

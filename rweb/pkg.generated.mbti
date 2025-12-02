@@ -9,82 +9,82 @@ import(
 )
 
 // Values
-fn[T : TAttrValue] attr(String, T) -> @web_sys.Attr
+pub fn[T : TAttrValue] attr(String, T) -> @web_sys.Attr
 
-fn button(&TAttachableNode, Array[&TAttachableNode]) -> @web_sys.HTMLButtonElement
+pub fn button(&TAttachableNode, Array[&TAttachableNode]) -> @web_sys.HTMLButtonElement
 
-fn canvas(Array[&TAttachableNode]) -> @web_sys.HTMLCanvasElement
+pub fn canvas(Array[&TAttachableNode]) -> @web_sys.HTMLCanvasElement
 
-fn checked(rs? : @rsignal.Rsignal[Bool]) -> BoolAttr
+pub fn checked(rs? : @rsignal.Rsignal[Bool]) -> BoolAttr
 
-fn[T : TAttrValue] class(T) -> @web_sys.Attr
+pub fn[T : TAttrValue] class(T) -> @web_sys.Attr
 
-fn disabled(rs? : @rsignal.Rsignal[Bool]) -> BoolAttr
+pub fn disabled(rs? : @rsignal.Rsignal[Bool]) -> BoolAttr
 
-fn div(Array[&TAttachableNode]) -> @web_sys.HTMLDivElement
+pub fn div(Array[&TAttachableNode]) -> @web_sys.HTMLDivElement
 
-fn h(String, Array[&TAttachableNode]) -> @web_sys.Element
+pub fn h(String, Array[&TAttachableNode]) -> @web_sys.Element
 
-fn h1(Array[&TAttachableNode]) -> @web_sys.Element
+pub fn h1(Array[&TAttachableNode]) -> @web_sys.Element
 
-fn h2(Array[&TAttachableNode]) -> @web_sys.Element
+pub fn h2(Array[&TAttachableNode]) -> @web_sys.Element
 
-fn h3(Array[&TAttachableNode]) -> @web_sys.Element
+pub fn h3(Array[&TAttachableNode]) -> @web_sys.Element
 
-fn h4(Array[&TAttachableNode]) -> @web_sys.Element
+pub fn h4(Array[&TAttachableNode]) -> @web_sys.Element
 
-fn h5(Array[&TAttachableNode]) -> @web_sys.Element
+pub fn h5(Array[&TAttachableNode]) -> @web_sys.Element
 
-fn h6(Array[&TAttachableNode]) -> @web_sys.Element
+pub fn h6(Array[&TAttachableNode]) -> @web_sys.Element
 
-fn[T : TAttrValue] id(T) -> @web_sys.Attr
+pub fn[T : TAttrValue] id(T) -> @web_sys.Attr
 
-fn img(Array[&TAttachableNode]) -> @web_sys.HTMLImageElement
+pub fn img(Array[&TAttachableNode]) -> @web_sys.HTMLImageElement
 
-fn input(String, Array[&TAttachableNode]) -> @web_sys.HTMLInputElement
+pub fn input(String, Array[&TAttachableNode]) -> @web_sys.HTMLInputElement
 
-fn mount_to_body(&TAttachableNode) -> Unit
+pub fn mount_to_body(&TAttachableNode) -> Unit
 
-fn[T] on(String, (T) -> Unit) -> EventHandlerAttr[T]
+pub fn[T] on(String, (T) -> Unit) -> EventHandlerAttr[T]
 
-fn onchange((@web_sys.Event) -> Unit) -> EventHandlerAttr[@web_sys.Event]
+pub fn onchange((@web_sys.Event) -> Unit) -> EventHandlerAttr[@web_sys.Event]
 
-fn onclick((@web_sys.PointerEvent) -> Unit) -> EventHandlerAttr[@web_sys.PointerEvent]
+pub fn onclick((@web_sys.PointerEvent) -> Unit) -> EventHandlerAttr[@web_sys.PointerEvent]
 
-fn p(Array[&TAttachableNode]) -> @web_sys.Element
+pub fn p(Array[&TAttachableNode]) -> @web_sys.Element
 
-fn span(Array[&TAttachableNode]) -> @web_sys.Element
+pub fn span(Array[&TAttachableNode]) -> @web_sys.Element
 
-fn[T : TAttrValue] style(T) -> @web_sys.Attr
+pub fn[T : TAttrValue] style(T) -> @web_sys.Attr
 
 // Errors
 
 // Types and methods
 type BoolAttr
 #as_free_fn
-fn BoolAttr::bool_attr(String, rs? : @rsignal.Rsignal[Bool]) -> Self
-fn BoolAttr::name(Self) -> String
-impl TAttachableNode for BoolAttr
-impl @web_sys.TEventTarget for BoolAttr
-impl @web_sys.TJsValue for BoolAttr
-impl @web_sys.TNode for BoolAttr
+pub fn BoolAttr::bool_attr(String, rs? : @rsignal.Rsignal[Bool]) -> Self
+pub fn BoolAttr::name(Self) -> String
+pub impl TAttachableNode for BoolAttr
+pub impl @web_sys.TEventTarget for BoolAttr
+pub impl @web_sys.TJsValue for BoolAttr
+pub impl @web_sys.TNode for BoolAttr
 
 type EventHandlerAttr[E]
-fn[E] EventHandlerAttr::event_name(Self[E]) -> String
-fn[E] EventHandlerAttr::handler(Self[E]) -> (E) -> Unit
-fn[E] EventHandlerAttr::new(String, (E) -> Unit) -> Self[E]
-impl[T] TAttachableNode for EventHandlerAttr[T]
-impl[T] @web_sys.TEventTarget for EventHandlerAttr[T]
-impl[T] @web_sys.TJsValue for EventHandlerAttr[T]
-impl[T] @web_sys.TNode for EventHandlerAttr[T]
+pub fn[E] EventHandlerAttr::event_name(Self[E]) -> String
+pub fn[E] EventHandlerAttr::handler(Self[E]) -> (E) -> Unit
+pub fn[E] EventHandlerAttr::new(String, (E) -> Unit) -> Self[E]
+pub impl[T] TAttachableNode for EventHandlerAttr[T]
+pub impl[T] @web_sys.TEventTarget for EventHandlerAttr[T]
+pub impl[T] @web_sys.TJsValue for EventHandlerAttr[T]
+pub impl[T] @web_sys.TNode for EventHandlerAttr[T]
 
 type Styles
-fn Styles::add(Self, String, String) -> Self
-fn Styles::new() -> Self
-fn Styles::remove(Self, String) -> Self
-impl TAttrValue for Styles
-impl Eq for Styles
-impl Show for Styles
+pub fn Styles::add(Self, String, String) -> Self
+pub fn Styles::new() -> Self
+pub fn Styles::remove(Self, String) -> Self
+pub impl TAttrValue for Styles
+pub impl Eq for Styles
+pub impl Show for Styles
 
 // Type aliases
 
@@ -92,38 +92,38 @@ impl Show for Styles
 pub(open) trait TAttachableNode : @web_sys.TNode {
   attach(Self, @web_sys.Element) -> Unit = _
 }
-impl TAttachableNode for Int
-impl TAttachableNode for Int16
-impl TAttachableNode for Int64
-impl TAttachableNode for UInt
-impl TAttachableNode for UInt16
-impl TAttachableNode for UInt64
-impl TAttachableNode for Float
-impl TAttachableNode for Double
-impl TAttachableNode for String
-impl[T : Show] TAttachableNode for @rsignal.Rsignal[T]
-impl TAttachableNode for @web_sys.Attr
-impl TAttachableNode for @web_sys.Element
-impl TAttachableNode for @web_sys.HTMLButtonElement
-impl TAttachableNode for @web_sys.HTMLCanvasElement
-impl TAttachableNode for @web_sys.HTMLDivElement
-impl TAttachableNode for @web_sys.HTMLImageElement
-impl TAttachableNode for @web_sys.HTMLInputElement
-impl TAttachableNode for @bigint.BigInt
+pub impl TAttachableNode for Int
+pub impl TAttachableNode for Int16
+pub impl TAttachableNode for Int64
+pub impl TAttachableNode for UInt
+pub impl TAttachableNode for UInt16
+pub impl TAttachableNode for UInt64
+pub impl TAttachableNode for Float
+pub impl TAttachableNode for Double
+pub impl TAttachableNode for String
+pub impl[T : Show] TAttachableNode for @rsignal.Rsignal[T]
+pub impl TAttachableNode for @web_sys.Attr
+pub impl TAttachableNode for @web_sys.Element
+pub impl TAttachableNode for @web_sys.HTMLButtonElement
+pub impl TAttachableNode for @web_sys.HTMLCanvasElement
+pub impl TAttachableNode for @web_sys.HTMLDivElement
+pub impl TAttachableNode for @web_sys.HTMLImageElement
+pub impl TAttachableNode for @web_sys.HTMLInputElement
+pub impl TAttachableNode for @bigint.BigInt
 
 pub(open) trait TAttrValue {
   set_attr(Self, @web_sys.Attr) -> Unit
 }
-impl TAttrValue for Bool
-impl TAttrValue for Int
-impl TAttrValue for Int16
-impl TAttrValue for Int64
-impl TAttrValue for UInt
-impl TAttrValue for UInt16
-impl TAttrValue for UInt64
-impl TAttrValue for Float
-impl TAttrValue for Double
-impl TAttrValue for String
-impl[T : Show] TAttrValue for @rsignal.Rsignal[T]
-impl TAttrValue for @bigint.BigInt
+pub impl TAttrValue for Bool
+pub impl TAttrValue for Int
+pub impl TAttrValue for Int16
+pub impl TAttrValue for Int64
+pub impl TAttrValue for UInt
+pub impl TAttrValue for UInt16
+pub impl TAttrValue for UInt64
+pub impl TAttrValue for Float
+pub impl TAttrValue for Double
+pub impl TAttrValue for String
+pub impl[T : Show] TAttrValue for @rsignal.Rsignal[T]
+pub impl TAttrValue for @bigint.BigInt
 

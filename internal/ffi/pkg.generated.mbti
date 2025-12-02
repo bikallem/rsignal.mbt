@@ -6,9 +6,9 @@ import(
 )
 
 // Values
-fn add_event_listener(@js_sys.JsValue, String, @js_sys.JsValue, Bool) -> Unit
+pub fn add_event_listener(@js_sys.JsValue, String, @js_sys.JsValue, Bool) -> Unit
 
-fn set_attribute_node(@js_sys.JsValue, @js_sys.JsValue) -> Unit
+pub fn set_attribute_node(@js_sys.JsValue, @js_sys.JsValue) -> Unit
 
 // Errors
 

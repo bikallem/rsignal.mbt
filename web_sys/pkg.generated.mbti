@@ -8,226 +8,226 @@ import(
 )
 
 // Values
-const ATTRIBUTE_NODE : Int = 2
+pub const ATTRIBUTE_NODE : Int = 2
 
-const DOCUMENT_NODE : Int = 9
+pub const DOCUMENT_NODE : Int = 9
 
-const ELEMENT_NODE : Int = 1
+pub const ELEMENT_NODE : Int = 1
 
-const TEXT_NODE : Int = 3
+pub const TEXT_NODE : Int = 3
 
-fn[T] add_event_listener(&TJsValue, String, (T) -> Unit, use_capture? : Bool) -> Unit
+pub fn[T] add_event_listener(&TJsValue, String, (T) -> Unit, use_capture? : Bool) -> Unit
 
-let document : Document
+pub let document : Document
 
-fn read_as_array_buffer_ffi(FileReader, @js_sys.JsValue) -> Unit
+pub fn read_as_array_buffer_ffi(FileReader, @js_sys.JsValue) -> Unit
 
-let window : Window
+pub let window : Window
 
 // Errors
 
 // Types and methods
 type Attr
-fn Attr::name(Self) -> String
-fn Attr::owner_element(Self) -> Element?
-fn[T : Show] Attr::set_value(Self, T) -> Unit
-fn Attr::value(Self) -> String
-impl TEventTarget for Attr
-impl TJsValue for Attr
-impl TNode for Attr
+pub fn Attr::name(Self) -> String
+pub fn Attr::owner_element(Self) -> Element?
+pub fn[T : Show] Attr::set_value(Self, T) -> Unit
+pub fn Attr::value(Self) -> String
+pub impl TEventTarget for Attr
+pub impl TJsValue for Attr
+pub impl TNode for Attr
 
 type BeforeUnloadEvent
-impl TEvent for BeforeUnloadEvent
-impl TJsValue for BeforeUnloadEvent
+pub impl TEvent for BeforeUnloadEvent
+pub impl TJsValue for BeforeUnloadEvent
 
 type Blob
-fn Blob::new(Array[@js_sys.JsValue], @js_sys.JsObject) -> Self
-impl TBlob for Blob
-impl TJsValue for Blob
+pub fn Blob::new(Array[@js_sys.JsValue], @js_sys.JsObject) -> Self
+pub impl TBlob for Blob
+pub impl TJsValue for Blob
 
 type CSSStyleDeclaration
-fn CSSStyleDeclaration::set_property(Self, String, String, priority? : String) -> Unit
+pub fn CSSStyleDeclaration::set_property(Self, String, String, priority? : String) -> Unit
 
 type CanvasRenderingContext2D
-fn CanvasRenderingContext2D::begin_path(Self) -> Unit
-fn CanvasRenderingContext2D::clear_rect(Self, Int, Int, Int, Int) -> Unit
-fn CanvasRenderingContext2D::draw_image(Self, HTMLImageElement, sx? : Int, sy? : Int, swidth? : Int, sheight? : Int, dx? : Int, dy? : Int, dwidth? : Int, dheight? : Int) -> Unit
-fn CanvasRenderingContext2D::fill_rect(Self, Int, Int, Int, Int) -> Unit
-fn CanvasRenderingContext2D::image_smoothing_enabled(Self) -> Bool
-fn CanvasRenderingContext2D::image_smoothing_quality(Self) -> String
-fn CanvasRenderingContext2D::line_to(Self, Int, Int) -> Unit
-fn CanvasRenderingContext2D::move_to(Self, Int, Int) -> Unit
-fn CanvasRenderingContext2D::put_image_data(Self, ImageData, Int, Int) -> Unit
-fn CanvasRenderingContext2D::restore(Self) -> Unit
-fn CanvasRenderingContext2D::save(Self) -> Unit
-fn CanvasRenderingContext2D::set_fill_style(Self, String) -> Unit
-fn CanvasRenderingContext2D::set_image_smoothing_enabled(Self, Bool) -> Unit
-fn CanvasRenderingContext2D::set_image_smoothing_quality(Self, String) -> Unit
-fn CanvasRenderingContext2D::set_line_width(Self, Int) -> Unit
-fn CanvasRenderingContext2D::set_stroke_style(Self, String) -> Unit
-fn CanvasRenderingContext2D::stroke(Self) -> Unit
-fn CanvasRenderingContext2D::stroke_rect(Self, Int, Int, Int, Int) -> Unit
+pub fn CanvasRenderingContext2D::begin_path(Self) -> Unit
+pub fn CanvasRenderingContext2D::clear_rect(Self, Int, Int, Int, Int) -> Unit
+pub fn CanvasRenderingContext2D::draw_image(Self, HTMLImageElement, sx? : Int, sy? : Int, swidth? : Int, sheight? : Int, dx? : Int, dy? : Int, dwidth? : Int, dheight? : Int) -> Unit
+pub fn CanvasRenderingContext2D::fill_rect(Self, Int, Int, Int, Int) -> Unit
+pub fn CanvasRenderingContext2D::image_smoothing_enabled(Self) -> Bool
+pub fn CanvasRenderingContext2D::image_smoothing_quality(Self) -> String
+pub fn CanvasRenderingContext2D::line_to(Self, Int, Int) -> Unit
+pub fn CanvasRenderingContext2D::move_to(Self, Int, Int) -> Unit
+pub fn CanvasRenderingContext2D::put_image_data(Self, ImageData, Int, Int) -> Unit
+pub fn CanvasRenderingContext2D::restore(Self) -> Unit
+pub fn CanvasRenderingContext2D::save(Self) -> Unit
+pub fn CanvasRenderingContext2D::set_fill_style(Self, String) -> Unit
+pub fn CanvasRenderingContext2D::set_image_smoothing_enabled(Self, Bool) -> Unit
+pub fn CanvasRenderingContext2D::set_image_smoothing_quality(Self, String) -> Unit
+pub fn CanvasRenderingContext2D::set_line_width(Self, Int) -> Unit
+pub fn CanvasRenderingContext2D::set_stroke_style(Self, String) -> Unit
+pub fn CanvasRenderingContext2D::stroke(Self) -> Unit
+pub fn CanvasRenderingContext2D::stroke_rect(Self, Int, Int, Int, Int) -> Unit
 
 type DOMRect
-fn DOMRect::bottom(Self) -> Double
-fn DOMRect::height(Self) -> Double
-fn DOMRect::left(Self) -> Double
-fn DOMRect::right(Self) -> Double
-fn DOMRect::top(Self) -> Double
-fn DOMRect::width(Self) -> Double
+pub fn DOMRect::bottom(Self) -> Double
+pub fn DOMRect::height(Self) -> Double
+pub fn DOMRect::left(Self) -> Double
+pub fn DOMRect::right(Self) -> Double
+pub fn DOMRect::top(Self) -> Double
+pub fn DOMRect::width(Self) -> Double
 
 type Document
-fn Document::body(Self) -> Element
-fn Document::create_attribute(Self, String) -> Attr
-fn Document::create_element(Self, String) -> Element
-fn[T : Show] Document::create_text_node(Self, T) -> Text
-fn Document::get_element_by_id(Self, String) -> Element?
-impl TEventTarget for Document
-impl TJsValue for Document
-impl TNode for Document
+pub fn Document::body(Self) -> Element
+pub fn Document::create_attribute(Self, String) -> Attr
+pub fn Document::create_element(Self, String) -> Element
+pub fn[T : Show] Document::create_text_node(Self, T) -> Text
+pub fn Document::get_element_by_id(Self, String) -> Element?
+pub impl TEventTarget for Document
+pub impl TJsValue for Document
+pub impl TNode for Document
 
 type Element
-fn[T : TElement] Element::into(Self) -> T
-impl TElement for Element
-impl TEventTarget for Element
-impl TJsValue for Element
-impl TNode for Element
+pub fn[T : TElement] Element::into(Self) -> T
+pub impl TElement for Element
+pub impl TEventTarget for Element
+pub impl TJsValue for Element
+pub impl TNode for Element
 
 type Event
-fn[T : TEvent] Event::into(Self) -> T
-impl TEvent for Event
-impl TJsValue for Event
+pub fn[T : TEvent] Event::into(Self) -> T
+pub impl TEvent for Event
+pub impl TJsValue for Event
 
 type EventTarget
-fn[T : TEventTarget] EventTarget::into(Self) -> T
-impl TEventTarget for EventTarget
-impl TJsValue for EventTarget
+pub fn[T : TEventTarget] EventTarget::into(Self) -> T
+pub impl TEventTarget for EventTarget
+pub impl TJsValue for EventTarget
 
 type File
-fn File::last_modified(Self) -> Int
-fn File::name(Self) -> String
-fn File::size(Self) -> Int
-fn File::type_(Self) -> String
-fn File::webkit_relative_path(Self) -> String
-impl TBlob for File
-impl TJsValue for File
+pub fn File::last_modified(Self) -> Int
+pub fn File::name(Self) -> String
+pub fn File::size(Self) -> Int
+pub fn File::type_(Self) -> String
+pub fn File::webkit_relative_path(Self) -> String
+pub impl TBlob for File
+pub impl TJsValue for File
 
 type FileList
-fn FileList::item(Self, Int) -> File?
-fn FileList::length(Self) -> Int
+pub fn FileList::item(Self, Int) -> File?
+pub fn FileList::length(Self) -> Int
 
 type FileReader
-fn FileReader::new() -> Self
-fn FileReader::onerror(Self, (ProgressEvent) -> Unit) -> Unit
-fn FileReader::onload(Self, (ProgressEvent) -> Unit) -> Unit
-fn FileReader::read_as_array_buffer(Self, &TBlob) -> Unit
-fn FileReader::read_as_data_url(Self, &TBlob) -> Unit
-fn FileReader::read_as_text(Self, &TBlob, encoding? : String) -> Unit
-fn FileReader::result(Self) -> FileReaderResult
-impl TEventTarget for FileReader
-impl TJsValue for FileReader
+pub fn FileReader::new() -> Self
+pub fn FileReader::onerror(Self, (ProgressEvent) -> Unit) -> Unit
+pub fn FileReader::onload(Self, (ProgressEvent) -> Unit) -> Unit
+pub fn FileReader::read_as_array_buffer(Self, &TBlob) -> Unit
+pub fn FileReader::read_as_data_url(Self, &TBlob) -> Unit
+pub fn FileReader::read_as_text(Self, &TBlob, encoding? : String) -> Unit
+pub fn FileReader::result(Self) -> FileReaderResult
+pub impl TEventTarget for FileReader
+pub impl TJsValue for FileReader
 
 type FileReaderResult
-fn FileReaderResult::to_array_buffer(Self) -> @js_sys.ArrayBuffer
+pub fn FileReaderResult::to_array_buffer(Self) -> @js_sys.ArrayBuffer
 
 type HTMLButtonElement
-fn HTMLButtonElement::disabled(Self) -> Bool
-fn HTMLButtonElement::name(Self) -> String
-fn HTMLButtonElement::set_disabled(Self, Bool) -> Unit
-fn HTMLButtonElement::set_name(Self, String) -> Unit
-fn HTMLButtonElement::set_value(Self, String) -> Unit
-fn HTMLButtonElement::value(Self) -> String
-impl TElement for HTMLButtonElement
-impl TEventTarget for HTMLButtonElement
-impl TJsValue for HTMLButtonElement
-impl TNode for HTMLButtonElement
+pub fn HTMLButtonElement::disabled(Self) -> Bool
+pub fn HTMLButtonElement::name(Self) -> String
+pub fn HTMLButtonElement::set_disabled(Self, Bool) -> Unit
+pub fn HTMLButtonElement::set_name(Self, String) -> Unit
+pub fn HTMLButtonElement::set_value(Self, String) -> Unit
+pub fn HTMLButtonElement::value(Self) -> String
+pub impl TElement for HTMLButtonElement
+pub impl TEventTarget for HTMLButtonElement
+pub impl TJsValue for HTMLButtonElement
+pub impl TNode for HTMLButtonElement
 
 type HTMLCanvasElement
-fn HTMLCanvasElement::get_2d_context(Self) -> CanvasRenderingContext2D
-fn HTMLCanvasElement::height(Self) -> Int
-fn HTMLCanvasElement::set_height(Self, Int) -> Unit
-fn HTMLCanvasElement::set_width(Self, Int) -> Unit
-fn HTMLCanvasElement::width(Self) -> Int
-impl TElement for HTMLCanvasElement
-impl TEventTarget for HTMLCanvasElement
-impl THTMLelement for HTMLCanvasElement
-impl TJsValue for HTMLCanvasElement
-impl TNode for HTMLCanvasElement
+pub fn HTMLCanvasElement::get_2d_context(Self) -> CanvasRenderingContext2D
+pub fn HTMLCanvasElement::height(Self) -> Int
+pub fn HTMLCanvasElement::set_height(Self, Int) -> Unit
+pub fn HTMLCanvasElement::set_width(Self, Int) -> Unit
+pub fn HTMLCanvasElement::width(Self) -> Int
+pub impl TElement for HTMLCanvasElement
+pub impl TEventTarget for HTMLCanvasElement
+pub impl THTMLelement for HTMLCanvasElement
+pub impl TJsValue for HTMLCanvasElement
+pub impl TNode for HTMLCanvasElement
 
 type HTMLDivElement
-impl TElement for HTMLDivElement
-impl TEventTarget for HTMLDivElement
-impl THTMLelement for HTMLDivElement
-impl TJsValue for HTMLDivElement
-impl TNode for HTMLDivElement
+pub impl TElement for HTMLDivElement
+pub impl TEventTarget for HTMLDivElement
+pub impl THTMLelement for HTMLDivElement
+pub impl TJsValue for HTMLDivElement
+pub impl TNode for HTMLDivElement
 
 type HTMLImageElement
-fn HTMLImageElement::height(Self) -> Int
-fn HTMLImageElement::image(width? : Int, height? : Int) -> Self
-fn HTMLImageElement::natural_height(Self) -> Int
-fn HTMLImageElement::natural_width(Self) -> Int
-fn HTMLImageElement::set_src(Self, String) -> Unit
-fn HTMLImageElement::width(Self) -> Int
-impl TElement for HTMLImageElement
-impl TEventTarget for HTMLImageElement
-impl THTMLelement for HTMLImageElement
-impl TJsValue for HTMLImageElement
-impl TNode for HTMLImageElement
+pub fn HTMLImageElement::height(Self) -> Int
+pub fn HTMLImageElement::image(width? : Int, height? : Int) -> Self
+pub fn HTMLImageElement::natural_height(Self) -> Int
+pub fn HTMLImageElement::natural_width(Self) -> Int
+pub fn HTMLImageElement::set_src(Self, String) -> Unit
+pub fn HTMLImageElement::width(Self) -> Int
+pub impl TElement for HTMLImageElement
+pub impl TEventTarget for HTMLImageElement
+pub impl THTMLelement for HTMLImageElement
+pub impl TJsValue for HTMLImageElement
+pub impl TNode for HTMLImageElement
 
 type HTMLInputElement
-fn HTMLInputElement::files(Self) -> FileList
-impl TElement for HTMLInputElement
-impl TEventTarget for HTMLInputElement
-impl THTMLelement for HTMLInputElement
-impl TJsValue for HTMLInputElement
-impl TNode for HTMLInputElement
+pub fn HTMLInputElement::files(Self) -> FileList
+pub impl TElement for HTMLInputElement
+pub impl TEventTarget for HTMLInputElement
+pub impl THTMLelement for HTMLInputElement
+pub impl TJsValue for HTMLInputElement
+pub impl TNode for HTMLInputElement
 
 type ImageBitmap
 
 type ImageData
-fn ImageData::data(Self) -> @js_sys.Uint8ClampedArray
-fn ImageData::height(Self) -> Int
-fn ImageData::new(@js_sys.Uint8ClampedArray, Int, Int) -> Self
-fn ImageData::width(Self) -> Int
+pub fn ImageData::data(Self) -> @js_sys.Uint8ClampedArray
+pub fn ImageData::height(Self) -> Int
+pub fn ImageData::new(@js_sys.Uint8ClampedArray, Int, Int) -> Self
+pub fn ImageData::width(Self) -> Int
 
 type KeyboardEvent
-fn KeyboardEvent::alt_key(Self) -> Bool
-fn KeyboardEvent::code(Self) -> String
-fn KeyboardEvent::ctrl_key(Self) -> Bool
-fn KeyboardEvent::key(Self) -> String
-fn KeyboardEvent::meta_key(Self) -> Bool
-fn KeyboardEvent::repeat(Self) -> Bool
-fn KeyboardEvent::shift_key(Self) -> Bool
-impl TEvent for KeyboardEvent
-impl TJsValue for KeyboardEvent
+pub fn KeyboardEvent::alt_key(Self) -> Bool
+pub fn KeyboardEvent::code(Self) -> String
+pub fn KeyboardEvent::ctrl_key(Self) -> Bool
+pub fn KeyboardEvent::key(Self) -> String
+pub fn KeyboardEvent::meta_key(Self) -> Bool
+pub fn KeyboardEvent::repeat(Self) -> Bool
+pub fn KeyboardEvent::shift_key(Self) -> Bool
+pub impl TEvent for KeyboardEvent
+pub impl TJsValue for KeyboardEvent
 
 type MouseEvent
-impl TEvent for MouseEvent
-impl TJsValue for MouseEvent
-impl TMouseEvent for MouseEvent
+pub impl TEvent for MouseEvent
+pub impl TJsValue for MouseEvent
+pub impl TMouseEvent for MouseEvent
 
 type PointerEvent
-fn PointerEvent::from_event(&TEvent) -> Self
-impl TEvent for PointerEvent
-impl TJsValue for PointerEvent
-impl TMouseEvent for PointerEvent
+pub fn PointerEvent::from_event(&TEvent) -> Self
+pub impl TEvent for PointerEvent
+pub impl TJsValue for PointerEvent
+pub impl TMouseEvent for PointerEvent
 
 type ProgressEvent
-impl TEvent for ProgressEvent
-impl TJsValue for ProgressEvent
+pub impl TEvent for ProgressEvent
+pub impl TJsValue for ProgressEvent
 
 type Text
-fn Text::whole_text(Self) -> String
-impl TEventTarget for Text
-impl TJsValue for Text
-impl TNode for Text
+pub fn Text::whole_text(Self) -> String
+pub impl TEventTarget for Text
+pub impl TJsValue for Text
+pub impl TNode for Text
 
 type Window
-fn Window::beforeunload(Self, (BeforeUnloadEvent) -> Unit) -> Unit
-fn Window::create_image_bitmap(Self, ImageData) -> @js_sys.Promise[ImageBitmap]
-fn Window::device_pixel_ratio(Self) -> Double
-impl TEventTarget for Window
-impl TJsValue for Window
+pub fn Window::beforeunload(Self, (BeforeUnloadEvent) -> Unit) -> Unit
+pub fn Window::create_image_bitmap(Self, ImageData) -> @js_sys.Promise[ImageBitmap]
+pub fn Window::device_pixel_ratio(Self) -> Double
+pub impl TEventTarget for Window
+pub impl TJsValue for Window
 
 // Type aliases
 
@@ -267,18 +267,18 @@ pub(open) trait TEvent : TJsValue {
 pub(open) trait TEventTarget : TJsValue {
   add_event_listener(Self, String, (Event) -> Unit, Bool) -> Unit = _
 }
-impl TEventTarget for Bool
-impl TEventTarget for Int
-impl TEventTarget for Int16
-impl TEventTarget for Int64
-impl TEventTarget for UInt
-impl TEventTarget for UInt16
-impl TEventTarget for UInt64
-impl TEventTarget for Float
-impl TEventTarget for Double
-impl TEventTarget for String
-impl[T : Show] TEventTarget for @rsignal.Rsignal[T]
-impl TEventTarget for @bigint.BigInt
+pub impl TEventTarget for Bool
+pub impl TEventTarget for Int
+pub impl TEventTarget for Int16
+pub impl TEventTarget for Int64
+pub impl TEventTarget for UInt
+pub impl TEventTarget for UInt16
+pub impl TEventTarget for UInt64
+pub impl TEventTarget for Float
+pub impl TEventTarget for Double
+pub impl TEventTarget for String
+pub impl[T : Show] TEventTarget for @rsignal.Rsignal[T]
+pub impl TEventTarget for @bigint.BigInt
 
 pub(open) trait THTMLelement : TElement {
   onchange(Self, (Event) -> Unit) -> Unit = _
@@ -289,18 +289,18 @@ pub(open) trait THTMLelement : TElement {
 pub(open) trait TJsValue {
   to_jv(Self) -> @js_sys.JsValue
 }
-impl TJsValue for Bool
-impl TJsValue for Int
-impl TJsValue for Int16
-impl TJsValue for Int64
-impl TJsValue for UInt
-impl TJsValue for UInt16
-impl TJsValue for UInt64
-impl TJsValue for Float
-impl TJsValue for Double
-impl TJsValue for String
-impl[T : Show] TJsValue for @rsignal.Rsignal[T]
-impl TJsValue for @bigint.BigInt
+pub impl TJsValue for Bool
+pub impl TJsValue for Int
+pub impl TJsValue for Int16
+pub impl TJsValue for Int64
+pub impl TJsValue for UInt
+pub impl TJsValue for UInt16
+pub impl TJsValue for UInt64
+pub impl TJsValue for Float
+pub impl TJsValue for Double
+pub impl TJsValue for String
+pub impl[T : Show] TJsValue for @rsignal.Rsignal[T]
+pub impl TJsValue for @bigint.BigInt
 
 pub(open) trait TMouseEvent : TEvent {
   client_x(Self) -> Double = _
@@ -318,16 +318,16 @@ pub(open) trait TNode : TEventTarget {
   set_text_content(Self, &Show) -> Unit = _
   append_child(Self, &TNode) -> Unit = _
 }
-impl TNode for Bool
-impl TNode for Int
-impl TNode for Int16
-impl TNode for Int64
-impl TNode for UInt
-impl TNode for UInt16
-impl TNode for UInt64
-impl TNode for Float
-impl TNode for Double
-impl TNode for String
-impl[T : Show] TNode for @rsignal.Rsignal[T]
-impl TNode for @bigint.BigInt
+pub impl TNode for Bool
+pub impl TNode for Int
+pub impl TNode for Int16
+pub impl TNode for Int64
+pub impl TNode for UInt
+pub impl TNode for UInt16
+pub impl TNode for UInt64
+pub impl TNode for Float
+pub impl TNode for Double
+pub impl TNode for String
+pub impl[T : Show] TNode for @rsignal.Rsignal[T]
+pub impl TNode for @bigint.BigInt
 
