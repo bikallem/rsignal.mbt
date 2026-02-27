@@ -1,9 +1,9 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bikallem/rsignal/internal/ffi"
 
-import(
-  "bikallem/rsignal/js_sys"
-)
+import {
+  "bikallem/rsignal/js_sys",
+}
 
 // Values
 pub fn add_event_listener(@js_sys.JsValue, String, @js_sys.JsValue, Bool) -> Unit

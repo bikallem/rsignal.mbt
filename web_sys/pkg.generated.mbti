@@ -1,11 +1,11 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bikallem/rsignal/web_sys"
 
-import(
-  "bikallem/rsignal"
-  "bikallem/rsignal/js_sys"
-  "moonbitlang/core/bigint"
-)
+import {
+  "bikallem/rsignal",
+  "bikallem/rsignal/js_sys",
+  "moonbitlang/core/bigint",
+}
 
 // Values
 pub const ATTRIBUTE_NODE : Int = 2
