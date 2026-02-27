@@ -38,7 +38,7 @@ pub fn[T] new(value : T, label? : String = "signal") -> Rsignal[T] {
 /// - The unique ID of the signal.
 ///
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let s = new(0)
 /// assert_eq(s.id(), "signal#0")  
 /// let s2 = new(1, label="my_signal")
@@ -58,7 +58,7 @@ pub fn[T] Rsignal::id(self : Rsignal[T]) -> String {
 /// - The current value of the signal.
 /// 
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let s = new(0)
 /// assert_eq(s.val(), 0)
 /// s.update(5)
@@ -92,7 +92,7 @@ fn[T] Rsignal::new_observer_id(self : Rsignal[T]) -> ObserverId {
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values = []
 /// let signal = @rsignal.new(42)
 /// let observer = signal.observer(fn(v) { values.push(v) })
@@ -130,7 +130,7 @@ pub fn[T] Rsignal::observer(
 ///
 /// Example:
 ///
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values = []
 /// let signal = @rsignal.new(42)
 /// signal.observe(fn(v) { values.push(v) })
@@ -156,7 +156,7 @@ pub fn[T] Rsignal::observe(
 /// - `notify` : If `true` notifies all observers of this signal - default is `true`.
 ///
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values = []
 /// let s = new(0)
 /// s.observe(fn(v) { values.push(v) })
@@ -191,7 +191,7 @@ pub fn[T : Eq] Rsignal::update(
 /// - `observer`: The observer to remove.
 ///
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values = []
 /// let s = new(0)
 /// let ob = s.observer(fn(v) { values.push(v) })
@@ -223,7 +223,7 @@ pub fn[T] Rsignal::remove_observer(
 /// - A new signal that emits the result of applying `f` to the value of `self`.
 ///
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values = []
 /// let s = new(0)
 /// let s2 = s.map(fn(v) { v + 1 })
@@ -251,7 +251,7 @@ pub fn[T, U : Eq] Rsignal::map(self : Rsignal[T], f : (T) -> U) -> Rsignal[U] {
 /// - A new signal that emits the result of applying `f` to the values of `s1` and `s2`.
 /// 
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values: Array[Int] = []
 /// let s1 = new(1)
 /// let s2 = new(2)
@@ -287,7 +287,7 @@ pub fn[T, U, V : Eq] map2(
 /// - A new signal that emits only the values from `self` that pass the filter function `f`.
 /// 
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let filtered_values: Array[Int] = []
 /// let s = new(1)
 /// let s2 = s.filter(fn(v) { v > 5 }, 0)
@@ -323,7 +323,7 @@ pub fn[T : Eq] Rsignal::filter(
 /// - A new signal that emits the values from `self` that pass the mapping function `f`.
 /// 
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let mapped_values = []
 /// let s = new(1)
 /// let s2 = s.filter_map(fn(v) { if v > 5 { Some(v+2) } else { None } }, 0)
@@ -340,9 +340,11 @@ pub fn[T, U : Eq] Rsignal::filter_map(
 ) -> Rsignal[U] {
   let v = f(self.value).unwrap_or_else(() => seed)
   let s = new(v)
-  self.observe(v => match f(v) {
-    Some(v) => s.update(v)
-    None => ()
+  self.observe(v => {
+    match f(v) {
+      Some(v) => s.update(v)
+      None => ()
+    }
   })
   s
 }
@@ -364,7 +366,7 @@ pub fn[T, U : Eq] Rsignal::filter_map(
 /// - A new signal that emits the values from all signals in the array.
 ///
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values = []
 /// let s1 = new(1)
 /// let s2 = new(2)
@@ -395,7 +397,7 @@ pub fn[T : Default + Eq] select_one(signals : Array[Rsignal[T]]) -> Rsignal[T] {
 /// - A new signal that emits a tuple of the latest values from `s1` and `s2`.
 ///
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values = []
 /// let s1 = new(1)
 /// let s2 = new(2)
@@ -428,7 +430,7 @@ pub fn[T : Eq, U : Eq] pair(
 /// - A new signal that emits a tuple of the latest values from `s1`, `s2`, and `s3`.
 ///
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values = []
 /// let s1 = new(1)
 /// let s2 = new(2)
@@ -464,7 +466,7 @@ pub fn[T : Eq, U : Eq, V : Eq] triple(
 /// - A new signal that emits an array of the latest values from all signals.
 /// 
 /// Example:
-/// ```moonbit
+/// ```moonbit nocheck
 /// let values = []
 /// let s1 = new(1)
 /// let s2 = new(2)

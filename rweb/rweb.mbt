@@ -38,28 +38,28 @@ pub fn input(
 }
 
 ///|
-pub let span : (Array[&TAttachableNode]) -> Element = h("span", _)
+pub let span : (Array[&TAttachableNode]) -> Element = x => h("span", x)
 
 ///|
-pub let h1 : (Array[&TAttachableNode]) -> Element = h("h1", _)
+pub let h1 : (Array[&TAttachableNode]) -> Element = x => h("h1", x)
 
 ///|
-pub let h2 : (Array[&TAttachableNode]) -> Element = h("h2", _)
+pub let h2 : (Array[&TAttachableNode]) -> Element = x => h("h2", x)
 
 ///|
-pub let h3 : (Array[&TAttachableNode]) -> Element = h("h3", _)
+pub let h3 : (Array[&TAttachableNode]) -> Element = x => h("h3", x)
 
 ///|
-pub let h4 : (Array[&TAttachableNode]) -> Element = h("h4", _)
+pub let h4 : (Array[&TAttachableNode]) -> Element = x => h("h4", x)
 
 ///|
-pub let h5 : (Array[&TAttachableNode]) -> Element = h("h5", _)
+pub let h5 : (Array[&TAttachableNode]) -> Element = x => h("h5", x)
 
 ///|
-pub let h6 : (Array[&TAttachableNode]) -> Element = h("h6", _)
+pub let h6 : (Array[&TAttachableNode]) -> Element = x => h("h6", x)
 
 ///|
-pub let p : (Array[&TAttachableNode]) -> Element = h("p", _)
+pub let p : (Array[&TAttachableNode]) -> Element = x => h("p", x)
 
 ///|
 pub fn img(nodes : Array[&TAttachableNode]) -> HTMLImageElement {

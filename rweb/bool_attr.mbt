@@ -39,10 +39,12 @@ pub impl TAttachableNode for BoolAttr with attach(
 ) -> Unit {
   @ffi.set_attribute_node(parent.to_jv(), self.attr.to_jv())
   guard self.rsignal is Some(signal) else {  }
-  signal.observe(attach_attr => if attach_attr {
-    parent.set_attribute_node(self.attr)
-  } else {
-    parent.remove_attribute_node(self.attr)
+  signal.observe(attach_attr => {
+    if attach_attr {
+      parent.set_attribute_node(self.attr)
+    } else {
+      parent.remove_attribute_node(self.attr)
+    }
   })
 }
 

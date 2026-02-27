@@ -24,9 +24,9 @@ extern "js" fn promise_then_ffi(
 ///|
 pub async fn[T] Promise::wait(self : Promise[T]) -> T {
   let promise : JsValue = JsValue::to_jv(self)
-  let v = suspend((resolve, reject) => promise_then_ffi(promise, resolve, e => reject(
-    e,
-  )))
+  let v = suspend((resolve, reject) => {
+    promise_then_ffi(promise, resolve, e => reject(e))
+  })
   JsValue::of_jv(v)
 }
 

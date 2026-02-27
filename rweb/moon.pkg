@@ -1,0 +1,11 @@
+import {
+  "bikallem/rsignal",
+  "bikallem/rsignal/web_sys",
+  "bikallem/rsignal/internal/ffi",
+  "bikallem/rsignal/js_sys",
+  "moonbitlang/core/immut/hashmap" @immut/hashmap,
+}
+
+options(
+  "supported-targets": [ "js" ],
+)

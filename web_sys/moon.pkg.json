@@ -1,7 +1,0 @@
-{
-    "import": [
-        "bikallem/rsignal",
-        "bikallem/rsignal/js_sys",
-        "bikallem/rsignal/internal/ffi"
-    ]
-}

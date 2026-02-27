@@ -1,0 +1,9 @@
+import {
+  "bikallem/rsignal",
+  "bikallem/rsignal/rweb",
+  "bikallem/rsignal/web_sys",
+}
+
+options(
+  "is-main": true,
+)
